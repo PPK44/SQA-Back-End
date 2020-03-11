@@ -10,10 +10,10 @@ public class UserAccounts {
     /**
      *
      */
-    String userName;
-    String userType;
-    BigDecimal availableCredit = new BigDecimal("0.0");
-    String password;
+    private String userName;
+    private String userType;
+    private BigDecimal availableCredit = new BigDecimal("0.0");
+    private String password;
 
     /**
      *
@@ -79,11 +79,21 @@ public class UserAccounts {
         return availableCredit;
     }
 
-    UserAccounts(){
+    /**
+     *
+     */
+    public UserAccounts(){
 
     }
 
-    UserAccounts(String user, String type, String pwd,BigDecimal credit){
+    /**
+     *
+     * @param user
+     * @param type
+     * @param pwd
+     * @param credit
+     */
+    public UserAccounts(String user, String type, String pwd,BigDecimal credit){
         this.userName = user;
         this.userType = type;
         this.availableCredit = credit;
@@ -91,6 +101,10 @@ public class UserAccounts {
     }
 
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString()
     {

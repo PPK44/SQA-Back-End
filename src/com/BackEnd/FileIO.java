@@ -13,9 +13,9 @@ public class FileIO{
     /**
      *
      */
-    File availableItemsFile = new File("");
-    File userAccountsFile = new File("");
-    File transactionFile = new File("");
+    File availableItemsFile = new File("availableitems.txt");
+    File userAccountsFile = new File("useraccounts.txt");
+    File transactionFile = new File("transactions.txt");
 
 
     /**
@@ -23,7 +23,12 @@ public class FileIO{
      * @param transactions
      * @return
      */
-    List<Transactions> ParseTransactions(List<Transactions> transactions){
+    public List<Transactions> parseTransactions(List<Transactions> transactions) throws FileNotFoundException {
+        Scanner scanner = new Scanner(transactionFile);
+        while(scanner.hasNextLine()){
+            String line = scanner.nextLine();
+            //break everything up
+        }
 
 
         return transactions;
@@ -34,7 +39,12 @@ public class FileIO{
      * @param items
      * @return
      */
-    List<AvailableItems> ParseItems(List<AvailableItems> items){
+    public List<AvailableItems> parseItems(List<AvailableItems> items) throws FileNotFoundException {
+        Scanner scanner = new Scanner(availableItemsFile);
+        while(scanner.hasNextLine()){
+            String line = scanner.nextLine();
+            //break everything up
+        }
 
 
         return items;
@@ -45,7 +55,12 @@ public class FileIO{
      * @param users
      * @return
      */
-    List<UserAccounts> ParseUsers(List<UserAccounts>users){
+    public List<UserAccounts> parseUsers(List<UserAccounts>users) throws FileNotFoundException {
+        Scanner scanner = new Scanner(userAccountsFile);
+        while(scanner.hasNextLine()){
+            String line = scanner.nextLine();
+            //break everything up
+        }
 
 
 
@@ -56,7 +71,7 @@ public class FileIO{
      *
      * @param users
      */
-    void WriteUserFile(List<UserAccounts> users){
+    public void writeUserFile(List<UserAccounts> users){
 
     }
 
@@ -64,7 +79,7 @@ public class FileIO{
      *
      * @param items
      */
-    void WriteItemFile(List<AvailableItems> items){
+    public void writeItemFile(List<AvailableItems> items){
 
     }
 

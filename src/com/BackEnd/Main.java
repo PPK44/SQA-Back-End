@@ -2,20 +2,13 @@ package com.BackEnd;
 import java.io.*;
 import java.util.List;
 
-import com.BackEnd.AvailableItems;
-import com.BackEnd.UserAccounts;
+import com.BackEnd.Files;
 
 /**
  *
  */
 public class Main extends FileIO {
 
-    /**
-     *
-     */
-    List<UserAccounts> users;
-    List<AvailableItems> items;
-    List<Transactions> transactions;
 
     /**
      *
@@ -24,9 +17,12 @@ public class Main extends FileIO {
      */
     public static void main(String[] args) throws IOException{
 
-        Main main = new Main();
+        Files run = new Files();
 
 	    try{
+	        run.updateTransactionList();
+            run.updateAvailableItemsList();
+            run.updateUserList();
 
         }finally{
 
@@ -34,19 +30,6 @@ public class Main extends FileIO {
 
     }
 
-    /**
-     *
-     */
-    void UpdateUserList(){
-
-    }
-
-    /**
-     *
-     */
-    void UpdateAvailableItemsList(){
-
-    }
 
 
 

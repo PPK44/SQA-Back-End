@@ -10,11 +10,11 @@ public class AvailableItems {
     /**
      *
      */
-    String itemName;
-    String sellerName;
-    String currentWinningBidder;
-    int numberOfDaysLeft;
-    BigDecimal highestBid = new BigDecimal("0.0");
+    private String itemName;
+    private String sellerName;
+    private String currentWinningBidder;
+    private int numberOfDaysLeft;
+    private BigDecimal highestBid = new BigDecimal("0.0");
 
     /**
      *
@@ -99,7 +99,7 @@ public class AvailableItems {
     /**
      *
      */
-    AvailableItems(){
+    public AvailableItems(){
 
     }
 
@@ -111,7 +111,7 @@ public class AvailableItems {
      * @param days
      * @param bid
      */
-    AvailableItems(String item, String seller, String currentBidder, int days, BigDecimal bid){
+    public AvailableItems(String item, String seller, String currentBidder, int days, BigDecimal bid){
         this.itemName = item;
         this.sellerName = seller;
         this.currentWinningBidder = currentBidder;
