@@ -1,5 +1,5 @@
 # SQA-Back-End
 
 ## Members 
-Gajan Sivanesan 
-Geerthan Srikantharajah 
+* Gajan Sivanesan 
+* Geerthan Srikantharajah 
