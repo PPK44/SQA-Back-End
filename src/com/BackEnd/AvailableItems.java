@@ -8,6 +8,8 @@ import java.math.BigDecimal;
  */
 public class AvailableItems {
 
+
+
     /**
      * Data about the item in question, its seller, and about the item's active auction.
      * Auction data includes the highest bidder, the highest bid, and the amount of days left.
