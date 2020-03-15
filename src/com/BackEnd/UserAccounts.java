@@ -110,7 +110,7 @@ public class UserAccounts {
      * @param pwd the user's password
      * @param credit the amount of credit the user has
      */
-    public UserAccounts(String user, String type, String pwd,BigDecimal credit){
+    public UserAccounts(String user, String type, String pwd, BigDecimal credit){
         this.userName = user;
         this.userType = type;
         this.availableCredit = credit;

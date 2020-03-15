@@ -50,7 +50,7 @@ public class FileIO{
      * @param users TODO
      * @return a list of all UserAccounts
      */
-    public List<UserAccounts> parseUsers(List<UserAccounts>users) throws FileNotFoundException {
+    public List<UserAccounts> parseUsers(List<UserAccounts> users) throws FileNotFoundException {
         Scanner scanner = new Scanner(userAccountsFile);
         while(scanner.hasNextLine()){
             String line = scanner.nextLine();
@@ -74,6 +74,5 @@ public class FileIO{
     public void writeItemFile(List<AvailableItems> items){
 
     }
-
 
 }
