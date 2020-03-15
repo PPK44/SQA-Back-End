@@ -59,7 +59,6 @@ public class FileIO{
      * @return a list of all UserAccounts
      */
     public List<UserAccounts> parseUsers(List<UserAccounts> users) throws FileNotFoundException {
-
         Scanner scanner = new Scanner(userAccountsFile);
         while(scanner.hasNextLine()){
             UserAccounts user = new UserAccounts();
@@ -88,6 +87,5 @@ public class FileIO{
     public void writeItemFile(List<AvailableItems> items){
 
     }
-
 
 }
