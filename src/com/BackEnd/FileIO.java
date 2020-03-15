@@ -16,7 +16,7 @@ public class FileIO{
     String localDir = System.getProperty("user.dir");
     File availableItemsFile = new File(localDir + "\\items.if.txt");
     File userAccountsFile = new File(localDir + "\\current_user_accounts_file.txt");
-    //File transactionFile = new File("transactions.txt");
+    File transactionFile = new File(localDir + "\\daily_transaction_file.txt");
 
 
     /**
@@ -25,11 +25,11 @@ public class FileIO{
      * @return a list of all Transactions
      */
     public List<Transactions> parseTransactions(List<Transactions> transactions) throws FileNotFoundException {
-//        Scanner scanner = new Scanner(transactionFile);
-//        while(scanner.hasNextLine()){
-//            String line = scanner.nextLine();
-//            //break everything up
-//        }
+        Scanner scanner = new Scanner(transactionFile);
+       while(scanner.hasNextLine()){
+            String line = scanner.nextLine();
+            //break everything up
+       }
         return transactions;
     }
 
@@ -43,11 +43,11 @@ public class FileIO{
         while(scanner.hasNextLine()){
             AvailableItems item = new AvailableItems();
             String line = scanner.nextLine();
-            item.setItemName(line.substring(0, 25)); // Item Name
-            item.setSellerName(line.substring(26, 41)); // Seller name
-            item.setCurrentWinningBidder(line.substring(42, 57));  // Current Bidder's name
-            item.setNumberOfDaysLeft(Integer.parseInt(line.substring(58, 61))); // Remaining days
-            item.setHighestBid(new BigDecimal(line.substring(62, 68))); // Current bid
+            item.setItemName(line.substring(0, 25));
+            item.setSellerName(line.substring(26, 41));
+            item.setCurrentWinningBidder(line.substring(42, 57));
+            item.setNumberOfDaysLeft(Integer.parseInt(line.substring(58, 61)));
+            item.setHighestBid(new BigDecimal(line.substring(62, 68)));
             items.add(item);
         }
         return items;

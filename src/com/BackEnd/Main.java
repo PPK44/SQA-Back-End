@@ -7,6 +7,8 @@ import com.BackEnd.Files;
 /**
  * This backend project updates account and item data for an auction system on a nightly basis.
  * It accesses and manipulates a user accounts file, an available items file, and a daily transaction file.
+ * @author Paul Kerrigan, Gajan Sivanesan, Geerthan Srikantharajah
+ * @version 1.0
  */
 public class Main extends FileIO {
 

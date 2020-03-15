@@ -9,7 +9,7 @@ import com.BackEnd.FileIO;
 import com.BackEnd.Transactions;
 
 /**
- * This class handles file storage. It utilizes the FileIO class for file input.
+ * This class handles file storage an updating files. It utilizes the FileIO class for file input.
  * It accesses three files: the user accounts file, the available items file, and the daily transaction file.
  */
 public class Files {
@@ -23,8 +23,7 @@ public class Files {
     FileIO parser = new FileIO();
 
     /**
-     * Updates, stores, and returns the daily transaction list, utilizing the FileIO class.
-     * @return a list of all previous Transactions stored in the daily transaction file
+     * Updates, stores, and returns the daily transaction list, utilizing the FileIO class
      * @throws FileNotFoundException if the transaction file is missing
      */
     public void updateTransactionList() throws FileNotFoundException {
@@ -34,6 +33,7 @@ public class Files {
 
     /**
      * Updates and stores the list of users, utilizing the FileIO class.
+     * @throws FileNotFoundException if the user file is missing
      */
     public void updateUserList() throws FileNotFoundException {
         users = parser.parseUsers(users);
@@ -49,6 +49,7 @@ public class Files {
 
     /**
      * Updates and stores the available item list, utilizing the FileIO class.
+     * @throws FileNotFoundException if the items file is missing
      */
     public void updateAvailableItemsList() throws FileNotFoundException {
         items = parser.parseItems(items);
@@ -60,6 +61,54 @@ public class Files {
             System.out.print(item.getNumberOfDaysLeft() + " ");
             System.out.println(item.getHighestBid());
         }
+    }
+
+    /**
+     * Creates a new user with information from the transaction and adds it into the list
+     * @param transaction holds the transaction that will be used to change/add to the list
+     */
+    public void create(Transactions transaction){
+
+    }
+
+    /**
+     * Deletes a user with information from the transaction object and adds it into the list
+     * @param transaction holds the transaction that will be used to change/add to the list
+     */
+    public void delete(Transactions transaction){
+
+    }
+
+    /**
+     * Adds the item to be advertised from the transactions object to the item list
+     * @param transaction holds the transaction that will be used to change/add to the list
+     */
+    public void advertise(Transactions transaction){
+
+    }
+
+    /**
+     * Adds the bid from the transaction object to the item list for current bid
+     * @param transaction holds the transaction that will be used to change/add to the list
+     */
+    public void bid(Transactions transaction){
+
+    }
+
+    /**
+     * Refund Credit with information from the transaction object and adds to the proper user
+     * @param transaction holds the transaction that will be used to change/add to the list
+     */
+    public void refund(Transactions transaction){
+
+    }
+
+    /**
+     * Adds credit with information from the transaction object and adds it to the proper user
+     * @param transaction holds the transaction that will be used to change/add to the list
+     */
+    public void addCredit(Transactions transaction){
+
     }
 
 }
