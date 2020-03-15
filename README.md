@@ -3,3 +3,4 @@
 ## Members 
 * Gajan Sivanesan 
 * Geerthan Srikantharajah 
+* Paul Kerrigan
