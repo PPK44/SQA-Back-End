@@ -1,0 +1,2 @@
+06 TestUser        FS 000230.00
+00 IsAdmin         AA 999999.00

@@ -1,0 +1,7 @@
+login
+IsAdmin
+password
+addcredit
+NonExistingUser
+logout
+quit

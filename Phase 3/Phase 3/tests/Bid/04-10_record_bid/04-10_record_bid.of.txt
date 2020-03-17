@@ -1,0 +1,2 @@
+04 apple                     TestUser        TestUser        006.00
+00 TestUser        FS 000100.00

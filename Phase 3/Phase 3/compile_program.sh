@@ -1,0 +1,3 @@
+cd program
+make
+cd ..

@@ -1,0 +1,3 @@
+Please enter "login" to start: 
+You must be logged in to enter commands 
+Please enter "login" to start: 

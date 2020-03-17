@@ -1,0 +1,4 @@
+login
+InvalidUserName
+password
+quit

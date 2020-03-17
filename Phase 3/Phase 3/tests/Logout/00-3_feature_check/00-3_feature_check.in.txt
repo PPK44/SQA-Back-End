@@ -1,0 +1,6 @@
+login
+UserName
+password
+logout
+bid
+quit

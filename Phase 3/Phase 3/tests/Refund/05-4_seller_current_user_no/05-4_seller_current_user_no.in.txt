@@ -1,0 +1,8 @@
+login
+IsAdmin
+password
+refund
+TestUser
+FakeSeller
+logout
+quit

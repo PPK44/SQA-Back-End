@@ -28,6 +28,19 @@ public class Files {
      */
     public void updateTransactionList() throws FileNotFoundException {
         transactions = parser.parseTransactions(transactions);
+        System.out.println(transactions.size());
+        for (Transactions transaction: transactions) {
+            if(transaction.getTransactionCode() == 03){
+                StringBuilder sb = new StringBuilder(String.valueOf(transaction.getTransactionCode()));
+                StringBuilder sb2 = new StringBuilder(String.valueOf(transaction.getMinBid()));
+                System.out.print(sb.insert(0, "0", 0, 2 - sb.length()) + " ");
+                System.out.print(transaction.getItemName() + " ");
+                System.out.print(transaction.getUserName() + " ");
+                System.out.print(transaction.getDaysToAuction() + " ");
+                System.out.println(sb2.insert(0, "00", 0, 6 - sb2.length()));
+            }
+
+        }
 
     }
 

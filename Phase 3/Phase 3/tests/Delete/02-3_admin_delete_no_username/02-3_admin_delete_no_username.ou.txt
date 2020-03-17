@@ -1,0 +1,8 @@
+Please enter "login" to start: 
+Username: 
+Password: 
+Welcome IsAdmin
+Enter user to delete: 
+Error! You must enter a Username to delete
+Logout Successful!
+Please enter "login" to start: 

@@ -1,0 +1,6 @@
+login
+TestUser
+password
+delete
+logout
+quit

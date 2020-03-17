@@ -1,0 +1,14 @@
+Please enter "login" to start: 
+Username: 
+Password: 
+Welcome IsAdmin
+Enter account name: 
+Select Account Type: 
+AA (admin)
+FS (Full-Standard)
+BS (Buy-Standard)
+SS (Sell-Standard)
+Enter amount of credit to add: 
+Max amount of credit to give users is $999,999.00. Give less credit.
+Logout Successful!
+Please enter "login" to start: 

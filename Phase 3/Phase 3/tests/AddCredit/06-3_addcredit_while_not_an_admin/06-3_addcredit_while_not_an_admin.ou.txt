@@ -1,0 +1,8 @@
+Please enter "login" to start: 
+Username: 
+Password: 
+Welcome TestUser
+Enter the amount to add: 
+$130.00 has been given to TestUser
+Logout Successful!
+Please enter "login" to start: 

@@ -1,0 +1,7 @@
+Please enter "login" to start: 
+Username: 
+Password: 
+Welcome TestUser
+Only Admins can delete users
+Logout Successful!
+Please enter "login" to start: 

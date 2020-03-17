@@ -1,0 +1,8 @@
+login
+TestUser
+password
+bid
+apple
+InvalidSeller
+logout
+quit

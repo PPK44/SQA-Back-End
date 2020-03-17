@@ -1,0 +1,7 @@
+login
+TestUser
+password
+bid
+banana
+logout
+quit

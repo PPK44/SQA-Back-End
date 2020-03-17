@@ -1,0 +1,8 @@
+Please enter "login" to start: 
+Username: 
+Password: 
+Welcome TestUser
+Enter item name:
+That item name is too long! Please enter a name that is at most 25 characters long.
+Logout Successful!
+Please enter "login" to start: 

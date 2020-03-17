@@ -1,0 +1,2 @@
+04 apple                     TestUser        IsAdmin         005.01
+00 IsAdmin         AA 999999.00

@@ -1,0 +1,8 @@
+Please enter "login" to start: 
+Username: 
+Password: 
+Welcome TestUser
+Please enter the item you'd like to bid on: 
+Sorry, no one is selling items named "banana". Please try a different item name. 
+Logout Successful!
+Please enter "login" to start: 

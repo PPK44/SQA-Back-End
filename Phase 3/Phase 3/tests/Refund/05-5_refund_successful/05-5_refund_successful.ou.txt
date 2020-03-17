@@ -1,0 +1,10 @@
+Please enter "login" to start: 
+Username: 
+Password: 
+Welcome IsAdmin
+Enter buyer's username: 
+Enter seller's username: 
+Enter the amount of credit to transfer: 
+Successfully refunded TestUser. $12.00 has be transfered from OtherName's account to TestUser's account
+Logout Successful!
+Please enter "login" to start: 

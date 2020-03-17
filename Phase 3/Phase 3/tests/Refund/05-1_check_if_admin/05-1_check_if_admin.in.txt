@@ -1,0 +1,6 @@
+login
+TestUser
+password
+refund
+logout
+quit

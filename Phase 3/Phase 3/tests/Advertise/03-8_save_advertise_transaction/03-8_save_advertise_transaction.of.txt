@@ -1,0 +1,2 @@
+03 abcdefghijklmnopqrstuvwxy TestUser        100 999.99
+00 TestUser        FS 000100.00

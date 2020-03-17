@@ -1,0 +1,7 @@
+Please enter "login" to start: 
+Username: 
+Password: 
+Welcome UserName
+Sorry! Sell-Standard accounts are not allowed to bid on items.
+Logout Successful!
+Please enter "login" to start: 

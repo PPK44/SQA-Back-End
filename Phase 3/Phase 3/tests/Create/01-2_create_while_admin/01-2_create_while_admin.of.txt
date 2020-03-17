@@ -1,0 +1,2 @@
+01 NewUser         FS 000099.00
+00 IsAdmin         AA 999999.00

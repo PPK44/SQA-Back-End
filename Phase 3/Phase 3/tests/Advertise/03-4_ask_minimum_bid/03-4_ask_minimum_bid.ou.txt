@@ -1,0 +1,9 @@
+Please enter "login" to start: 
+Username: 
+Password: 
+Welcome TestUser
+Enter item name:
+Enter minimum bid amount ($):
+Error! An item can be priced for at most $999.99. Please enter a different bid amount ($):
+Logout Successful!
+Please enter "login" to start: 

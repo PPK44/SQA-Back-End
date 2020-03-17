@@ -28,7 +28,47 @@ public class FileIO{
         Scanner scanner = new Scanner(transactionFile);
        while(scanner.hasNextLine()){
             String line = scanner.nextLine();
-            //break everything up
+            Transactions transaction = new Transactions();
+
+           switch (line.substring(0, 2)) {
+               case "01": //Create
+               case "02":  //Delete
+               case "06":  //Add credit
+                   transaction.setTransactionCode(Integer.parseInt(line.substring(0, 2)));
+                   transaction.setUserName(line.substring(3, 18));
+                   transaction.setUserType(line.substring(19, 21));
+                   transaction.setAvailableCredit(new BigDecimal(line.substring(22, 31)));
+                   transactions.add(transaction);
+                   break;
+               case "03":  //Advertise
+                   transaction.setTransactionCode(Integer.parseInt(line.substring(0, 2)));
+                   transaction.setItemName(line.substring(3, 22));
+                   transaction.setUserName(line.substring(23, 38));
+                   transaction.setDaysToAuction(Integer.parseInt(line.substring(39, 42)));
+                   transaction.setMinBid(new BigDecimal(line.substring(43, 49)));
+                   transactions.add(transaction);
+                   break;
+               case "04": //Bid
+                   transaction.setTransactionCode(Integer.parseInt(line.substring(0, 2)));
+                   transaction.setItemName(line.substring(3, 22));
+                   transaction.setSellerName(line.substring(23, 38));
+                   transaction.setBuyerName(line.substring(39, 54));
+                   transaction.setNewBid(new BigDecimal(line.substring(55, 61)));
+                   break;
+               case "05": //Refund
+                    transaction.setTransactionCode(Integer.parseInt(line.substring(0, 2)));
+                    transaction.setBuyerName(line.substring(3, 18));
+                    transaction.setSellerName(line.substring(19, 34));
+                    transaction.setRefundCredit(new BigDecimal(line.substring(35, 44)));
+                   break;
+
+               case "07": //Enable
+
+                   break;
+               case "08": //Disable
+
+                   break;
+           }
        }
         return transactions;
     }

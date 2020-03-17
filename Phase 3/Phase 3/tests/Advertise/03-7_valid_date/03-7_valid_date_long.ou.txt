@@ -1,0 +1,10 @@
+Please enter "login" to start: 
+Username: 
+Password: 
+Welcome TestUser
+Enter item name:
+Enter minimum bid amount ($):
+Enter how long to auction the item for (days):
+Error! An item can be auctioned for at most 100 days. Please enter a different number of days to auction the item for:
+Logout Successful!
+Please enter "login" to start: 

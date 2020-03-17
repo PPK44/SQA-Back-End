@@ -1,0 +1,9 @@
+Please enter "login" to start: 
+Username: 
+Password: 
+Welcome TestUser
+Enter item name:
+Enter minimum bid amount ($):
+Error! An item cannot be priced less than $0.00. Please enter a different bid amount ($):
+Logout Successful!
+Please enter "login" to start: 

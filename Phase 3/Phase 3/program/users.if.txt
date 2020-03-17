@@ -1,0 +1,6 @@
+TestUser        FS 000100.00
+OtherName       BS 099999.99
+UserName        SS 001000.00
+IsAdmin         AA 999999.00
+ExistingUser    FS 000000.00
+BuyStandardOnly BS 001000.00

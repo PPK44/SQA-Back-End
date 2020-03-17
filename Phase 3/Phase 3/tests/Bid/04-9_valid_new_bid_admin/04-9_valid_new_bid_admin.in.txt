@@ -1,0 +1,9 @@
+login
+IsAdmin
+password
+bid
+apple
+TestUser
+4.99
+logout
+quit

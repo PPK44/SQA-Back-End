@@ -1,0 +1,7 @@
+login
+TestUser
+password
+advertise
+
+logout
+quit
