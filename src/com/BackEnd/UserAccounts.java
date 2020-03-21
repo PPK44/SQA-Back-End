@@ -124,7 +124,9 @@ public class UserAccounts {
     @Override
     public String toString()
     {
-        return userName + " " + password + " " + userType + " " + availableCredit;
+        StringBuilder sb = new StringBuilder(password);
+        StringBuilder sb2 = new StringBuilder(String.valueOf(availableCredit));
+        return userName + " " + sb.insert(sb.length(), "           ", 0, 12 - sb.length()) + " " + userType + " " + sb2.insert(0, "00000", 0, 9 - sb2.length()) + "\n";
     }
 
 }

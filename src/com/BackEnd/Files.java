@@ -1,5 +1,6 @@
 package com.BackEnd;
 import java.io.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class Files {
     List<UserAccounts> users = new ArrayList<>();
     List<AvailableItems> items = new ArrayList<>();
     List<Transactions> transactions = new ArrayList<>();
-    UserAccounts user = new UserAccounts();
+
 
     FileIO parser = new FileIO();
 
@@ -28,19 +29,6 @@ public class Files {
      */
     public void updateTransactionList() throws FileNotFoundException {
         transactions = parser.parseTransactions(transactions);
-        System.out.println(transactions.size());
-        for (Transactions transaction: transactions) {
-            if(transaction.getTransactionCode() == 03){
-                StringBuilder sb = new StringBuilder(String.valueOf(transaction.getTransactionCode()));
-                StringBuilder sb2 = new StringBuilder(String.valueOf(transaction.getMinBid()));
-                System.out.print(sb.insert(0, "0", 0, 2 - sb.length()) + " ");
-                System.out.print(transaction.getItemName() + " ");
-                System.out.print(transaction.getUserName() + " ");
-                System.out.print(transaction.getDaysToAuction() + " ");
-                System.out.println(sb2.insert(0, "00", 0, 6 - sb2.length()));
-            }
-
-        }
 
     }
 
@@ -48,14 +36,36 @@ public class Files {
      * Updates and stores the list of users, utilizing the FileIO class.
      * @throws FileNotFoundException if the user file is missing
      */
-    public void updateUserList() throws FileNotFoundException {
+    public void updateUserList() throws IOException {
         users = parser.parseUsers(users);
-        System.out.println(users.size());
-        for (UserAccounts userAccounts : users) {
-            System.out.print(userAccounts.getUserName() + " ");
-            System.out.print(userAccounts.getPassword() + " ");
-            System.out.print(userAccounts.getUserType() + " ");
-            System.out.println(userAccounts.getAvailableCredit());
+        for (Transactions transaction: transactions) {
+
+            switch (transaction.getTransactionCode()) {
+                case 1: //Create
+                    //create(transaction);
+                    break;
+                case 2:  //Delete
+                    //delete(transaction);
+                    break;
+                case 3:  //Advertise
+                    advertise(transaction);
+                    break;
+                case 4: //Bid
+                    bid(transaction);
+                    break;
+                case 5: //Refund
+                    refund(transaction);
+                    break;
+                case 6:  //Add credit
+                    addCredit(transaction);
+                    break;
+                case 7: //Enable
+
+                    break;
+                case 8: //Disable
+
+                    break;
+            }
         }
 
     }
@@ -80,7 +90,16 @@ public class Files {
      * Creates a new user with information from the transaction and adds it into the list
      * @param transaction holds the transaction that will be used to change/add to the list
      */
-    public void create(Transactions transaction){
+    public void create(Transactions transaction) throws IOException {
+        UserAccounts user = new UserAccounts();
+        user.setUserType(transaction.getUserType());
+        // do sb on write to file not now stupid paul
+        user.setAvailableCredit(transaction.getAvailableCredit());
+        user.setPassword("Test");
+        user.setUserName(transaction.getUserName());
+        users.add(user);
+
+        parser.writeUserFile(users);
 
     }
 
@@ -88,7 +107,20 @@ public class Files {
      * Deletes a user with information from the transaction object and adds it into the list
      * @param transaction holds the transaction that will be used to change/add to the list
      */
-    public void delete(Transactions transaction){
+    public void delete(Transactions transaction) throws IOException {
+
+        UserAccounts user = new UserAccounts();
+        user.setUserType(transaction.getUserType());
+        user.setAvailableCredit(transaction.getAvailableCredit());
+        user.setUserName(transaction.getUserName());
+        user.setPassword("buyinggf20k");
+        users.removeIf(userAccounts -> (userAccounts.getUserName().equals(user.getUserName())));
+        for (UserAccounts user1 : users) {
+            System.out.print(user1.getUserName() + " ");
+            System.out.print(user1.getUserType() + " ");
+            System.out.println(user1.getAvailableCredit());
+        }
+        parser.writeUserFile(users);
 
     }
 
@@ -120,7 +152,20 @@ public class Files {
      * Adds credit with information from the transaction object and adds it to the proper user
      * @param transaction holds the transaction that will be used to change/add to the list
      */
-    public void addCredit(Transactions transaction){
+    public void addCredit(Transactions transaction) throws IOException {
+        UserAccounts user = new UserAccounts();
+        user.setUserType(transaction.getUserType());
+        user.setUserName(transaction.getUserName());
+
+        for(int i = 0; i < users.size(); i++){
+            if(users.get(i).getUserName().equals(user.getUserName())){
+                user.setAvailableCredit(users.get(i).getAvailableCredit().add(transaction.getAvailableCredit()));
+                user.setPassword(users.get(i).getPassword());
+                users.set(i, user);
+            }
+
+        }
+        parser.writeUserFile(users);
 
     }
 

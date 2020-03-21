@@ -20,7 +20,7 @@ public class Main extends FileIO {
         try{
             run.updateTransactionList();
             //run.updateAvailableItemsList();
-            //run.updateUserList();
+            run.updateUserList();
         } finally {
             // Placeholder
         }

@@ -116,7 +116,12 @@ public class FileIO{
      * Writes the current userlist to the user accounts file.
      * @param users the userlist to write to file.
      */
-    public void writeUserFile(List<UserAccounts> users){
+    public void writeUserFile(List<UserAccounts> users) throws IOException {
+        FileWriter writer = new FileWriter(localDir + "\\current_user_accounts_file.txt");
+        for(UserAccounts user : users){
+            writer.write(user.toString());
+        }
+        writer.close();
 
     }
 
