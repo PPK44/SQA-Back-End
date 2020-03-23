@@ -29,6 +29,9 @@ public class Files {
      */
     public void updateTransactionList() throws FileNotFoundException {
         transactions = parser.parseTransactions(transactions);
+//        for (Transactions transaction: transactions) {
+//                System.out.println(transaction.getTransactionCode());
+//            }
 
     }
 
@@ -74,15 +77,21 @@ public class Files {
      * Updates and stores the available item list, utilizing the FileIO class.
      * @throws FileNotFoundException if the items file is missing
      */
-    public void updateAvailableItemsList() throws FileNotFoundException {
+    public void updateAvailableItemsList() throws IOException {
         items = parser.parseItems(items);
-        System.out.println(items.size());
-        for (AvailableItems item : items) {
-            System.out.print(item.getItemName() + " ");
-            System.out.print(item.getSellerName() + " ");
-            System.out.print(item.getCurrentWinningBidder() + " ");
-            System.out.print(item.getNumberOfDaysLeft() + " ");
-            System.out.println(item.getHighestBid());
+        for (Transactions transaction: transactions) {
+
+            switch (transaction.getTransactionCode()) {
+                case 3:  //Advertise
+                    advertise(transaction);
+                    break;
+                case 4: //Bid
+                    //bid(transaction);
+                    break;
+                case 5: //Refund
+                    //refund(transaction);
+                    break;
+            }
         }
     }
 
@@ -128,7 +137,20 @@ public class Files {
      * Adds the item to be advertised from the transactions object to the item list
      * @param transaction holds the transaction that will be used to change/add to the list
      */
-    public void advertise(Transactions transaction){
+    public void advertise(Transactions transaction) throws IOException {
+
+        AvailableItems item = new AvailableItems();
+
+        item.setItemName(transaction.getItemName());
+        item.setSellerName(transaction.getSellerName());
+        item.setCurrentWinningBidder(transaction.getBuyerName());
+        item.setNumberOfDaysLeft(transaction.getDaysToAuction());
+        item.setCurrentWinningBidder("");
+        item.setHighestBid(transaction.getMinBid());
+
+        items.add(item);
+
+        parser.writeItemFile(items);
 
     }
 
@@ -136,7 +158,22 @@ public class Files {
      * Adds the bid from the transaction object to the item list for current bid
      * @param transaction holds the transaction that will be used to change/add to the list
      */
-    public void bid(Transactions transaction){
+    public void bid(Transactions transaction) throws IOException {
+
+        AvailableItems item = new AvailableItems();
+        item.setItemName(transaction.getItemName());
+        item.setSellerName(transaction.getSellerName());
+        item.setCurrentWinningBidder(transaction.getBuyerName());
+        item.setHighestBid(transaction.getNewBid());
+
+        for(int i = 0; i < items.size(); i++){
+            if(items.get(i).getItemName().equals(item.getItemName())){
+                item.setNumberOfDaysLeft(items.get(i).getNumberOfDaysLeft());
+                items.set(i, item);
+            }
+
+        }
+        parser.writeItemFile(items);
 
     }
 
