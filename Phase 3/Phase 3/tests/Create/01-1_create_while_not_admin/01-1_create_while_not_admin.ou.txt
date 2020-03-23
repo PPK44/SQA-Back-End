@@ -1,0 +1,7 @@
+Please enter "login" to start: 
+Username: 
+Password: 
+Welcome TestUser
+Must be an admin to create an account.
+Logout Successful!
+Please enter "login" to start: 

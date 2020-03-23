@@ -129,7 +129,11 @@ public class AvailableItems {
      */
     @Override
     public String toString(){
-        return itemName + " " + sellerName + " " + currentWinningBidder + " " + numberOfDaysLeft + " " + highestBid;
+
+        StringBuilder sb = new StringBuilder(String.valueOf(highestBid));
+        StringBuilder sb2 = new StringBuilder(String.valueOf(numberOfDaysLeft));
+        StringBuilder sb3 = new StringBuilder(String.valueOf(currentWinningBidder));
+        return itemName + " " + sellerName + " " + sb3.insert(0, "               ", 0, 15 - sb3.length()) + " " + sb2.insert(0, "00", 0, 3 - sb2.length()) + " " + sb.insert(0, "00", 0, 6 - sb.length()) + "\n";
     }
 
 }

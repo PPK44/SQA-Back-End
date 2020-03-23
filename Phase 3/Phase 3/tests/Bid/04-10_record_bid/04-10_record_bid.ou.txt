@@ -1,0 +1,12 @@
+Please enter "login" to start: 
+Username: 
+Password: 
+Welcome TestUser
+Please enter the item you'd like to bid on: 
+Please enter the seller's username: 
+Item name: "apple"    Seller name: "TestUser"    Current highest bid: 5.00
+Please enter your bid amount: 
+Success! You have successfully bid on the item "apple"
+Item name: "apple"    Seller name: "TestUser"    Current highest bid: 6.00
+Logout Successful!
+Please enter "login" to start: 

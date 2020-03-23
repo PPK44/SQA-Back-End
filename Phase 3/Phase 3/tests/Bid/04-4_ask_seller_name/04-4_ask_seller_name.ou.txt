@@ -1,0 +1,9 @@
+Please enter "login" to start: 
+Username: 
+Password: 
+Welcome TestUser
+Please enter the item you'd like to bid on: 
+Please enter the seller's username: 
+No user named "InvalidSeller" found! Please enter an existing seller's username: 
+Logout Successful!
+Please enter "login" to start: 

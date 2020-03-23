@@ -1,0 +1,8 @@
+Please enter "login" to start: 
+Username: 
+Password: 
+Welcome IsAdmin
+Enter the user to add to: 
+User does not exist. Try someone else.
+Logout Successful!
+Please enter "login" to start: 

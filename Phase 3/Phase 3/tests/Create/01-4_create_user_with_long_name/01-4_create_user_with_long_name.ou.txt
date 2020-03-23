@@ -1,0 +1,8 @@
+Please enter "login" to start: 
+Username: 
+Password: 
+Welcome IsAdmin
+Enter account name: 
+UserName is longer than 15 characters. Please pick a shorter UserName.
+Logout Successful!
+Please enter "login" to start: 

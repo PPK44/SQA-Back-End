@@ -1,0 +1,7 @@
+login
+TestUser
+password
+addcredit
+20000
+logout
+quit

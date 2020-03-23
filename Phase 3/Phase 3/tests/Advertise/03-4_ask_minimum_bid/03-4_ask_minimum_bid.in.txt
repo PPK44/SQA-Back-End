@@ -1,0 +1,8 @@
+login
+TestUser
+password
+advertise
+abcdefghijklmnopqrstuvwxy
+1000.00
+logout
+quit

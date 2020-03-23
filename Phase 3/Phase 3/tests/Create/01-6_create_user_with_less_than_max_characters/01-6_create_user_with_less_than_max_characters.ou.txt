@@ -1,0 +1,8 @@
+Please enter "login" to start: 
+Username: 
+Password: 
+Welcome IsAdmin
+Enter account name: 
+Error! Account name cannot be empty
+Logout Successful!
+Please enter "login" to start: 

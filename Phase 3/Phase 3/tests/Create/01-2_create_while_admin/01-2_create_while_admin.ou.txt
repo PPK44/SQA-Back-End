@@ -1,0 +1,14 @@
+Please enter "login" to start: 
+Username: 
+Password: 
+Welcome IsAdmin
+Enter account name: 
+Select Account Type: 
+AA (admin)
+FS (Full-Standard)
+BS (Buy-Standard)
+SS (Sell-Standard)
+Enter amount of credit to add: 
+New account created! Welcome NewUser
+Logout Successful!
+Please enter "login" to start: 

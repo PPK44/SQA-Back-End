@@ -1,0 +1,9 @@
+Please enter "login" to start: 
+Username: 
+Password: 
+Welcome TestUser
+Please enter the item you'd like to bid on: 
+Please enter the seller's username: 
+Seller "IsAdmin" is not selling any item named "apple". Please enter a seller who is selling the item you want: 
+Logout Successful!
+Please enter "login" to start: 

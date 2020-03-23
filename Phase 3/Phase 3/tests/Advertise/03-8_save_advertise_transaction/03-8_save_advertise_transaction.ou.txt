@@ -1,0 +1,14 @@
+Please enter "login" to start: 
+Username: 
+Password: 
+Welcome TestUser
+Enter item name:
+Enter minimum bid amount ($):
+Enter how long to auction the item for (days):
+Item name: abcdefghijklmnopqrstuvwxy
+Seller name: TestUser
+Minimum bid: $999.99
+Auction length: 100 days
+Saved!
+Logout Successful!
+Please enter "login" to start: 

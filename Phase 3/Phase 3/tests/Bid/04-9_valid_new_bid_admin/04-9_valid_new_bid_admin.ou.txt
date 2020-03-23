@@ -1,0 +1,11 @@
+Please enter "login" to start: 
+Username: 
+Password: 
+Welcome IsAdmin
+Please enter the item you'd like to bid on: 
+Please enter the seller's username: 
+Item name: "apple"    Seller name: "TestUser"    Current highest bid: 5.00
+Please enter your bid amount: 
+Bid rejected! The new bid value must be higher than the previous bid. Please enter a larger bid amount: 
+Logout Successful!
+Please enter "login" to start: 

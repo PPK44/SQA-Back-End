@@ -1,0 +1,8 @@
+login
+TestUser
+password
+bid
+apple
+IsAdmin
+logout
+quit

@@ -1,0 +1,9 @@
+Please enter "login" to start: 
+Username: 
+Password: 
+Welcome IsAdmin
+Enter buyer's username: 
+Enter seller's username: 
+"FakeSeller" is not a current user. The account does not exist or is not in use.
+Logout Successful!
+Please enter "login" to start: 

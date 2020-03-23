@@ -28,7 +28,49 @@ public class FileIO{
         Scanner scanner = new Scanner(transactionFile);
        while(scanner.hasNextLine()){
             String line = scanner.nextLine();
-            //break everything up
+            Transactions transaction = new Transactions();
+
+           switch (line.substring(0, 2)) {
+               case "01": //Create
+               case "02":  //Delete
+               case "06":  //Add credit
+                   transaction.setTransactionCode(Integer.parseInt(line.substring(0, 2)));
+                   transaction.setUserName(line.substring(3, 18));
+                   transaction.setUserType(line.substring(19, 21));
+                   transaction.setAvailableCredit(new BigDecimal(line.substring(22, 31)));
+                   transactions.add(transaction);
+                   break;
+               case "03":  //Advertise
+                   transaction.setTransactionCode(Integer.parseInt(line.substring(0, 2)));
+                   transaction.setItemName(line.substring(3, 22));
+                   transaction.setSellerName(line.substring(23, 38));
+                   transaction.setDaysToAuction(Integer.parseInt(line.substring(39, 42)));
+                   transaction.setMinBid(new BigDecimal(line.substring(43, 49)));
+                   transactions.add(transaction);
+                   break;
+               case "04": //Bid
+                   transaction.setTransactionCode(Integer.parseInt(line.substring(0, 2)));
+                   transaction.setItemName(line.substring(3, 22));
+                   transaction.setSellerName(line.substring(23, 38));
+                   transaction.setBuyerName(line.substring(39, 54));
+                   transaction.setNewBid(new BigDecimal(line.substring(55, 61)));
+                   transactions.add(transaction);
+                   break;
+               case "05": //Refund
+                    transaction.setTransactionCode(Integer.parseInt(line.substring(0, 2)));
+                    transaction.setBuyerName(line.substring(3, 18));
+                    transaction.setSellerName(line.substring(19, 34));
+                    transaction.setRefundCredit(new BigDecimal(line.substring(35, 41)));
+                    transactions.add(transaction);
+                   break;
+
+               case "07": //Enable
+
+                   break;
+               case "08": //Disable
+
+                   break;
+           }
        }
         return transactions;
     }
@@ -43,11 +85,11 @@ public class FileIO{
         while(scanner.hasNextLine()){
             AvailableItems item = new AvailableItems();
             String line = scanner.nextLine();
-            item.setItemName(line.substring(0, 25));
-            item.setSellerName(line.substring(26, 41));
-            item.setCurrentWinningBidder(line.substring(42, 57));
-            item.setNumberOfDaysLeft(Integer.parseInt(line.substring(58, 61)));
-            item.setHighestBid(new BigDecimal(line.substring(62, 68)));
+            item.setItemName(line.substring(0, 19));
+            item.setSellerName(line.substring(20, 35));
+            item.setCurrentWinningBidder(line.substring(36, 51));
+            item.setNumberOfDaysLeft(Integer.parseInt(line.substring(52, 55)));
+            item.setHighestBid(new BigDecimal(line.substring(56, 62)));
             items.add(item);
         }
         return items;
@@ -76,7 +118,12 @@ public class FileIO{
      * Writes the current userlist to the user accounts file.
      * @param users the userlist to write to file.
      */
-    public void writeUserFile(List<UserAccounts> users){
+    public void writeUserFile(List<UserAccounts> users) throws IOException {
+        FileWriter writer = new FileWriter(localDir + "\\current_user_accounts_file.txt");
+        for(UserAccounts user : users){
+            writer.write(user.toString());
+        }
+        writer.close();
 
     }
 
@@ -84,8 +131,12 @@ public class FileIO{
      * Writes the current available items list to the available items file.
      * @param items the available items list to write to file.
      */
-    public void writeItemFile(List<AvailableItems> items){
-
+    public void writeItemFile(List<AvailableItems> items) throws IOException {
+        FileWriter writer = new FileWriter(localDir + "\\items.if.txt");
+        for(AvailableItems item : items){
+            writer.write(item.toString());
+        }
+        writer.close();
     }
 
 }

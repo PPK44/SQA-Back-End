@@ -1,0 +1,2 @@
+06 TestUser        FS 000230.00
+00 TestUser        FS 000100.00

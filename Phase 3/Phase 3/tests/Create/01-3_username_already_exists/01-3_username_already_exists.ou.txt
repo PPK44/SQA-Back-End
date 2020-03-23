@@ -1,0 +1,8 @@
+Please enter "login" to start: 
+Username: 
+Password: 
+Welcome IsAdmin
+Enter account name: 
+Username already exists. Choose another UserName. 
+Logout Successful!
+Please enter "login" to start: 
