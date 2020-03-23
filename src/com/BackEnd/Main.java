@@ -19,8 +19,8 @@ public class Main extends FileIO {
 
         try{
             run.updateTransactionList();
-            run.updateAvailableItemsList();
-            //run.updateUserList();
+            //run.updateAvailableItemsList();
+            run.updateUserList();
         } finally {
             // Placeholder
         }

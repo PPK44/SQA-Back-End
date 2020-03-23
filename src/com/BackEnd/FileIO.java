@@ -60,7 +60,8 @@ public class FileIO{
                     transaction.setTransactionCode(Integer.parseInt(line.substring(0, 2)));
                     transaction.setBuyerName(line.substring(3, 18));
                     transaction.setSellerName(line.substring(19, 34));
-                    transaction.setRefundCredit(new BigDecimal(line.substring(35, 44)));
+                    transaction.setRefundCredit(new BigDecimal(line.substring(35, 41)));
+                    transactions.add(transaction);
                    break;
 
                case "07": //Enable

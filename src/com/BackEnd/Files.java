@@ -50,17 +50,11 @@ public class Files {
                 case 2:  //Delete
                     //delete(transaction);
                     break;
-                case 3:  //Advertise
-                    advertise(transaction);
-                    break;
-                case 4: //Bid
-                    bid(transaction);
-                    break;
                 case 5: //Refund
                     refund(transaction);
                     break;
                 case 6:  //Add credit
-                    addCredit(transaction);
+                    //addCredit(transaction);
                     break;
                 case 7: //Enable
 
@@ -167,7 +161,7 @@ public class Files {
         item.setHighestBid(transaction.getNewBid());
 
         for(int i = 0; i < items.size(); i++){
-            if(items.get(i).getItemName().equals(item.getItemName())){
+            if(items.get(i).getItemName().equals(item.getItemName()) && items.get(i).getSellerName().equals(item.getSellerName())){
                 item.setNumberOfDaysLeft(items.get(i).getNumberOfDaysLeft());
                 items.set(i, item);
             }
@@ -181,8 +175,29 @@ public class Files {
      * Refund Credit with information from the transaction object and adds to the proper user
      * @param transaction holds the transaction that will be used to change/add to the list
      */
-    public void refund(Transactions transaction){
+    public void refund(Transactions transaction) throws IOException {
+        UserAccounts buyer = new UserAccounts();
+        UserAccounts seller = new UserAccounts();
 
+        buyer.setUserName(transaction.getBuyerName());
+        seller.setUserName(transaction.getSellerName());
+
+        for(int i = 0; i < users.size(); i++){
+            if(users.get(i).getUserName().equals(seller.getUserName())){
+                seller.setAvailableCredit(users.get(i).getAvailableCredit().subtract(transaction.getRefundCredit()));
+                seller.setUserType(users.get(i).getUserType());
+                seller.setPassword(users.get(i).getPassword());
+                users.set(i, seller);
+            }
+            if(users.get(i).getUserName().equals(buyer.getUserName())){
+                buyer.setAvailableCredit(users.get(i).getAvailableCredit().add(transaction.getRefundCredit()));
+                buyer.setUserType(users.get(i).getUserType());
+                buyer.setPassword(users.get(i).getPassword());
+                users.set(i, buyer);
+            }
+
+        }
+        parser.writeUserFile(users);
     }
 
     /**
