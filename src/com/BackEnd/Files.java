@@ -29,9 +29,7 @@ public class Files {
      */
     public void updateTransactionList() throws FileNotFoundException {
         transactions = parser.parseTransactions(transactions);
-//        for (Transactions transaction: transactions) {
-//                System.out.println(transaction.getTransactionCode());
-//            }
+
 
     }
 
@@ -45,13 +43,13 @@ public class Files {
 
             switch (transaction.getTransactionCode()) {
                 case 1: //Create
-                    //create(transaction);
+                    create(transaction, users);
                     break;
                 case 2:  //Delete
-                    //delete(transaction);
+                    delete(transaction, users);
                     break;
                 case 5: //Refund
-                    refund(transaction);
+                    //refund(transaction);
                     break;
                 case 6:  //Add credit
                     //addCredit(transaction);
@@ -93,7 +91,7 @@ public class Files {
      * Creates a new user with information from the transaction and adds it into the list
      * @param transaction holds the transaction that will be used to change/add to the list
      */
-    public void create(Transactions transaction) throws IOException {
+    public void create(Transactions transaction, List<UserAccounts> users) throws IOException {
         UserAccounts user = new UserAccounts();
         user.setUserType(transaction.getUserType());
         // do sb on write to file not now stupid paul
@@ -110,13 +108,13 @@ public class Files {
      * Deletes a user with information from the transaction object and adds it into the list
      * @param transaction holds the transaction that will be used to change/add to the list
      */
-    public void delete(Transactions transaction) throws IOException {
+    public void delete(Transactions transaction, List<UserAccounts> users) throws IOException {
 
         UserAccounts user = new UserAccounts();
         user.setUserType(transaction.getUserType());
         user.setAvailableCredit(transaction.getAvailableCredit());
         user.setUserName(transaction.getUserName());
-        user.setPassword("buyinggf20k");
+        user.setPassword("passwords");
         users.removeIf(userAccounts -> (userAccounts.getUserName().equals(user.getUserName())));
         for (UserAccounts user1 : users) {
             System.out.print(user1.getUserName() + " ");
