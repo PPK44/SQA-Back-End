@@ -133,8 +133,16 @@ public class FilesTest {
     @Test
     public void bid() throws IOException {
         List<AvailableItems> items = new ArrayList<>();
+        AvailableItems bidItem = new AvailableItems();
+        bidItem.setItemName("GreenApple");
+        bidItem.setSellerName("GreenSeller");
+        bidItem.setCurrentWinningBidder("PoorBuyer");
+        bidItem.setHighestBid(new BigDecimal("55.00"));
+        bidItem.setNumberOfDaysLeft(5);
+        items.add(bidItem);
         file.bid(bidTransaction, items);
-        assertEquals(1, items.size());
+        assertEquals("GreenBuyer", items.get(0).getCurrentWinningBidder());
+        assertEquals(new BigDecimal("90.00"), items.get(0).getHighestBid());
     }
 
     @Test

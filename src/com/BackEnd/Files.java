@@ -162,12 +162,11 @@ public class Files {
         for(int i = 0; i < items.size(); i++){
             if(items.get(i).getItemName().equals(item.getItemName()) && items.get(i).getSellerName().equals(item.getSellerName())){
                 item.setNumberOfDaysLeft(items.get(i).getNumberOfDaysLeft());
+                item.setHighestBid(transaction.getHighestBid());
                 items.set(i, item);
             }
 
         }
-
-        items.add(item);
 
         parser.writeItemFile(items);
 
