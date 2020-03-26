@@ -36,8 +36,8 @@ public class Files {
      * @param transactionFilePrefix
      * @throws FileNotFoundException
      */
-    public void updateTransactionList(String transactionFilePrefix) throws FileNotFoundException {
-        transactions = parser.parseTransactions(transactions, transactionFilePrefix);
+    public void updateTransactionList(List<Transactions> testTransactionList) throws FileNotFoundException {
+        transactions = testTransactionList;
     }
 
     /**
@@ -50,8 +50,8 @@ public class Files {
 
     }
 
-    public void updateUserList(String filePrefix) throws IOException {
-        users = parser.parseUsers(users, filePrefix);
+    public void updateUserList(List<UserAccounts> userList) throws IOException {
+        users = userList;
         writeUserList();
     }
 
@@ -90,8 +90,8 @@ public class Files {
         writeItems();
     }
 
-    public void updateAvailableItemsList(String filePrefix) throws IOException {
-        items = parser.parseItems(items, filePrefix);
+    public void updateAvailableItemsList(List<AvailableItems> itemList) throws IOException {
+        items = itemList;
         writeItems();
     }
 
@@ -110,6 +110,14 @@ public class Files {
             }
         }
         parser.writeItemFile(items);
+    }
+
+    public List<UserAccounts> getUserList() {
+        return users;
+    }
+
+    public List<AvailableItems> getAvailableItemsList() {
+        return items;
     }
 
     /**
