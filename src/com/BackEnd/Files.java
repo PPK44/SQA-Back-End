@@ -29,8 +29,15 @@ public class Files {
      */
     public void updateTransactionList() throws FileNotFoundException {
         transactions = parser.parseTransactions(transactions);
+    }
 
-
+    /**
+     * TEMP
+     * @param transactionFilePrefix
+     * @throws FileNotFoundException
+     */
+    public void updateTransactionList(List<Transactions> testTransactionList) throws FileNotFoundException {
+        transactions = testTransactionList;
     }
 
     /**
@@ -39,8 +46,17 @@ public class Files {
      */
     public void updateUserList() throws IOException {
         users = parser.parseUsers(users);
-        for (Transactions transaction: transactions) {
+        writeUserList();
 
+    }
+
+    public void updateUserList(List<UserAccounts> userList) throws IOException {
+        users = userList;
+        writeUserList();
+    }
+
+    private void writeUserList() throws IOException{
+        for (Transactions transaction: transactions) {
             switch (transaction.getTransactionCode()) {
                 case 1: //Create
                     create(transaction, users);
@@ -62,7 +78,7 @@ public class Files {
                     break;
             }
         }
-
+        parser.writeUserFile(users);
     }
 
     /**
@@ -71,8 +87,16 @@ public class Files {
      */
     public void updateAvailableItemsList() throws IOException {
         items = parser.parseItems(items);
-        for (Transactions transaction: transactions) {
+        writeItems();
+    }
 
+    public void updateAvailableItemsList(List<AvailableItems> itemList) throws IOException {
+        items = itemList;
+        writeItems();
+    }
+
+    private void writeItems() throws IOException {
+        for (Transactions transaction: transactions) {
             switch (transaction.getTransactionCode()) {
                 case 3:  //Advertise
                     advertise(transaction, items);
@@ -85,6 +109,15 @@ public class Files {
                     break;
             }
         }
+        parser.writeItemFile(items);
+    }
+
+    public List<UserAccounts> getUserList() {
+        return users;
+    }
+
+    public List<AvailableItems> getAvailableItemsList() {
+        return items;
     }
 
     /**

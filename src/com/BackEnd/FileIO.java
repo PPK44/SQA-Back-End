@@ -27,12 +27,12 @@ public class FileIO{
 
     /**
      * Reads in transaction data from the daily transaction file, and converts the raw data into the Transactions datatype.
-     * @param transactions TODO
+     * @param transactions the previous Transactions list
      * @return a list of all Transactions
      */
     public List<Transactions> parseTransactions(List<Transactions> transactions) throws FileNotFoundException {
         Scanner scanner = new Scanner(transactionFile);
-       while(scanner.hasNextLine()){
+        while(scanner.hasNextLine()){
             String line = scanner.nextLine();
             Transactions transaction = new Transactions();
 
@@ -82,8 +82,23 @@ public class FileIO{
     }
 
     /**
+     * Uses a custom transaction file prefix for testing purposes.
+     * Reads in transaction data from the daily transaction file, and converts the raw data into the Transactions datatype.
+     * @param transactions the previous Transactions list
+     * @param transactionFilePrefix the prefix for the transaction file
+     * @return a list of all Transactions
+     */
+    public List<Transactions> parseTransactions(List<Transactions> transactions, String transactionFilePrefix) throws FileNotFoundException {
+        File tempFile = transactionFile;
+        transactionFile = new File(localDir + "\\" + transactionFilePrefix + "daily_transaction_file.txt");
+        List<Transactions> retVal = parseTransactions(transactions);
+        transactionFile = tempFile;
+        return retVal;
+    }
+
+    /**
      * Reads in item data from the available items file, and converts the raw data into the AvailableItems datatype.
-     * @param items TODO
+     * @param items the list of current Items
      * @return a list of all AvailableItems
      */
     public List<AvailableItems> parseItems(List<AvailableItems> items) throws FileNotFoundException {
@@ -102,8 +117,23 @@ public class FileIO{
     }
 
     /**
+     * Uses a custom item file prefix for testing purposes.
+     * Reads in item data from the available items file, and converts the raw data into the AvailableItems datatype.
+     * @param items the list of current Items
+     * @param itemFilePrefix the prefix for the item file
+     * @return a list of all AvailableItems
+     */
+    public List<AvailableItems> parseItems(List<AvailableItems> items, String itemFilePrefix) throws FileNotFoundException {
+        File tempFile = availableItemsFile;
+        availableItemsFile = new File(localDir + "\\" + itemFilePrefix + "items.if.txt");
+        List<AvailableItems> retVal = parseItems(items);
+        availableItemsFile = tempFile;
+        return retVal;
+    }
+
+    /**
      * Reads in user data from the user accounts file, and converts the raw data into the UserAccounts datatype.
-     * @param users TODO
+     * @param users the list of current Users
      * @return a list of all UserAccounts
      */
     public List<UserAccounts> parseUsers(List<UserAccounts> users) throws FileNotFoundException {
@@ -121,6 +151,21 @@ public class FileIO{
     }
 
     /**
+     * Uses a custom user file prefix for testing purposes.
+     * Reads in user data from the user accounts file, and converts the raw data into the UserAccounts datatype.
+     * @param users the list of current Users
+     * @param userFilePrefix the prefix for the user file
+     * @return a list of all UserAccounts
+     */
+    public List<UserAccounts> parseUsers(List<UserAccounts> users, String userFilePrefix) throws FileNotFoundException {
+        File tempFile = userAccountsFile;
+        userAccountsFile = new File(localDir + "\\" + userFilePrefix + "current_user_accounts_file.txt");
+        List<UserAccounts> retVal = parseUsers(users);
+        userAccountsFile = tempFile;
+        return retVal;
+    }
+
+    /**
      * Writes the current userlist to the user accounts file.
      * @param users the userlist to write to file.
      */
@@ -130,7 +175,6 @@ public class FileIO{
             writer.write(user.toString());
         }
         writer.close();
-
     }
 
     /**
