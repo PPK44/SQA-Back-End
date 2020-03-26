@@ -26,7 +26,7 @@ public class FileIO{
      */
     public List<Transactions> parseTransactions(List<Transactions> transactions) throws FileNotFoundException {
         Scanner scanner = new Scanner(transactionFile);
-       while(scanner.hasNextLine()){
+        while(scanner.hasNextLine()){
             String line = scanner.nextLine();
             Transactions transaction = new Transactions();
 
@@ -76,6 +76,21 @@ public class FileIO{
     }
 
     /**
+     * TEMP
+     * @param transactions
+     * @param transactionFilePrefix
+     * @return
+     * @throws FileNotFoundException
+     */
+    public List<Transactions> parseTransactions(List<Transactions> transactions, String transactionFilePrefix) throws FileNotFoundException {
+        File tempFile = transactionFile;
+        transactionFile = new File(localDir + "\\" + transactionFilePrefix + "daily_transaction_file.txt");
+        List<Transactions> retVal = parseTransactions(transactions);
+        transactionFile = tempFile;
+        return retVal;
+    }
+
+    /**
      * Reads in item data from the available items file, and converts the raw data into the AvailableItems datatype.
      * @param items TODO
      * @return a list of all AvailableItems
@@ -93,6 +108,14 @@ public class FileIO{
             items.add(item);
         }
         return items;
+    }
+
+    public List<AvailableItems> parseItems(List<AvailableItems> items, String itemFilePrefix) throws FileNotFoundException {
+        File tempFile = availableItemsFile;
+        availableItemsFile = new File(localDir + "\\" + itemFilePrefix + "items.if.txt");
+        List<AvailableItems> retVal = parseItems(items);
+        availableItemsFile = tempFile;
+        return retVal;
     }
 
     /**
@@ -114,6 +137,14 @@ public class FileIO{
         return users;
     }
 
+    public List<UserAccounts> parseUsers(List<UserAccounts> users, String userFilePrefix) throws FileNotFoundException {
+        File tempFile = userAccountsFile;
+        userAccountsFile = new File(localDir + "\\" + userFilePrefix + "current_user_accounts_file.txt");
+        List<UserAccounts> retVal = parseUsers(users);
+        userAccountsFile = tempFile;
+        return retVal;
+    }
+
     /**
      * Writes the current userlist to the user accounts file.
      * @param users the userlist to write to file.
@@ -124,7 +155,6 @@ public class FileIO{
             writer.write(user.toString());
         }
         writer.close();
-
     }
 
     /**
