@@ -39,8 +39,7 @@ public class FilesTest {
     }
 
     /**
-     * TEMP
-     * @throws FileNotFoundException
+     * Tests the updateTransactionList() method in Files by creating a test transaction list to verify.
      */
     @Test
     public void updateTransactionList() throws IOException {
@@ -122,9 +121,7 @@ public class FilesTest {
     }
 
     /**
-     * for this you need to create a transaction with each transaction code to cover
-     * each statement in the switch, I have done one with transaction code = 1
-     * @throws IOException
+     * Tests the updateUserList() method in Files by creating a test set of user-creating transactions to verify.
      */
     @Test
     public void updateUserList() throws IOException {
@@ -191,9 +188,7 @@ public class FilesTest {
     }
 
     /**
-     * for this you need to create a transaction with each transaction code to cover
-     * each statement in the switch, I have done one with transaction code = 1
-     * @throws IOException
+     * Tests the updateAvailableItemsList() method in Files by creating a test set of item-creating transactions to verify.
      */
     @Test
     public void updateAvailableItemsList() throws IOException {
