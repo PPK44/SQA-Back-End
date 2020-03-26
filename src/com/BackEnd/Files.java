@@ -49,10 +49,10 @@ public class Files {
                     delete(transaction, users);
                     break;
                 case 5: //Refund
-                    //refund(transaction);
+                    refund(transaction, users);
                     break;
                 case 6:  //Add credit
-                    //addCredit(transaction);
+                    addCredit(transaction, users);
                     break;
                 case 7: //Enable
 
@@ -75,13 +75,13 @@ public class Files {
 
             switch (transaction.getTransactionCode()) {
                 case 3:  //Advertise
-                    advertise(transaction);
+                    advertise(transaction, items);
                     break;
                 case 4: //Bid
-                    //bid(transaction);
+                    bid(transaction, items);
                     break;
                 case 5: //Refund
-                    //refund(transaction);
+                    //refund(transaction, items);
                     break;
             }
         }
@@ -129,7 +129,7 @@ public class Files {
      * Adds the item to be advertised from the transactions object to the item list
      * @param transaction holds the transaction that will be used to change/add to the list
      */
-    public void advertise(Transactions transaction) throws IOException {
+    public void advertise(Transactions transaction, List<AvailableItems> items) throws IOException {
 
         AvailableItems item = new AvailableItems();
 
@@ -150,7 +150,7 @@ public class Files {
      * Adds the bid from the transaction object to the item list for current bid
      * @param transaction holds the transaction that will be used to change/add to the list
      */
-    public void bid(Transactions transaction) throws IOException {
+    public void bid(Transactions transaction, List<AvailableItems> items) throws IOException {
 
         AvailableItems item = new AvailableItems();
         item.setItemName(transaction.getItemName());
@@ -158,13 +158,16 @@ public class Files {
         item.setCurrentWinningBidder(transaction.getBuyerName());
         item.setHighestBid(transaction.getNewBid());
 
+
         for(int i = 0; i < items.size(); i++){
             if(items.get(i).getItemName().equals(item.getItemName()) && items.get(i).getSellerName().equals(item.getSellerName())){
                 item.setNumberOfDaysLeft(items.get(i).getNumberOfDaysLeft());
+                item.setHighestBid(transaction.getHighestBid());
                 items.set(i, item);
             }
 
         }
+
         parser.writeItemFile(items);
 
     }
@@ -173,7 +176,7 @@ public class Files {
      * Refund Credit with information from the transaction object and adds to the proper user
      * @param transaction holds the transaction that will be used to change/add to the list
      */
-    public void refund(Transactions transaction) throws IOException {
+    public void refund(Transactions transaction, List<UserAccounts> users) throws IOException {
         UserAccounts buyer = new UserAccounts();
         UserAccounts seller = new UserAccounts();
 
@@ -186,12 +189,14 @@ public class Files {
                 seller.setUserType(users.get(i).getUserType());
                 seller.setPassword(users.get(i).getPassword());
                 users.set(i, seller);
+
             }
             if(users.get(i).getUserName().equals(buyer.getUserName())){
                 buyer.setAvailableCredit(users.get(i).getAvailableCredit().add(transaction.getRefundCredit()));
                 buyer.setUserType(users.get(i).getUserType());
                 buyer.setPassword(users.get(i).getPassword());
                 users.set(i, buyer);
+                
             }
 
         }
@@ -202,7 +207,7 @@ public class Files {
      * Adds credit with information from the transaction object and adds it to the proper user
      * @param transaction holds the transaction that will be used to change/add to the list
      */
-    public void addCredit(Transactions transaction) throws IOException {
+    public void addCredit(Transactions transaction, List<UserAccounts> users) throws IOException {
         UserAccounts user = new UserAccounts();
         user.setUserType(transaction.getUserType());
         user.setUserName(transaction.getUserName());
@@ -215,6 +220,8 @@ public class Files {
             }
 
         }
+
+
         parser.writeUserFile(users);
 
     }

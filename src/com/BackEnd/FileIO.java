@@ -18,6 +18,12 @@ public class FileIO{
     File userAccountsFile = new File(localDir + "\\current_user_accounts_file.txt");
     File transactionFile = new File(localDir + "\\daily_transaction_file.txt");
 
+    // Linux Paths
+//    String localDir = System.getProperty("user.dir");
+//    File availableItemsFile = new File(localDir + "/items.if.txt");
+//    File userAccountsFile = new File(localDir + "/current_user_accounts_file.txt");
+//    File transactionFile = new File(localDir + "/daily_transaction_file.txt");
+
 
     /**
      * Reads in transaction data from the daily transaction file, and converts the raw data into the Transactions datatype.
