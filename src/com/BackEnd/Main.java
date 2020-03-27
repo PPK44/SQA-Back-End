@@ -1,8 +1,10 @@
 package com.BackEnd;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.BackEnd.Files;
+import com.BackEnd.FileIO;
 
 /**
  * This backend project updates account and item data for an auction system on a nightly basis.
@@ -16,14 +18,17 @@ public class Main extends FileIO {
 
         // Files instance for storing accounts/items/transactions files
         Files run = new Files();
+        FileIO parser = new FileIO();
 
-        try{
-            run.updateTransactionList();
-            //run.updateAvailableItemsList();
-            run.updateUserList();
-        } finally {
-            // Placeholder
-        }
+        List<Transactions> transactions = parser.parseTransactions();
+        List<AvailableItems> items = parser.parseItems();
+        List<UserAccounts> users = parser.parseUsers();
+        //run.updateUserList(users, transactions);
+        run.updateAvailableItemsList(items, transactions);
+        //run.decrementAuctionDay(items, users);
+        parser.writeItemFile(items);
+        //parser.writeUserFile(users);
+
 
     }
 
