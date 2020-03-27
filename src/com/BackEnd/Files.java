@@ -24,16 +24,6 @@ public class Files {
     final BigDecimal MAX_CREDIT = new BigDecimal("999999.99");
 
     /**
-     * Updates, stores, and returns the daily transaction list, utilizing the FileIO class
-     * @throws FileNotFoundException if the transaction file is missing
-     */
-//    public List<Transactions> updateTransactionList() throws FileNotFoundException {
-//        List<Transactions> temp = new ArrayList<>();
-//        return parser.parseTransactions(temp);
-//    }
-
-
-    /**
      * Updates and stores the list of users, utilizing the FileIO class.
      * @throws FileNotFoundException if the user file is missing
      */

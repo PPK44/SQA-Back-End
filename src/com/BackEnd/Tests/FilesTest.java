@@ -89,114 +89,103 @@ public class FilesTest {
         addCreditTransaction.setAvailableCredit(new BigDecimal("10.00"));
         addCreditTransactions.add(addCreditTransaction);
 
-
+        // Update Method Testing Data Prep
     }
 
     /**
      * Tests the updateUserList() method in Files by creating a test set of user-creating transactions to verify.
      */
-//    @Test
-//    public void updateUserList() throws IOException {
-//        List<Transactions> testTransactionList = new ArrayList<>();
-//
-//        Transactions createTransaction = new Transactions();
-//        createTransaction.setTransactionCode(1);
-//        createTransaction.setUserName("Joe");
-//        createTransaction.setUserType("FS");
-//        createTransaction.setAvailableCredit(new BigDecimal("500.00"));
-//        testTransactionList.add(createTransaction);
-//
-//        Transactions createTransaction2 = new Transactions();
-//        createTransaction2.setTransactionCode(1);
-//        createTransaction2.setUserName("Barrett");
-//        createTransaction2.setUserType("AA");
-//        createTransaction2.setAvailableCredit(new BigDecimal("100.00"));
-//        testTransactionList.add(createTransaction2);
-//
-//        Transactions addCreditTransaction = new Transactions();
-//        addCreditTransaction.setTransactionCode(6);
-//        addCreditTransaction.setUserName("Joe");
-//        addCreditTransaction.setUserType("FS");
-//        addCreditTransaction.setAvailableCredit(new BigDecimal("25.50"));
-//        testTransactionList.add(addCreditTransaction);
-//
-//        Transactions addCreditTransaction2 = new Transactions();
-//        addCreditTransaction2.setTransactionCode(6);
-//        addCreditTransaction2.setUserName("Barrett");
-//        addCreditTransaction2.setUserType("AA");
-//        addCreditTransaction2.setAvailableCredit(new BigDecimal("24.50"));
-//        testTransactionList.add(addCreditTransaction2);
-//
-//        Transactions refundTransaction = new Transactions();
-//        refundTransaction.setTransactionCode(5);
-//        refundTransaction.setBuyerName("Barrett");
-//        refundTransaction.setSellerName("Joe");
-//        refundTransaction.setRefundCredit(new BigDecimal("150"));
-//        testTransactionList.add(refundTransaction);
-//
-//        Transactions deleteTransaction = new Transactions();
-//        deleteTransaction.setTransactionCode(2);
-//        deleteTransaction.setBuyerName("Barrett");
-//        deleteTransaction.setUserType("AA");
-//        testTransactionList.add(deleteTransaction);
-//
-//        file.updateTransactionList(testTransactionList);
-//
-//        file.updateUserList();
-//
-//        List<UserAccounts> users = file.getUserList();
-//
-//        assertEquals(users.size(), 1);
-//    }
+    @Test
+    public void updateUserList() throws IOException {
+        List<Transactions> testTransactionList = new ArrayList<>();
+
+        Transactions createTransaction = new Transactions();
+        createTransaction.setTransactionCode(1);
+        createTransaction.setUserName("Joe");
+        createTransaction.setUserType("FS");
+        createTransaction.setAvailableCredit(new BigDecimal("500.00"));
+        testTransactionList.add(createTransaction);
+
+        Transactions createTransaction2 = new Transactions();
+        createTransaction2.setTransactionCode(1);
+        createTransaction2.setUserName("Barrett");
+        createTransaction2.setUserType("AA");
+        createTransaction2.setAvailableCredit(new BigDecimal("100.00"));
+        testTransactionList.add(createTransaction2);
+
+        Transactions addCreditTransaction = new Transactions();
+        addCreditTransaction.setTransactionCode(6);
+        addCreditTransaction.setUserName("Joe");
+        addCreditTransaction.setUserType("FS");
+        addCreditTransaction.setAvailableCredit(new BigDecimal("25.50"));
+        testTransactionList.add(addCreditTransaction);
+
+        Transactions addCreditTransaction2 = new Transactions();
+        addCreditTransaction2.setTransactionCode(6);
+        addCreditTransaction2.setUserName("Barrett");
+        addCreditTransaction2.setUserType("AA");
+        addCreditTransaction2.setAvailableCredit(new BigDecimal("24.50"));
+        testTransactionList.add(addCreditTransaction2);
+
+        Transactions refundTransaction = new Transactions();
+        refundTransaction.setTransactionCode(5);
+        refundTransaction.setBuyerName("Barrett");
+        refundTransaction.setSellerName("Joe");
+        refundTransaction.setRefundCredit(new BigDecimal("150"));
+        testTransactionList.add(refundTransaction);
+
+        Transactions deleteTransaction = new Transactions();
+        deleteTransaction.setTransactionCode(2);
+        deleteTransaction.setBuyerName("Barrett");
+        deleteTransaction.setUserType("AA");
+        testTransactionList.add(deleteTransaction);
+
+        List<UserAccounts> users = new ArrayList<>();
+        file.updateUserList(users, testTransactionList);
+        assertEquals(users.size(), 1);
+    }
 
     /**
      * Tests the updateAvailableItemsList() method in Files by creating a test set of item-creating transactions to verify.
      */
-//    @Test
-//    public void updateAvailableItemsList() throws IOException {
-//        List<Transactions> testTransactionList = new ArrayList<>();
-//
-//        Transactions createTransaction = new Transactions();
-//        createTransaction.setTransactionCode(1);
-//        createTransaction.setUserName("Joe");
-//        createTransaction.setUserType("FS");
-//        createTransaction.setAvailableCredit(new BigDecimal("500.00"));
-//        testTransactionList.add(createTransaction);
-//
-//        Transactions createTransaction2 = new Transactions();
-//        createTransaction2.setTransactionCode(1);
-//        createTransaction2.setUserName("Barrett");
-//        createTransaction2.setUserType("AA");
-//        createTransaction2.setAvailableCredit(new BigDecimal("100.00"));
-//        testTransactionList.add(createTransaction2);
-//
-//        Transactions advertiseTransaction = new Transactions();
-//        advertiseTransaction.setTransactionCode(3);
-//        advertiseTransaction.setItemName("Bread");
-//        advertiseTransaction.setSellerName("Joe");
-//        advertiseTransaction.setDaysToAuction(5);
-//        advertiseTransaction.setMinBid(new BigDecimal("149.99"));
-//        testTransactionList.add(advertiseTransaction);
-//
-//        Transactions bidTransaction = new Transactions();
-//        bidTransaction.setTransactionCode(4);
-//        bidTransaction.setItemName("Bread");
-//        bidTransaction.setSellerName("Joe");
-//        bidTransaction.setBuyerName("Barrett");
-//        bidTransaction.setNewBid(new BigDecimal("150"));
-//        testTransactionList.add(bidTransaction);
-//
-//        file.updateTransactionList(testTransactionList);
-//
-//        // Refund seems like it isn't needed
-//
-//        file.updateAvailableItemsList();
-//
-//        List<AvailableItems> items = file.getAvailableItemsList();
-//
-//        // Check enable/disable, possibly check credit values
-//        assertEquals(items.size(), 1);
-//    }
+    @Test
+    public void updateAvailableItemsList() throws IOException {
+        List<Transactions> testTransactionList = new ArrayList<>();
+
+        Transactions createTransaction = new Transactions();
+        createTransaction.setTransactionCode(1);
+        createTransaction.setUserName("Joe");
+        createTransaction.setUserType("FS");
+        createTransaction.setAvailableCredit(new BigDecimal("500.00"));
+        testTransactionList.add(createTransaction);
+
+        Transactions createTransaction2 = new Transactions();
+        createTransaction2.setTransactionCode(1);
+        createTransaction2.setUserName("Barrett");
+        createTransaction2.setUserType("AA");
+        createTransaction2.setAvailableCredit(new BigDecimal("100.00"));
+        testTransactionList.add(createTransaction2);
+
+        Transactions advertiseTransaction = new Transactions();
+        advertiseTransaction.setTransactionCode(3);
+        advertiseTransaction.setItemName("Bread");
+        advertiseTransaction.setSellerName("Joe");
+        advertiseTransaction.setDaysToAuction(5);
+        advertiseTransaction.setMinBid(new BigDecimal("149.99"));
+        testTransactionList.add(advertiseTransaction);
+
+        Transactions bidTransaction = new Transactions();
+        bidTransaction.setTransactionCode(4);
+        bidTransaction.setItemName("Bread");
+        bidTransaction.setSellerName("Joe");
+        bidTransaction.setBuyerName("Barrett");
+        bidTransaction.setNewBid(new BigDecimal("150"));
+        testTransactionList.add(bidTransaction);
+
+        List<AvailableItems> items = new ArrayList<>();
+        file.updateAvailableItemsList(items, testTransactionList);
+        assertEquals(items.size(), 1);
+    }
 
     @Test
     public void create() throws IOException {
