@@ -5,6 +5,7 @@ import com.BackEnd.Files;
 import com.BackEnd.Transactions;
 
 import com.BackEnd.UserAccounts;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
  * Use junit4
@@ -57,37 +58,29 @@ public class FilesTest {
         transactions.add(disableTransaction);
 
         // Advertise Transaction Testing Data Prep
-        List<Transactions> advertiseTransactions = new ArrayList<>();
         advertiseTransaction.setTransactionCode(3);
         advertiseTransaction.setItemName("GajanItemTest");
         advertiseTransaction.setSellerName("Gajan");
         advertiseTransaction.setCurrentWinningBidder("Gajan");
         advertiseTransaction.setHighestBid(new BigDecimal("999.99"));
-        advertiseTransactions.add(advertiseTransaction);
 
         // Bid Transaction Testing Data Prep
-        List<Transactions> bidTransactions = new ArrayList<>();
         bidTransaction.setTransactionCode(4);
         bidTransaction.setItemName("GreenApple");
         bidTransaction.setSellerName("GreenSeller");
         bidTransaction.setBuyerName("GreenBuyer");
         bidTransaction.setCurrentWinningBidder("GreenBuyer");
         bidTransaction.setHighestBid(new BigDecimal("90.00"));
-        bidTransactions.add(bidTransaction);
 
         // Refund Transaction Testing Data Prep
-        List<Transactions> refundTransactions = new ArrayList<>();
         refundTransaction.setTransactionCode(5);
         refundTransaction.setBuyerName("RefundBuyer");
         refundTransaction.setSellerName("RefundSeller");
         refundTransaction.setRefundCredit(new BigDecimal("1.00"));
-        refundTransactions.add(refundTransaction);
 
         // Add Credit Transaction Testing Data Prep
-        List<Transactions> addCreditTransactions = new ArrayList<>();
         addCreditTransaction.setUserName("AddCreditUser");
         addCreditTransaction.setAvailableCredit(new BigDecimal("10.00"));
-        addCreditTransactions.add(addCreditTransaction);
 
         // Update Method Testing Data Prep
     }
@@ -120,13 +113,6 @@ public class FilesTest {
         addCreditTransaction.setAvailableCredit(new BigDecimal("25.50"));
         testTransactionList.add(addCreditTransaction);
 
-        Transactions addCreditTransaction2 = new Transactions();
-        addCreditTransaction2.setTransactionCode(6);
-        addCreditTransaction2.setUserName("Barrett");
-        addCreditTransaction2.setUserType("AA");
-        addCreditTransaction2.setAvailableCredit(new BigDecimal("24.50"));
-        testTransactionList.add(addCreditTransaction2);
-
         Transactions refundTransaction = new Transactions();
         refundTransaction.setTransactionCode(5);
         refundTransaction.setBuyerName("Barrett");
@@ -139,10 +125,53 @@ public class FilesTest {
         deleteTransaction.setBuyerName("Barrett");
         deleteTransaction.setUserType("AA");
         testTransactionList.add(deleteTransaction);
+        testTransactionList.add(enableTransaction); //transaction code 7
+        testTransactionList.add(disableTransaction);//transaction code 8
 
         List<UserAccounts> users = new ArrayList<>();
         file.updateUserList(users, testTransactionList);
-        assertEquals(users.size(), 1);
+        assertEquals(2, users.size());
+    }
+
+    /**
+     * Tests the updateAvailableItemsList() loop by never entering loop
+     */
+    @Test
+    public void neverEnterLoop() throws IOException {
+        List<Transactions> testTransactionList = new ArrayList<>();
+        List<AvailableItems> items = new ArrayList<>();
+
+        file.updateAvailableItemsList(items, testTransactionList);
+        assertTrue(items.isEmpty());
+
+    }
+
+    /**
+     * Tests the updateAvailableItemsList() loop by entering loop once
+     */
+    @Test
+    public void enterLoopOnce() throws IOException {
+        List<Transactions> testTransactionList = new ArrayList<>();
+        List<AvailableItems> items = new ArrayList<>();
+        testTransactionList.add(bidTransaction);
+        testTransactionList.add(advertiseTransaction);
+
+        file.updateAvailableItemsList(items, testTransactionList);
+        assertEquals(2, testTransactionList.size());
+
+    }
+    /**
+     * Tests the updateAvailableItemsList() loop by entering loop once
+     */
+    @Test
+    public void enterLoopTwice() throws IOException {
+        List<Transactions> testTransactionList = new ArrayList<>();
+        List<AvailableItems> items = new ArrayList<>();
+        testTransactionList.add(bidTransaction);
+
+        file.updateAvailableItemsList(items, testTransactionList);
+        assertEquals(1, testTransactionList.size());
+
     }
 
     /**
@@ -151,20 +180,7 @@ public class FilesTest {
     @Test
     public void updateAvailableItemsList() throws IOException {
         List<Transactions> testTransactionList = new ArrayList<>();
-
-        Transactions createTransaction = new Transactions();
-        createTransaction.setTransactionCode(1);
-        createTransaction.setUserName("Joe");
-        createTransaction.setUserType("FS");
-        createTransaction.setAvailableCredit(new BigDecimal("500.00"));
-        testTransactionList.add(createTransaction);
-
-        Transactions createTransaction2 = new Transactions();
-        createTransaction2.setTransactionCode(1);
-        createTransaction2.setUserName("Barrett");
-        createTransaction2.setUserType("AA");
-        createTransaction2.setAvailableCredit(new BigDecimal("100.00"));
-        testTransactionList.add(createTransaction2);
+        List<AvailableItems> items = new ArrayList<>();
 
         Transactions advertiseTransaction = new Transactions();
         advertiseTransaction.setTransactionCode(3);
@@ -182,20 +198,36 @@ public class FilesTest {
         bidTransaction.setNewBid(new BigDecimal("150"));
         testTransactionList.add(bidTransaction);
 
-        List<AvailableItems> items = new ArrayList<>();
+
         file.updateAvailableItemsList(items, testTransactionList);
-        assertEquals(items.size(), 1);
+        assertEquals(1, items.size());
     }
 
+    /**
+     * Decision Coverage
+     */
     @Test
-    public void create() throws IOException {
+    public void create()  {
         List<UserAccounts> users = new ArrayList<>();
         file.create(transaction, users);
         assertEquals(1, users.size());
     }
 
+    /**
+     * Decision Coverage
+     */
     @Test
-    public void delete() throws IOException {
+    public void failCreate() {
+        List<UserAccounts> users = new ArrayList<>();
+        UserAccounts user = new UserAccounts();
+        user.setUserName(transaction.getUserName());
+        users.add(user);
+        file.create(transaction, users);
+        assertEquals(1, users.size());
+    }
+
+    @Test
+    public void delete() {
         List<UserAccounts> users = new ArrayList<>();
         UserAccounts user = new UserAccounts();
         user.setUserName("paul");
@@ -208,7 +240,7 @@ public class FilesTest {
     }
 
     @Test
-    public void advertise() throws IOException {
+    public void advertise(){
         List<AvailableItems> items = new ArrayList<>();
         file.advertise(advertiseTransaction, items);
         assertEquals(1, items.size());
@@ -216,22 +248,22 @@ public class FilesTest {
     }
 
     @Test
-    public void bid() throws IOException {
+    public void bid(){
         List<AvailableItems> items = new ArrayList<>();
         AvailableItems bidItem = new AvailableItems();
         bidItem.setItemName("GreenApple");
         bidItem.setSellerName("GreenSeller");
         bidItem.setCurrentWinningBidder("PoorBuyer");
         bidItem.setHighestBid(new BigDecimal("55.00"));
-        bidItem.setNumberOfDaysLeft(5);
+        //bidItem.setNumberOfDaysLeft(5);
         items.add(bidItem);
         file.bid(bidTransaction, items);
-        assertEquals("GreenBuyer", items.get(0).getCurrentWinningBidder());
-        assertEquals(new BigDecimal("90.00"), items.get(0).getHighestBid());
+        assertEquals("PoorBuyer", items.get(0).getCurrentWinningBidder());
+        assertEquals(new BigDecimal("55.00"), items.get(0).getHighestBid());
     }
 
     @Test
-    public void refund() throws IOException {
+    public void refund(){
         List<UserAccounts> users = new ArrayList<>();
         UserAccounts refundBuyerUser = new UserAccounts();
         UserAccounts refundSellerUser = new UserAccounts();
@@ -259,7 +291,7 @@ public class FilesTest {
     }
 
     @Test
-    public void addCredit() throws IOException {
+    public void addCredit(){
         List<UserAccounts> users = new ArrayList<>();
         UserAccounts addCreditUser = new UserAccounts();
 
@@ -279,7 +311,7 @@ public class FilesTest {
     }
 
     @Test
-    public void enable() throws IOException {
+    public void enable(){
 
         List<UserAccounts> users = new ArrayList<>();
         UserAccounts enableUser = new UserAccounts();
@@ -299,7 +331,7 @@ public class FilesTest {
     }
 
     @Test
-    public void disable() throws IOException {
+    public void disable(){
 
         List<UserAccounts> users = new ArrayList<>();
         UserAccounts disableUser = new UserAccounts();
@@ -361,7 +393,12 @@ public class FilesTest {
     }
 
     @Test
-    public void completeAuction() throws IOException {
+    public void decrementAuctionDayCallCompleteAuction(){
+
+    }
+
+    @Test
+    public void completeAuction(){
 
         // Complete Auction
         List<AvailableItems> completeAuctionItems = new ArrayList<>();
