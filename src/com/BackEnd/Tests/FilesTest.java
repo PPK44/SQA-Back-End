@@ -33,6 +33,8 @@ public class FilesTest {
     Transactions addCreditTransaction = new Transactions();
     Transactions enableTransaction = new Transactions();
     Transactions disableTransaction = new Transactions();
+    UserAccounts endOfAuctionUsers = new UserAccounts();
+    AvailableItems endOfAuctionItems = new AvailableItems();
 
     @Before
     public void init(){
@@ -86,6 +88,8 @@ public class FilesTest {
         addCreditTransaction.setUserName("AddCreditUser");
         addCreditTransaction.setAvailableCredit(new BigDecimal("10.00"));
         addCreditTransactions.add(addCreditTransaction);
+
+
     }
 
     /**
@@ -326,12 +330,91 @@ public class FilesTest {
     }
 
     @Test
-    public void decrementAuctionDay(){
+    public void decrementAuctionDay() throws IOException {
+        // Decrement Auction Day
+        List<AvailableItems> decrementAuctionItems = new ArrayList<>();
+        AvailableItems decrementAuctionitem = new AvailableItems();
+
+        // Create Items to decrement
+        decrementAuctionitem.setItemName("DecrementItem");
+        decrementAuctionitem.setHighestBid(new BigDecimal("10.00"));
+        decrementAuctionitem.setCurrentWinningBidder("DIBuyer");
+        decrementAuctionitem.setSellerName("DISeller");
+        decrementAuctionitem.setNumberOfDaysLeft(4);
+        decrementAuctionItems.add(decrementAuctionitem);
+
+        // Create Users to Handle the item
+        List<UserAccounts> decrementUsers = new ArrayList<>();
+        UserAccounts decrementBuyer = new UserAccounts();
+        UserAccounts decrementSeller = new UserAccounts();
+
+        // Create Seller
+        decrementSeller.setAvailableCredit(new BigDecimal("50.00"));
+        decrementSeller.setPassword("passwords");
+        decrementSeller.setUserName("DISeller");
+        decrementSeller.setUserType("FS");
+        decrementUsers.add(decrementSeller);
+
+        // Create Buyer
+        decrementBuyer.setUserType("FS");
+        decrementBuyer.setUserName("DIBuyer");
+        decrementBuyer.setAvailableCredit(new BigDecimal("20.00"));
+        decrementBuyer.setPassword("passwords");
+        decrementUsers.add(decrementBuyer);
+
+        // Run test
+        file.decrementAuctionDay(decrementAuctionItems, decrementUsers);
+
+        //Test Results
+        assertEquals(3, decrementAuctionItems.get(0).getNumberOfDaysLeft());
+
 
     }
 
     @Test
-    public void completeAuction(){
+    public void completeAuction() throws IOException {
+
+        // Complete Auction
+        List<AvailableItems> completeAuctionItems = new ArrayList<>();
+        AvailableItems completeAuctionitem = new AvailableItems();
+
+        // Create Items to complete
+        completeAuctionitem.setItemName("CompleteItem");
+        completeAuctionitem.setHighestBid(new BigDecimal("10.00"));
+        completeAuctionitem.setCurrentWinningBidder("DIBuyer");
+        completeAuctionitem.setSellerName("DISeller");
+        completeAuctionitem.setNumberOfDaysLeft(0);
+        completeAuctionItems.add(completeAuctionitem);
+
+        // Create Users to Handle the item
+        List<UserAccounts> completeUsers = new ArrayList<>();
+        UserAccounts completeBuyer = new UserAccounts();
+        UserAccounts completeSeller = new UserAccounts();
+
+        // Create Seller
+        completeSeller.setAvailableCredit(new BigDecimal("50.00"));
+        completeSeller.setPassword("passwords");
+        completeSeller.setUserName("DISeller");
+        completeSeller.setUserType("FS");
+        completeUsers.add(completeSeller);
+
+        // Create Buyer
+        completeBuyer.setUserType("FS");
+        completeBuyer.setUserName("DIBuyer");
+        completeBuyer.setAvailableCredit(new BigDecimal("20.00"));
+        completeBuyer.setPassword("passwords");
+        completeUsers.add(completeBuyer);
+
+        // Run test
+        file.completeAuction(completeAuctionItems, completeAuctionitem, completeUsers);
+
+        //Test Results
+        // Test that seller gets money
+        assertEquals(new BigDecimal("60.00"), completeUsers.get(0).getAvailableCredit());
+        // Test that buy loses money
+        assertEquals(new BigDecimal("10.00"), completeUsers.get(1).getAvailableCredit());
+        // Test that Item is Deleted
+        assertEquals(0, completeAuctionItems.size());
 
     }
 }

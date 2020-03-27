@@ -273,7 +273,7 @@ public class Files {
      * STILL NEED TO TEST
      * @param items
      */
-    public void decrementAuctionDay(List<AvailableItems> items, List<UserAccounts> users){
+    public void decrementAuctionDay(List<AvailableItems> items, List<UserAccounts> users) throws IOException{
 
         for(int i = 0; i < items.size(); i++){
             AvailableItems item = new AvailableItems();
@@ -292,7 +292,33 @@ public class Files {
 
     }
 
-    public void completeAuction(List<AvailableItems>items, AvailableItems item, List<UserAccounts> users){
+    public void completeAuction(List<AvailableItems>items, AvailableItems item, List<UserAccounts> users) throws IOException{
+
+        // compare the item with the user and update the available credit
+        for (int i = 0; i < users.size(); i++) {
+            UserAccounts user = new UserAccounts();
+            user.setUserName(users.get(i).getUserName());
+            user.setUserType(users.get(i).getUserType());
+            user.setPassword(users.get(i).getPassword());
+            user.setAvailableCredit(users.get(i).getAvailableCredit());
+
+            // Buyer loses money
+            if(user.getUserName() == item.getCurrentWinningBidder()) {
+                user.setAvailableCredit(user.getAvailableCredit().subtract(item.getHighestBid()));
+                users.set(i, user);
+            }
+
+            // Seller gets money
+            if(user.getUserName() == item.getSellerName()) {
+                user.setAvailableCredit(user.getAvailableCredit().add(item.getHighestBid()));
+                users.set(i, user);
+
+            }
+
+        }
+
+        // remove the item from the list after transaction
+        items.removeIf(itemList -> (itemList.getItemName().equals(item.getItemName())));
 
     }
 
