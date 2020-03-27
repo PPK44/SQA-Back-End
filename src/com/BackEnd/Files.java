@@ -35,19 +35,19 @@ public class Files {
                     create(transaction, users);
                     break;
                 case 2:  //Delete
-                    //delete(transaction, users);
+                    delete(transaction, users);
                     break;
                 case 5: //Refund
-                    //refund(transaction, users);
+                    refund(transaction, users);
                     break;
                 case 6:  //Add credit
-                    //addCredit(transaction, users);
+                    addCredit(transaction, users);
                     break;
                 case 7: //Enable
-                    //enable(transaction, users);
+                    enable(transaction, users);
                     break;
                 case 8: //Disable
-                    //disable(transaction, users);
+                    disable(transaction, users);
                     break;
             }
         }
@@ -64,7 +64,7 @@ public class Files {
         for (Transactions transaction: transactions) {
             switch (transaction.getTransactionCode()) {
                 case 3:  //Advertise
-                    //advertise(transaction, items);
+                    advertise(transaction, items);
                     break;
                 case 4: //Bid
                     bid(transaction, items);
@@ -77,7 +77,7 @@ public class Files {
      * Creates a new user with information from the transaction and adds it into the list
      * @param transaction holds the transaction that will be used to change/add to the list
      */
-    public void create(Transactions transaction, List<UserAccounts> users) throws IOException {
+    public void create(Transactions transaction, List<UserAccounts> users) {
         boolean check = false;
 
         for (UserAccounts userAccounts : users) {
@@ -103,7 +103,7 @@ public class Files {
      * Deletes a user with information from the transaction object and adds it into the list
      * @param transaction holds the transaction that will be used to change/add to the list
      */
-    public void delete(Transactions transaction, List<UserAccounts> users) throws IOException {
+    public void delete(Transactions transaction, List<UserAccounts> users) {
 
         UserAccounts user = new UserAccounts();
         user.setUserType(transaction.getUserType());
@@ -111,11 +111,7 @@ public class Files {
         user.setUserName(transaction.getUserName());
         user.setPassword("passwords");
         users.removeIf(userAccounts -> (userAccounts.getUserName().equals(user.getUserName())));
-        for (UserAccounts user1 : users) {
-            System.out.print(user1.getUserName() + " ");
-            System.out.print(user1.getUserType() + " ");
-            System.out.println(user1.getAvailableCredit());
-        }
+
 
     }
 
@@ -123,7 +119,7 @@ public class Files {
      * Adds the item to be advertised from the transactions object to the item list
      * @param transaction holds the transaction that will be used to change/add to the list
      */
-    public void advertise(Transactions transaction, List<AvailableItems> items) throws IOException {
+    public void advertise(Transactions transaction, List<AvailableItems> items) {
 
         AvailableItems item = new AvailableItems();
 
@@ -142,7 +138,7 @@ public class Files {
      * Adds the bid from the transaction object to the item list for current bid
      * @param transaction holds the transaction that will be used to change/add to the list
      */
-    public void bid(Transactions transaction, List<AvailableItems> items) throws IOException {
+    public void bid(Transactions transaction, List<AvailableItems> items) {
 
         AvailableItems item = new AvailableItems();
         item.setItemName(transaction.getItemName());
@@ -168,7 +164,7 @@ public class Files {
      * @param transaction holds the transaction that will be used to change/add to the list
      * @param users
      */
-    public void refund(Transactions transaction, List<UserAccounts> users) throws IOException {
+    public void refund(Transactions transaction, List<UserAccounts> users) {
         UserAccounts buyer = new UserAccounts();
         UserAccounts seller = new UserAccounts();
 
@@ -199,7 +195,7 @@ public class Files {
      * @param transaction holds the transaction that will be used to change/add to the list
      * @param users
      */
-    public void addCredit(Transactions transaction, List<UserAccounts> users) throws IOException {
+    public void addCredit(Transactions transaction, List<UserAccounts> users){
         UserAccounts user = new UserAccounts();
         user.setUserType(transaction.getUserType());
         user.setUserName(transaction.getUserName());
@@ -220,7 +216,7 @@ public class Files {
      * @param transaction holds the transaction that will be used to change/add to the list
      * @param users
      */
-    public void enable(Transactions transaction, List<UserAccounts> users) throws IOException {
+    public void enable(Transactions transaction, List<UserAccounts> users){
 
         UserAccounts user = new UserAccounts();
         user.setAvailableCredit(transaction.getAvailableCredit());
@@ -241,7 +237,7 @@ public class Files {
      * @param transaction holds the transaction that will be used to change/add to the list
      * @param users holds the list of users
      */
-    public void disable(Transactions transaction, List<UserAccounts> users) throws IOException {
+    public void disable(Transactions transaction, List<UserAccounts> users){
 
         UserAccounts user = new UserAccounts();
         user.setAvailableCredit(transaction.getAvailableCredit());
@@ -282,7 +278,7 @@ public class Files {
 
     }
 
-    public void completeAuction(List<AvailableItems>items, AvailableItems item, List<UserAccounts> users) throws IOException{
+    public void completeAuction(List<AvailableItems>items, AvailableItems item, List<UserAccounts> users) {
 
         // compare the item with the user and update the available credit
         for (int i = 0; i < users.size(); i++) {
@@ -293,13 +289,13 @@ public class Files {
             user.setAvailableCredit(users.get(i).getAvailableCredit());
 
             // Buyer loses money
-            if(user.getUserName() == item.getCurrentWinningBidder()) {
+            if(user.getUserName().equals(item.getCurrentWinningBidder())) {
                 user.setAvailableCredit(user.getAvailableCredit().subtract(item.getHighestBid()));
                 users.set(i, user);
             }
 
             // Seller gets money
-            if(user.getUserName() == item.getSellerName()) {
+            if(user.getUserName().equals(item.getSellerName())) {
                 user.setAvailableCredit(user.getAvailableCredit().add(item.getHighestBid()));
                 users.set(i, user);
 
