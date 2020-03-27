@@ -27,10 +27,10 @@ public class FileIO{
 
     /**
      * Reads in transaction data from the daily transaction file, and converts the raw data into the Transactions datatype.
-     * @param transactions the previous Transactions list
      * @return a list of all Transactions
      */
-    public List<Transactions> parseTransactions(List<Transactions> transactions) throws FileNotFoundException {
+    public List<Transactions> parseTransactions() throws FileNotFoundException {
+        List<Transactions> transactions = new ArrayList<>();
         Scanner scanner = new Scanner(transactionFile);
         while(scanner.hasNextLine()){
             String line = scanner.nextLine();
@@ -40,6 +40,8 @@ public class FileIO{
                case "01": //Create
                case "02":  //Delete
                case "06":  //Add credit
+               case "07": //Enable
+               case "08": //Disable
                    transaction.setTransactionCode(Integer.parseInt(line.substring(0, 2)));
                    transaction.setUserName(line.substring(3, 18));
                    transaction.setUserType(line.substring(19, 21));
@@ -69,39 +71,18 @@ public class FileIO{
                     transaction.setRefundCredit(new BigDecimal(line.substring(35, 41)));
                     transactions.add(transaction);
                    break;
-
-               case "07": //Enable
-
-                   break;
-               case "08": //Disable
-
-                   break;
            }
        }
         return transactions;
     }
 
-    /**
-     * Uses a custom transaction file prefix for testing purposes.
-     * Reads in transaction data from the daily transaction file, and converts the raw data into the Transactions datatype.
-     * @param transactions the previous Transactions list
-     * @param transactionFilePrefix the prefix for the transaction file
-     * @return a list of all Transactions
-     */
-    public List<Transactions> parseTransactions(List<Transactions> transactions, String transactionFilePrefix) throws FileNotFoundException {
-        File tempFile = transactionFile;
-        transactionFile = new File(localDir + "\\" + transactionFilePrefix + "daily_transaction_file.txt");
-        List<Transactions> retVal = parseTransactions(transactions);
-        transactionFile = tempFile;
-        return retVal;
-    }
 
     /**
      * Reads in item data from the available items file, and converts the raw data into the AvailableItems datatype.
-     * @param items the list of current Items
      * @return a list of all AvailableItems
      */
-    public List<AvailableItems> parseItems(List<AvailableItems> items) throws FileNotFoundException {
+    public List<AvailableItems> parseItems() throws FileNotFoundException {
+        List<AvailableItems> items = new ArrayList<>();
         Scanner scanner = new Scanner(availableItemsFile);
         while(scanner.hasNextLine()){
             AvailableItems item = new AvailableItems();
@@ -116,27 +97,14 @@ public class FileIO{
         return items;
     }
 
-    /**
-     * Uses a custom item file prefix for testing purposes.
-     * Reads in item data from the available items file, and converts the raw data into the AvailableItems datatype.
-     * @param items the list of current Items
-     * @param itemFilePrefix the prefix for the item file
-     * @return a list of all AvailableItems
-     */
-    public List<AvailableItems> parseItems(List<AvailableItems> items, String itemFilePrefix) throws FileNotFoundException {
-        File tempFile = availableItemsFile;
-        availableItemsFile = new File(localDir + "\\" + itemFilePrefix + "items.if.txt");
-        List<AvailableItems> retVal = parseItems(items);
-        availableItemsFile = tempFile;
-        return retVal;
-    }
+
 
     /**
      * Reads in user data from the user accounts file, and converts the raw data into the UserAccounts datatype.
-     * @param users the list of current Users
      * @return a list of all UserAccounts
      */
-    public List<UserAccounts> parseUsers(List<UserAccounts> users) throws FileNotFoundException {
+    public List<UserAccounts> parseUsers() throws FileNotFoundException {
+        List<UserAccounts> users = new ArrayList<>();
         Scanner scanner = new Scanner(userAccountsFile);
         while(scanner.hasNextLine()){
             UserAccounts user = new UserAccounts();
@@ -148,21 +116,6 @@ public class FileIO{
             users.add(user);
         }
         return users;
-    }
-
-    /**
-     * Uses a custom user file prefix for testing purposes.
-     * Reads in user data from the user accounts file, and converts the raw data into the UserAccounts datatype.
-     * @param users the list of current Users
-     * @param userFilePrefix the prefix for the user file
-     * @return a list of all UserAccounts
-     */
-    public List<UserAccounts> parseUsers(List<UserAccounts> users, String userFilePrefix) throws FileNotFoundException {
-        File tempFile = userAccountsFile;
-        userAccountsFile = new File(localDir + "\\" + userFilePrefix + "current_user_accounts_file.txt");
-        List<UserAccounts> retVal = parseUsers(users);
-        userAccountsFile = tempFile;
-        return retVal;
     }
 
     /**

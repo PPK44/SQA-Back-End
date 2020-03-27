@@ -1,6 +1,2 @@
-apple               test123         MR.RUNESCAPEMAN 021 005.00
-test item           AnotherUser     SomeGuy         100 999.99
-DRAGON SCIMITAR     MR.RUNESCAPEMAN HECKING COOLMAN 100 199.99
-DRAGON SCIMITAR     MR.RUNESCAPEMAN                 100 080.99
-DRAGON SCIMITAR     MR.RUNESCAPEMAN                 100 120.99
-nintendoswitch      SELLINGBOY                      100 199.99
+apple               test123         BUYINGMAN       020 009.00
+test item           AnotherUser     SomeGuy         099 999.99

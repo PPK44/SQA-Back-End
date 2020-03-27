@@ -1,4 +1,5 @@
 package com.BackEnd;
+import java.awt.*;
 import java.io.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import com.BackEnd.AvailableItems;
 import com.BackEnd.UserAccounts;
 import com.BackEnd.FileIO;
 import com.BackEnd.Transactions;
+import com.sun.source.tree.NewArrayTree;
 
 /**
  * This class handles file storage an updating files. It utilizes the FileIO class for file input.
@@ -16,108 +18,69 @@ import com.BackEnd.Transactions;
 public class Files {
 
     // File data stored as List datatype
-    List<UserAccounts> users = new ArrayList<>();
-    List<AvailableItems> items = new ArrayList<>();
-    List<Transactions> transactions = new ArrayList<>();
 
 
-    FileIO parser = new FileIO();
+    final String DISABLE_CODE = "DS";
+    final BigDecimal MAX_CREDIT = new BigDecimal("999999.99");
 
     /**
      * Updates, stores, and returns the daily transaction list, utilizing the FileIO class
      * @throws FileNotFoundException if the transaction file is missing
      */
-    public void updateTransactionList() throws FileNotFoundException {
-        transactions = parser.parseTransactions(transactions);
-    }
+//    public List<Transactions> updateTransactionList() throws FileNotFoundException {
+//        List<Transactions> temp = new ArrayList<>();
+//        return parser.parseTransactions(temp);
+//    }
 
-    /**
-     * TEMP
-     * @param transactionFilePrefix
-     * @throws FileNotFoundException
-     */
-    public void updateTransactionList(List<Transactions> testTransactionList) throws FileNotFoundException {
-        transactions = testTransactionList;
-    }
 
     /**
      * Updates and stores the list of users, utilizing the FileIO class.
      * @throws FileNotFoundException if the user file is missing
      */
-    public void updateUserList() throws IOException {
-        users = parser.parseUsers(users);
-        writeUserList();
+    public void updateUserList(List<UserAccounts> users, List<Transactions> transactions) throws IOException {
 
-    }
-
-    public void updateUserList(List<UserAccounts> userList) throws IOException {
-        users = userList;
-        writeUserList();
-    }
-
-    private void writeUserList() throws IOException{
         for (Transactions transaction: transactions) {
             switch (transaction.getTransactionCode()) {
                 case 1: //Create
                     create(transaction, users);
                     break;
                 case 2:  //Delete
-                    delete(transaction, users);
+                    //delete(transaction, users);
                     break;
                 case 5: //Refund
-                    refund(transaction, users);
+                    //refund(transaction, users);
                     break;
                 case 6:  //Add credit
-                    addCredit(transaction, users);
+                    //addCredit(transaction, users);
                     break;
                 case 7: //Enable
-
+                    //enable(transaction, users);
                     break;
                 case 8: //Disable
-
+                    //disable(transaction, users);
                     break;
             }
         }
-        parser.writeUserFile(users);
+
     }
+
 
     /**
      * Updates and stores the available item list, utilizing the FileIO class.
      * @throws FileNotFoundException if the items file is missing
      */
-    public void updateAvailableItemsList() throws IOException {
-        items = parser.parseItems(items);
-        writeItems();
-    }
+    public void updateAvailableItemsList(List<AvailableItems> items, List<Transactions> transactions) throws IOException {
 
-    public void updateAvailableItemsList(List<AvailableItems> itemList) throws IOException {
-        items = itemList;
-        writeItems();
-    }
-
-    private void writeItems() throws IOException {
         for (Transactions transaction: transactions) {
             switch (transaction.getTransactionCode()) {
                 case 3:  //Advertise
-                    advertise(transaction, items);
+                    //advertise(transaction, items);
                     break;
                 case 4: //Bid
                     bid(transaction, items);
                     break;
-                case 5: //Refund
-                    //refund(transaction, items);
-                    break;
             }
         }
-        parser.writeItemFile(items);
-    }
-
-    public List<UserAccounts> getUserList() {
-        return users;
-    }
-
-    public List<AvailableItems> getAvailableItemsList() {
-        return items;
     }
 
     /**
@@ -125,15 +88,24 @@ public class Files {
      * @param transaction holds the transaction that will be used to change/add to the list
      */
     public void create(Transactions transaction, List<UserAccounts> users) throws IOException {
-        UserAccounts user = new UserAccounts();
-        user.setUserType(transaction.getUserType());
-        // do sb on write to file not now stupid paul
-        user.setAvailableCredit(transaction.getAvailableCredit());
-        user.setPassword("Test");
-        user.setUserName(transaction.getUserName());
-        users.add(user);
+        boolean check = false;
 
-        parser.writeUserFile(users);
+        for (UserAccounts userAccounts : users) {
+            if (userAccounts.getUserName().equals(transaction.getUserName())) {
+                check = true;
+                break;
+            }
+        }
+
+        if(!check){
+            UserAccounts user = new UserAccounts();
+            user.setUserType(transaction.getUserType());
+            user.setAvailableCredit(transaction.getAvailableCredit());
+            user.setPassword("Test");
+            user.setUserName(transaction.getUserName());
+            users.add(user);
+        }
+
 
     }
 
@@ -154,7 +126,6 @@ public class Files {
             System.out.print(user1.getUserType() + " ");
             System.out.println(user1.getAvailableCredit());
         }
-        parser.writeUserFile(users);
 
     }
 
@@ -175,8 +146,6 @@ public class Files {
 
         items.add(item);
 
-        parser.writeItemFile(items);
-
     }
 
     /**
@@ -194,20 +163,20 @@ public class Files {
 
         for(int i = 0; i < items.size(); i++){
             if(items.get(i).getItemName().equals(item.getItemName()) && items.get(i).getSellerName().equals(item.getSellerName())){
-                item.setNumberOfDaysLeft(items.get(i).getNumberOfDaysLeft());
-                item.setHighestBid(transaction.getHighestBid());
-                items.set(i, item);
+                if(items.get(i).getHighestBid().compareTo(item.getHighestBid()) < 0) {
+                    item.setNumberOfDaysLeft(items.get(i).getNumberOfDaysLeft());
+                    items.set(i, item);
+                }
             }
 
         }
-
-        parser.writeItemFile(items);
 
     }
 
     /**
      * Refund Credit with information from the transaction object and adds to the proper user
      * @param transaction holds the transaction that will be used to change/add to the list
+     * @param users
      */
     public void refund(Transactions transaction, List<UserAccounts> users) throws IOException {
         UserAccounts buyer = new UserAccounts();
@@ -233,12 +202,12 @@ public class Files {
             }
 
         }
-        parser.writeUserFile(users);
     }
 
     /**
      * Adds credit with information from the transaction object and adds it to the proper user
      * @param transaction holds the transaction that will be used to change/add to the list
+     * @param users
      */
     public void addCredit(Transactions transaction, List<UserAccounts> users) throws IOException {
         UserAccounts user = new UserAccounts();
@@ -254,9 +223,104 @@ public class Files {
 
         }
 
+    }
 
-        parser.writeUserFile(users);
+    /**
+     * Enables the user passed in from transaction and updates the users list
+     * @param transaction holds the transaction that will be used to change/add to the list
+     * @param users
+     */
+    public void enable(Transactions transaction, List<UserAccounts> users) throws IOException {
+
+        UserAccounts user = new UserAccounts();
+        user.setAvailableCredit(transaction.getAvailableCredit());
+        user.setUserName(transaction.getUserName());
+        user.setUserType(transaction.getUserType());
+
+        for(int i = 0; i < users.size(); i++){
+            if(users.get(i).getUserName().equals(user.getUserName())){
+                user.setPassword(users.get(i).getPassword());
+                users.set(i, user);
+            }
+
+        }
 
     }
+    /**
+     * Disables the user passed in from the transaction and updates the user list
+     * @param transaction holds the transaction that will be used to change/add to the list
+     * @param users holds the list of users
+     */
+    public void disable(Transactions transaction, List<UserAccounts> users) throws IOException {
+
+        UserAccounts user = new UserAccounts();
+        user.setAvailableCredit(transaction.getAvailableCredit());
+        user.setUserName(transaction.getUserName());
+
+        for(int i = 0; i < users.size(); i++){
+           if(users.get(i).getUserName().equals(user.getUserName())){
+               user.setUserType(DISABLE_CODE);
+               user.setPassword(users.get(i).getPassword());
+               users.set(i, user);
+            }
+
+        }
+
+    }
+
+    /**
+     * Decrements the number of days left on the auction and if 0 days left the auction is completed
+     * STILL NEED TO TEST
+     * @param items
+     */
+    public void decrementAuctionDay(List<AvailableItems> items, List<UserAccounts> users) throws IOException{
+
+        for(int i = 0; i < items.size(); i++){
+            AvailableItems item = new AvailableItems();
+            item.setItemName(items.get(i).getItemName());
+            item.setCurrentWinningBidder(items.get(i).getCurrentWinningBidder());
+            item.setHighestBid(items.get(i).getHighestBid());
+            item.setSellerName(items.get(i).getSellerName());
+
+            if(items.get(i).getNumberOfDaysLeft() != 0) {
+                item.setNumberOfDaysLeft(items.get(i).getNumberOfDaysLeft() - 1);
+                items.set(i, item);
+            }else{
+                completeAuction(items, item, users);
+            }
+        }
+
+    }
+
+    public void completeAuction(List<AvailableItems>items, AvailableItems item, List<UserAccounts> users) throws IOException{
+
+        // compare the item with the user and update the available credit
+        for (int i = 0; i < users.size(); i++) {
+            UserAccounts user = new UserAccounts();
+            user.setUserName(users.get(i).getUserName());
+            user.setUserType(users.get(i).getUserType());
+            user.setPassword(users.get(i).getPassword());
+            user.setAvailableCredit(users.get(i).getAvailableCredit());
+
+            // Buyer loses money
+            if(user.getUserName() == item.getCurrentWinningBidder()) {
+                user.setAvailableCredit(user.getAvailableCredit().subtract(item.getHighestBid()));
+                users.set(i, user);
+            }
+
+            // Seller gets money
+            if(user.getUserName() == item.getSellerName()) {
+                user.setAvailableCredit(user.getAvailableCredit().add(item.getHighestBid()));
+                users.set(i, user);
+
+            }
+
+        }
+
+        // remove the item from the list after transaction
+        items.removeIf(itemList -> (itemList.getItemName().equals(item.getItemName())));
+
+    }
+
 
 }
