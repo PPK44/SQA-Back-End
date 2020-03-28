@@ -223,6 +223,9 @@ public class FilesTest {
         assertEquals(1, users.size());
     }
 
+    /**
+     *
+     */
     @Test
     public void delete() {
         List<UserAccounts> users = new ArrayList<>();
@@ -389,13 +392,69 @@ public class FilesTest {
 
     }
 
+    /**
+     * Decision Coverage in if statement to call complete auction in else statement
+     * @throws IOException
+     */
     @Test
-    public void decrementAuctionDayCallCompleteAuction(){
+    public void decrementAuctionDayCallCompleteAuction() throws IOException {
+        List<AvailableItems> items = new ArrayList<>();
+        AvailableItems item = new AvailableItems();
+        List<UserAccounts> users = new ArrayList<>();
+        UserAccounts user = new UserAccounts();
+        item.setItemName("dragon");
+        item.setNumberOfDaysLeft(0);
+        item.setSellerName("john");
+        item.setCurrentWinningBidder("brent");
+        items.add(item);
+        user.setUserName("johnny");
+        users.add(user);
 
+        file.decrementAuctionDay(items, users);
     }
 
     @Test
-    public void completeAuction(){
+    public void completeAuctionWithNoBuyer()
+    {
+        // Complete Auction
+        List<AvailableItems> completeAuctionItems = new ArrayList<>();
+        AvailableItems completeAuctionitem = new AvailableItems();
+
+        // Create Items to complete
+        completeAuctionitem.setItemName("CompleteItem");
+        completeAuctionitem.setHighestBid(new BigDecimal("10.00"));
+        completeAuctionitem.setCurrentWinningBidder("");
+        completeAuctionitem.setSellerName("DISeller");
+        completeAuctionitem.setNumberOfDaysLeft(0);
+        completeAuctionItems.add(completeAuctionitem);
+
+        // Create Users to Handle the item
+        List<UserAccounts> completeUsers = new ArrayList<>();
+        UserAccounts completeBuyer = new UserAccounts();
+        UserAccounts completeSeller = new UserAccounts();
+
+        // Create Seller
+        completeSeller.setUserName("DISeller");
+        completeSeller.setAvailableCredit(new BigDecimal("60.00"));
+        completeUsers.add(completeSeller);
+
+        // Create Buyer
+        completeBuyer.setUserName("DIBuyer");
+        completeUsers.add(completeBuyer);
+
+
+
+        file.completeAuction(completeAuctionItems, completeAuctionitem, completeUsers);
+        assertEquals(new BigDecimal("60.00"), completeUsers.get(0).getAvailableCredit());
+        assertEquals(0, completeAuctionItems.size());
+
+    }
+
+    /**
+     *
+     */
+    @Test
+    public void completeAuctionSuccess(){
 
         // Complete Auction
         List<AvailableItems> completeAuctionItems = new ArrayList<>();
@@ -438,6 +497,44 @@ public class FilesTest {
         assertEquals(new BigDecimal("10.00"), completeUsers.get(1).getAvailableCredit());
         // Test that Item is Deleted
         assertEquals(0, completeAuctionItems.size());
+
+    }
+
+    /**
+     * The user is not found in the current list of users
+     */
+    @Test
+    public void checkForDeletedUsersFalse(){
+        List<AvailableItems> items = new ArrayList<>();
+        List<UserAccounts> users = new ArrayList<>();
+        UserAccounts user = new UserAccounts();
+        AvailableItems item = new AvailableItems();
+        user.setUserName("john");
+        users.add(user);
+        item.setCurrentWinningBidder("joe");
+        items.add(item);
+
+        file.checkForDeletedUsers(users, items);
+        assertEquals("", items.get(0).getCurrentWinningBidder());
+
+    }
+
+    /**
+     * The user is found in the list of current users
+     */
+    @Test
+    public void checkForDeletedUsersTrue(){
+        List<AvailableItems> items = new ArrayList<>();
+        List<UserAccounts> users = new ArrayList<>();
+        UserAccounts user = new UserAccounts();
+        AvailableItems item = new AvailableItems();
+        user.setUserName("john");
+        users.add(user);
+        item.setCurrentWinningBidder("john");
+        items.add(item);
+
+        file.checkForDeletedUsers(users, items);
+        assertEquals(user.getUserName(), items.get(0).getCurrentWinningBidder());
 
     }
 }

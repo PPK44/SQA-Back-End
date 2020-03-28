@@ -13,13 +13,11 @@ import com.sun.source.tree.NewArrayTree;
 
 /**
  * This class handles file storage an updating files. It utilizes the FileIO class for file input.
- * It accesses three files: the user accounts file, the available items file, and the daily transaction file.
+ * EXPLANATION: All print statements are for the Terminal Log
  */
 public class Files {
 
-    // File data stored as List datatype
-
-
+    // Constants
     final String DISABLE_CODE = "DS";
     final BigDecimal MAX_CREDIT = new BigDecimal("999999.99");
 
@@ -32,22 +30,22 @@ public class Files {
         for (Transactions transaction: transactions) {
             switch (transaction.getTransactionCode()) {
                 case 1: //Create
-                    //create(transaction, users);
+                    create(transaction, users);
                     break;
                 case 2:  //Delete
                     delete(transaction, users);
                     break;
                 case 5: //Refund
-                    //refund(transaction, users);
+                    refund(transaction, users);
                     break;
                 case 6:  //Add credit
-                    //addCredit(transaction, users);
+                    addCredit(transaction, users);
                     break;
                 case 7: //Enable
-                    //enable(transaction, users);
+                    enable(transaction, users);
                     break;
                 case 8: //Disable
-                    //disable(transaction, users);
+                    disable(transaction, users);
                     break;
             }
         }
@@ -64,10 +62,10 @@ public class Files {
         for (Transactions transaction: transactions) {
             switch (transaction.getTransactionCode()) {
                 case 3:  //Advertise
-                    //advertise(transaction, items);
+                    advertise(transaction, items);
                     break;
                 case 4: //Bid
-                    //bid(transaction, items);
+                    bid(transaction, items);
                     break;
             }
         }
@@ -169,29 +167,34 @@ public class Files {
      * @param users
      */
     public void refund(Transactions transaction, List<UserAccounts> users) {
+        boolean maxCreditCheck = true;
+        boolean overCredit = true;
         UserAccounts buyer = new UserAccounts();
         UserAccounts seller = new UserAccounts();
 
         buyer.setUserName(transaction.getBuyerName());
         seller.setUserName(transaction.getSellerName());
 
-        for(int i = 0; i < users.size(); i++){
-            if(users.get(i).getUserName().equals(seller.getUserName())){
+        for(int i = 0; i < users.size(); i++) {
+            if (users.get(i).getUserName().equals(seller.getUserName())) {
                 seller.setAvailableCredit(users.get(i).getAvailableCredit().subtract(transaction.getRefundCredit()));
                 seller.setUserType(users.get(i).getUserType());
                 seller.setPassword(users.get(i).getPassword());
                 users.set(i, seller);
-                System.out.println("Removed "+ transaction.getRefundCredit() + " from seller " +  seller.getUserName().trim() + " for refund");
+                System.out.println("Removed " + transaction.getRefundCredit() + " from seller " + seller.getUserName().trim() + " for refund");
             }
-            if(users.get(i).getUserName().equals(buyer.getUserName())){
+        }
+        for(int i = 0; i < users.size(); i++) {
+            if (users.get(i).getUserName().equals(buyer.getUserName())) {
                 buyer.setAvailableCredit(users.get(i).getAvailableCredit().add(transaction.getRefundCredit()));
                 buyer.setUserType(users.get(i).getUserType());
                 buyer.setPassword(users.get(i).getPassword());
                 users.set(i, buyer);
-                System.out.println("Refunded "+ transaction.getRefundCredit() + " to buyer " +  buyer.getUserName().trim());
+                System.out.println("Refunded " + transaction.getRefundCredit() + " to buyer " + buyer.getUserName().trim());
             }
-
         }
+
+
     }
 
     /**
@@ -281,41 +284,108 @@ public class Files {
                 System.out.println("Decremented number of days by 1 on " + item.getItemName().trim());
             }else{
                 completeAuction(items, item, users);
+                //items list size decreases by 1 after complete auction so have to decrement counter as well
+                i--;
             }
         }
 
     }
 
-    public void completeAuction(List<AvailableItems>items, AvailableItems item, List<UserAccounts> users) {
-
+    /**
+     * Completes an auction for when the number of days left is zero
+     * @param items
+     * @param item
+     * @param users
+     */
+    public void completeAuction(List<AvailableItems> items, AvailableItems item, List<UserAccounts> users) {
+        boolean maxCreditCheck = true;
+        boolean overCredit = true;
+        boolean noBuyer = false;
         // compare the item with the user and update the available credit
-        for (int i = 0; i < users.size(); i++) {
-            UserAccounts user = new UserAccounts();
-            user.setUserName(users.get(i).getUserName());
-            user.setUserType(users.get(i).getUserType());
-            user.setPassword(users.get(i).getPassword());
-            user.setAvailableCredit(users.get(i).getAvailableCredit());
 
-
-
-            // Seller gets money
-            if(user.getUserName().equals(item.getSellerName())) {
-                user.setAvailableCredit(user.getAvailableCredit().add(item.getHighestBid()));
-                users.set(i, user);
-                System.out.println("Seller " + item.getSellerName().trim() + " sold " + item.getItemName().trim() + " for " + item.getHighestBid());
+            if(!item.getCurrentWinningBidder().trim().equals("")) {
+                for (int i = 0; i < users.size(); i++) {
+                    UserAccounts user = new UserAccounts();
+                    user.setUserName(users.get(i).getUserName());
+                    user.setUserType(users.get(i).getUserType());
+                    user.setPassword(users.get(i).getPassword());
+                    user.setAvailableCredit(users.get(i).getAvailableCredit());
+                    // Seller gets money
+                    if (user.getUserName().equals(item.getSellerName())) {
+                        //check if seller can accept anymore credit
+                        if (!user.getAvailableCredit().equals(MAX_CREDIT)) {
+                            maxCreditCheck = false;
+                            user.setAvailableCredit(user.getAvailableCredit().add(item.getHighestBid()));
+                            // checks to see if the bid will put the seller over credit
+                            if (user.getAvailableCredit().compareTo(MAX_CREDIT) < 0) {
+                                overCredit = false;
+                                users.set(i, user);
+                                System.out.println("Seller " + item.getSellerName().trim() + " sold " + item.getItemName().trim() + " for " + item.getHighestBid());
+                            } else {
+                                System.out.println("The Complete Auction transaction on " + item.getItemName().trim()
+                                        + " cannot go through as the bid will put the user over the max credit limit but " + item.getItemName().trim() + " is removed");
+                            }
+                        } else {
+                            System.out.println("Sellers credit is already the max so the transaction cannot go through but item is removed");
+                        }
+                    }
+                }
+                for (int i = 0; i < users.size(); i++) {
+                    UserAccounts user = new UserAccounts();
+                    user.setUserName(users.get(i).getUserName());
+                    user.setUserType(users.get(i).getUserType());
+                    user.setPassword(users.get(i).getPassword());
+                    user.setAvailableCredit(users.get(i).getAvailableCredit());
+                    // Buyer loses money
+                    if (user.getUserName().equals(item.getCurrentWinningBidder())) {
+                        if (!maxCreditCheck && !overCredit) {
+                            user.setAvailableCredit(user.getAvailableCredit().subtract(item.getHighestBid()));
+                            users.set(i, user);
+                            System.out.println("Buyer " + item.getCurrentWinningBidder().trim() + " bought " + item.getItemName().trim() + " for " + item.getHighestBid());
+                        }
+                    }
+                }
+            }else{
+                noBuyer = true;
             }
-            // Buyer loses money
-            if(user.getUserName().equals(item.getCurrentWinningBidder())) {
-                user.setAvailableCredit(user.getAvailableCredit().subtract(item.getHighestBid()));
-                users.set(i, user);
-                System.out.println("Buyer " + item.getCurrentWinningBidder().trim() + " bought " + item.getItemName().trim() + " for " + item.getHighestBid());
+
+
+
+        // remove the item from the list after transaction
+        if (items.removeIf(itemList -> (itemList.getItemName().equals(item.getItemName())))){
+            if(noBuyer){
+                System.out.println("Completed Auction for " + item.getItemName().trim() + " but had no buyer");
+            }else {
+                System.out.println("Completed Auction for " + item.getItemName().trim());
             }
 
         }
 
-        // remove the item from the list after transaction
-        if (items.removeIf(itemList -> (itemList.getItemName().equals(item.getItemName())))){
-            System.out.println("Completed Auction for " + item.getItemName().trim());
+    }
+
+    /**
+     *
+     * @param users
+     * @param items
+     */
+    public void checkForDeletedUsers(List<UserAccounts> users, List<AvailableItems> items){
+
+        for (AvailableItems availableItems : items) {
+            boolean check = false;
+            AvailableItems item = new AvailableItems();
+            item.setCurrentWinningBidder(availableItems.getCurrentWinningBidder());
+
+            for (UserAccounts user : users) {
+                if (user.getUserName().trim().equals(item.getCurrentWinningBidder().trim())) {
+                    check = true;
+                    break;
+                }
+            }
+
+            if(!check){
+                availableItems.setHighestBid(new BigDecimal("0.00"));
+                availableItems.setCurrentWinningBidder("");
+            }
 
         }
 
