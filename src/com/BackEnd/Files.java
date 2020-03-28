@@ -35,19 +35,19 @@ public class Files {
                     create(transaction, users);
                     break;
                 case 2:  //Delete
-                    delete(transaction, users);
+                    //delete(transaction, users);
                     break;
                 case 5: //Refund
-                    refund(transaction, users);
+                    //refund(transaction, users);
                     break;
                 case 6:  //Add credit
-                    addCredit(transaction, users);
+                    //addCredit(transaction, users);
                     break;
                 case 7: //Enable
-                    enable(transaction, users);
+                    //enable(transaction, users);
                     break;
                 case 8: //Disable
-                    disable(transaction, users);
+                    //disable(transaction, users);
                     break;
             }
         }
@@ -288,16 +288,17 @@ public class Files {
             user.setPassword(users.get(i).getPassword());
             user.setAvailableCredit(users.get(i).getAvailableCredit());
 
-            // Buyer loses money
-            if(user.getUserName().equals(item.getCurrentWinningBidder())) {
-                user.setAvailableCredit(user.getAvailableCredit().subtract(item.getHighestBid()));
-                users.set(i, user);
-            }
+
 
             // Seller gets money
             if(user.getUserName().equals(item.getSellerName())) {
                 user.setAvailableCredit(user.getAvailableCredit().add(item.getHighestBid()));
                 users.set(i, user);
+                // Buyer loses money
+                if(user.getUserName().equals(item.getCurrentWinningBidder())) {
+                    user.setAvailableCredit(user.getAvailableCredit().subtract(item.getHighestBid()));
+                    users.set(i, user);
+                }
 
             }
 

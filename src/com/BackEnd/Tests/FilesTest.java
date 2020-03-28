@@ -22,9 +22,6 @@ import static org.junit.Assert.*;
  */
 public class FilesTest {
 
-    String filePrefix = "test_";
-    String localDir = System.getProperty("user.dir");
-
     Files file = new Files();
 
     Transactions transaction = new Transactions();
@@ -34,12 +31,11 @@ public class FilesTest {
     Transactions addCreditTransaction = new Transactions();
     Transactions enableTransaction = new Transactions();
     Transactions disableTransaction = new Transactions();
-    UserAccounts endOfAuctionUsers = new UserAccounts();
-    AvailableItems endOfAuctionItems = new AvailableItems();
+    List<Transactions> transactions = new ArrayList<>();
 
     @Before
     public void init(){
-        List<Transactions> transactions = new ArrayList<>();
+
         transaction.setTransactionCode(1);
         transaction.setUserName("paul");
         transaction.setUserType("FS");
@@ -161,16 +157,17 @@ public class FilesTest {
 
     }
     /**
-     * Tests the updateAvailableItemsList() loop by entering loop once
+     * Tests the updateAvailableItemsList() loop by entering loop twice
      */
     @Test
     public void enterLoopTwice() throws IOException {
         List<Transactions> testTransactionList = new ArrayList<>();
         List<AvailableItems> items = new ArrayList<>();
         testTransactionList.add(bidTransaction);
+        testTransactionList.add(advertiseTransaction);
 
         file.updateAvailableItemsList(items, testTransactionList);
-        assertEquals(1, testTransactionList.size());
+        assertEquals(2, testTransactionList.size());
 
     }
 

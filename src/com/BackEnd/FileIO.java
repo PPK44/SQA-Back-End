@@ -12,24 +12,11 @@ import com.BackEnd.Transactions;
  */
 public class FileIO{
 
-    // Data for all three files accessed: the available items file, the user accounts file, and the daily transaction file.
-    String localDir = System.getProperty("user.dir");
-    File availableItemsFile = new File(localDir + "\\items.if.txt");
-    File userAccountsFile = new File(localDir + "\\current_user_accounts_file.txt");
-    File transactionFile = new File(localDir + "\\daily_transaction_file.txt");
-
-    // Linux Paths
-//    String localDir = System.getProperty("user.dir");
-//    File availableItemsFile = new File(localDir + "/items.if.txt");
-//    File userAccountsFile = new File(localDir + "/current_user_accounts_file.txt");
-//    File transactionFile = new File(localDir + "/daily_transaction_file.txt");
-
-
     /**
      * Reads in transaction data from the daily transaction file, and converts the raw data into the Transactions datatype.
      * @return a list of all Transactions
      */
-    public List<Transactions> parseTransactions() throws FileNotFoundException {
+    public List<Transactions> parseTransactions(File transactionFile) throws FileNotFoundException {
         List<Transactions> transactions = new ArrayList<>();
         Scanner scanner = new Scanner(transactionFile);
         while(scanner.hasNextLine()){
@@ -81,7 +68,7 @@ public class FileIO{
      * Reads in item data from the available items file, and converts the raw data into the AvailableItems datatype.
      * @return a list of all AvailableItems
      */
-    public List<AvailableItems> parseItems() throws FileNotFoundException {
+    public List<AvailableItems> parseItems(File availableItemsFile) throws FileNotFoundException {
         List<AvailableItems> items = new ArrayList<>();
         Scanner scanner = new Scanner(availableItemsFile);
         while(scanner.hasNextLine()){
@@ -103,7 +90,7 @@ public class FileIO{
      * Reads in user data from the user accounts file, and converts the raw data into the UserAccounts datatype.
      * @return a list of all UserAccounts
      */
-    public List<UserAccounts> parseUsers() throws FileNotFoundException {
+    public List<UserAccounts> parseUsers(File userAccountsFile) throws FileNotFoundException {
         List<UserAccounts> users = new ArrayList<>();
         Scanner scanner = new Scanner(userAccountsFile);
         while(scanner.hasNextLine()){
@@ -122,14 +109,8 @@ public class FileIO{
      * Writes the current userlist to the user accounts file.
      * @param users the userlist to write to file.
      */
-    public void writeUserFile(List<UserAccounts> users) throws IOException {
-        // Windows Paths
-//        FileWriter writer = new FileWriter(localDir + "\\current_user_accounts_file.txt");
-        FileWriter writer = new FileWriter(localDir + "\\FileIOTestFiles\\testcurrent_user_accounts_file.txt");
-
-        // Linux Paths
-//        FileWriter writer = new FileWriter(localDir + "/current_user_accounts_file.txt");
-//        FileWriter writer = new FileWriter(localDir + "/FileIOTestFiles/testcurrent_user_accounts_file.txt");
+    public void writeUserFile(List<UserAccounts> users, String file) throws IOException {
+        FileWriter writer = new FileWriter(file);
         for(UserAccounts user : users){
             writer.write(user.toString());
         }
@@ -140,14 +121,8 @@ public class FileIO{
      * Writes the current available items list to the available items file.
      * @param items the available items list to write to file.
      */
-    public void writeItemFile(List<AvailableItems> items) throws IOException {
-        // Windows Paths
-//        FileWriter writer = new FileWriter(localDir + "\\items.if.txt");
-        FileWriter writer = new FileWriter(localDir + "\\FileIOTestFiles\\testItems.if.txt");
-
-        // Linux Paths
-//        FileWriter writer = new FileWriter(localDir + "/items.if.txt");
-//        FileWriter writer = new FileWriter(localDir + "/FileIOTestFiles/testItems.if.txt");
+    public void writeItemFile(List<AvailableItems> items, String file) throws IOException {
+        FileWriter writer = new FileWriter(file);
         for(AvailableItems item : items){
             writer.write(item.toString());
         }
