@@ -47,8 +47,6 @@ public class FileIOTest {
 
 
 
-
-
     @Before
     public void setUp() throws Exception {
 
@@ -79,7 +77,7 @@ public class FileIOTest {
         bidTransaction.setItemName("DRAGON SCIMITAR    ");
         bidTransaction.setSellerName("Paul           ");
         bidTransaction.setBuyerName("HECKING COOLMAN");
-        bidTransaction.setMinBid(new BigDecimal("199.99"));
+        bidTransaction.setNewBid(new BigDecimal("199.99"));
         testTransactions.add(bidTransaction);
 
         // Prep Refund test data
@@ -111,10 +109,6 @@ public class FileIOTest {
         user.setAvailableCredit(new BigDecimal("00.44"));
         users.add(user);
 
-        // Prep reader for File out check
-
-
-
     }
 
     @Test
@@ -130,7 +124,7 @@ public class FileIOTest {
         assertEquals(testTransactions.get(0).getUserType(), parsedTransaction.get(0).getUserType());
         assertEquals(testTransactions.get(0).getAvailableCredit(), parsedTransaction.get(0).getAvailableCredit());
 
-        // Check if Delete is parted correctly (02)
+        // Check if Delete is parsed correctly (02)
         assertEquals(testTransactions.get(1).getTransactionCode(), parsedTransaction.get(2).getTransactionCode());
         assertEquals(testTransactions.get(1).getUserName(), parsedTransaction.get(2).getUserName());
         assertEquals(testTransactions.get(1).getUserType(), parsedTransaction.get(2).getUserType());
@@ -148,7 +142,7 @@ public class FileIOTest {
         assertEquals(testTransactions.get(3).getItemName(), parsedTransaction.get(18).getItemName());
         assertEquals(testTransactions.get(3).getBuyerName(), parsedTransaction.get(18).getBuyerName());
         assertEquals(testTransactions.get(3).getSellerName(), parsedTransaction.get(18).getSellerName());
-       // assertEquals(testTransactions.get(3).getMinBid(), parsedTransaction.get(18).getMinBid());
+        assertEquals(testTransactions.get(3).getNewBid(), parsedTransaction.get(18).getNewBid());
 
         // Check if Refund is parsed correctly (05)
         assertEquals(testTransactions.get(4).getTransactionCode(), parsedTransaction.get(15).getTransactionCode());
@@ -193,25 +187,33 @@ public class FileIOTest {
 
     }
 
-//    @Test
-//    public void writeUserFile() throws IOException {
-//        fileIO.writeUserFile(users);
-//        String expected = "MR.RUNESCAPEMAN buyinggf20k  FS 000000.44";
-//        File userFileTest = new File(localDir+ "/current_user_accounts_file.txt");
-//        Scanner scanner = new Scanner(userFileTest);
-//        String actualString = scanner.nextLine();
-//        assertEquals(expected, actualString);
-//
-//    }
-//
-//    @Test
-//    public void writeItemFile() throws IOException {
-//        fileIO.writeItemFile(items);
-//        String expected = "apple               test123         BUYINGMAN       020 009.00";
-//        File itemFileTest = new File(localDir+ "/items.if.txt");
-//        Scanner scanner = new Scanner(itemFileTest);
-//        String actualString = scanner.nextLine();
-//        assertEquals(expected, actualString);
-//
-//    }
+    @Test
+    public void writeUserFile() throws IOException {
+        fileIO.writeUserFile(users);
+        String expected = "MR.RUNESCAPEMAN buyinggf20k  FS 000000.44";
+        // Linux Path
+//        File userFileTest = new File(localDir+ "/FileIOTestFiles/testcurrent_user_accounts_file.txt");
+
+        //Windows Path
+        File userFileTest = new File(localDir+ "\\FileIOTestFiles\\testcurrent_user_accounts_file.txt");
+        Scanner scanner = new Scanner(userFileTest);
+        String actualString = scanner.nextLine();
+        assertEquals(expected, actualString);
+
+    }
+
+    @Test
+    public void writeItemFile() throws IOException {
+        fileIO.writeItemFile(items);
+        String expected = "apple               test123         BUYINGMAN       020 009.00";
+        // Linux Path
+//        File itemFileTest = new File(localDir+ "/FileIOTestFiles/testItems.if.txt");
+
+        // Windows Path
+        File itemFileTest = new File(localDir+ "\\FileIOTestFiles\\testItems.if.txt");
+        Scanner scanner = new Scanner(itemFileTest);
+        String actualString = scanner.nextLine();
+        assertEquals(expected, actualString);
+
+    }
 }
