@@ -36,10 +36,10 @@ public class Main extends FileIO {
         List<Transactions> transactions = parser.parseTransactions(transactionFile);
         List<AvailableItems> items = parser.parseItems(availableItemsFile);
         List<UserAccounts> users = parser.parseUsers(userAccountsFile);
-        run.updateUserList(users, transactions);
+        //run.updateUserList(users, transactions);
         //run.updateAvailableItemsList(items, transactions);
-        //run.decrementAuctionDay(items, users);
-        //parser.writeItemFile(items, availableItemsFile.toString());
+        run.decrementAuctionDay(items, users);
+        parser.writeItemFile(items, availableItemsFile.toString());
         parser.writeUserFile(users, userAccountsFile.toString());
 
 

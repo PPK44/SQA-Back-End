@@ -32,10 +32,10 @@ public class Files {
         for (Transactions transaction: transactions) {
             switch (transaction.getTransactionCode()) {
                 case 1: //Create
-                    create(transaction, users);
+                    //create(transaction, users);
                     break;
                 case 2:  //Delete
-                    //delete(transaction, users);
+                    delete(transaction, users);
                     break;
                 case 5: //Refund
                     //refund(transaction, users);
@@ -64,10 +64,10 @@ public class Files {
         for (Transactions transaction: transactions) {
             switch (transaction.getTransactionCode()) {
                 case 3:  //Advertise
-                    advertise(transaction, items);
+                    //advertise(transaction, items);
                     break;
                 case 4: //Bid
-                    bid(transaction, items);
+                    //bid(transaction, items);
                     break;
             }
         }
@@ -83,6 +83,7 @@ public class Files {
         for (UserAccounts userAccounts : users) {
             if (userAccounts.getUserName().equals(transaction.getUserName())) {
                 check = true;
+                System.out.println("Attempted to create User " + transaction.getUserName().trim() + " but username already exits");
                 break;
             }
         }
@@ -94,6 +95,7 @@ public class Files {
             user.setPassword("Test");
             user.setUserName(transaction.getUserName());
             users.add(user);
+            System.out.println("Created User " + user.getUserName().trim() + " with user type " + user.getUserType());
         }
 
 
@@ -110,8 +112,9 @@ public class Files {
         user.setAvailableCredit(transaction.getAvailableCredit());
         user.setUserName(transaction.getUserName());
         user.setPassword("passwords");
-        users.removeIf(userAccounts -> (userAccounts.getUserName().equals(user.getUserName())));
-
+        if (users.removeIf(userAccounts -> (userAccounts.getUserName().equals(user.getUserName())))) {
+            System.out.println("Deleted User " + user.getUserName().trim() + " with user type " + user.getUserType());
+        }
 
     }
 
@@ -129,8 +132,8 @@ public class Files {
         item.setNumberOfDaysLeft(transaction.getDaysToAuction());
         item.setCurrentWinningBidder("");
         item.setHighestBid(transaction.getMinBid());
-
         items.add(item);
+        System.out.println("Advertised "+ item.getItemName().trim() + " with seller name " +  item.getSellerName());
 
     }
 
@@ -152,6 +155,7 @@ public class Files {
                 if(items.get(i).getHighestBid().compareTo(item.getHighestBid()) < 0) {
                     item.setNumberOfDaysLeft(items.get(i).getNumberOfDaysLeft());
                     items.set(i, item);
+                    System.out.println("User "+ item.getCurrentWinningBidder().trim() + " bid " +  item.getHighestBid() + " on " + item.getItemName().trim());
                 }
             }
 
@@ -177,14 +181,14 @@ public class Files {
                 seller.setUserType(users.get(i).getUserType());
                 seller.setPassword(users.get(i).getPassword());
                 users.set(i, seller);
-
+                System.out.println("Removed "+ transaction.getRefundCredit() + " from seller " +  seller.getUserName().trim() + " for refund");
             }
             if(users.get(i).getUserName().equals(buyer.getUserName())){
                 buyer.setAvailableCredit(users.get(i).getAvailableCredit().add(transaction.getRefundCredit()));
                 buyer.setUserType(users.get(i).getUserType());
                 buyer.setPassword(users.get(i).getPassword());
                 users.set(i, buyer);
-                
+                System.out.println("Refunded "+ transaction.getRefundCredit() + " to buyer " +  buyer.getUserName().trim());
             }
 
         }
@@ -205,6 +209,7 @@ public class Files {
                 user.setAvailableCredit(users.get(i).getAvailableCredit().add(transaction.getAvailableCredit()));
                 user.setPassword(users.get(i).getPassword());
                 users.set(i, user);
+                System.out.println("Added "+ transaction.getAvailableCredit() + " to user " +  user.getUserName().trim());
             }
 
         }
@@ -227,6 +232,7 @@ public class Files {
             if(users.get(i).getUserName().equals(user.getUserName())){
                 user.setPassword(users.get(i).getPassword());
                 users.set(i, user);
+                System.out.println("Enabled user "+ user.getUserName().trim() + " with user type " +  user.getUserType());
             }
 
         }
@@ -248,6 +254,7 @@ public class Files {
                user.setUserType(DISABLE_CODE);
                user.setPassword(users.get(i).getPassword());
                users.set(i, user);
+               System.out.println("Disabled user "+ user.getUserName().trim());
             }
 
         }
@@ -271,6 +278,7 @@ public class Files {
             if(items.get(i).getNumberOfDaysLeft() != 0) {
                 item.setNumberOfDaysLeft(items.get(i).getNumberOfDaysLeft() - 1);
                 items.set(i, item);
+                System.out.println("Decremented number of days by 1 on " + item.getItemName().trim());
             }else{
                 completeAuction(items, item, users);
             }
@@ -294,18 +302,22 @@ public class Files {
             if(user.getUserName().equals(item.getSellerName())) {
                 user.setAvailableCredit(user.getAvailableCredit().add(item.getHighestBid()));
                 users.set(i, user);
-                // Buyer loses money
-                if(user.getUserName().equals(item.getCurrentWinningBidder())) {
-                    user.setAvailableCredit(user.getAvailableCredit().subtract(item.getHighestBid()));
-                    users.set(i, user);
-                }
-
+                System.out.println("Seller " + item.getSellerName().trim() + " sold " + item.getItemName().trim() + " for " + item.getHighestBid());
+            }
+            // Buyer loses money
+            if(user.getUserName().equals(item.getCurrentWinningBidder())) {
+                user.setAvailableCredit(user.getAvailableCredit().subtract(item.getHighestBid()));
+                users.set(i, user);
+                System.out.println("Buyer " + item.getCurrentWinningBidder().trim() + " bought " + item.getItemName().trim() + " for " + item.getHighestBid());
             }
 
         }
 
         // remove the item from the list after transaction
-        items.removeIf(itemList -> (itemList.getItemName().equals(item.getItemName())));
+        if (items.removeIf(itemList -> (itemList.getItemName().equals(item.getItemName())))){
+            System.out.println("Completed Auction for " + item.getItemName().trim());
+
+        }
 
     }
 
