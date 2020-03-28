@@ -13,16 +13,16 @@ import com.BackEnd.Transactions;
 public class FileIO{
 
     // Data for all three files accessed: the available items file, the user accounts file, and the daily transaction file.
-//    String localDir = System.getProperty("user.dir");
-//    File availableItemsFile = new File(localDir + "\\items.if.txt");
-//    File userAccountsFile = new File(localDir + "\\current_user_accounts_file.txt");
-//    File transactionFile = new File(localDir + "\\daily_transaction_file.txt");
+    String localDir = System.getProperty("user.dir");
+    File availableItemsFile = new File(localDir + "\\items.if.txt");
+    File userAccountsFile = new File(localDir + "\\current_user_accounts_file.txt");
+    File transactionFile = new File(localDir + "\\daily_transaction_file.txt");
 
     // Linux Paths
-    String localDir = System.getProperty("user.dir");
-    File availableItemsFile = new File(localDir + "/items.if.txt");
-    File userAccountsFile = new File(localDir + "/current_user_accounts_file.txt");
-    File transactionFile = new File(localDir + "/daily_transaction_file.txt");
+//    String localDir = System.getProperty("user.dir");
+//    File availableItemsFile = new File(localDir + "/items.if.txt");
+//    File userAccountsFile = new File(localDir + "/current_user_accounts_file.txt");
+//    File transactionFile = new File(localDir + "/daily_transaction_file.txt");
 
 
     /**
@@ -124,6 +124,7 @@ public class FileIO{
      */
     public void writeUserFile(List<UserAccounts> users) throws IOException {
         FileWriter writer = new FileWriter(localDir + "\\current_user_accounts_file.txt");
+//        FileWriter writer = new FileWriter(localDir + "/current_user_accounts_file.txt");
         for(UserAccounts user : users){
             writer.write(user.toString());
         }
@@ -136,6 +137,7 @@ public class FileIO{
      */
     public void writeItemFile(List<AvailableItems> items) throws IOException {
         FileWriter writer = new FileWriter(localDir + "\\items.if.txt");
+//        FileWriter writer = new FileWriter(localDir + "/items.if.txt");
         for(AvailableItems item : items){
             writer.write(item.toString());
         }
