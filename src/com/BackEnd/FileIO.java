@@ -123,7 +123,13 @@ public class FileIO{
      * @param users the userlist to write to file.
      */
     public void writeUserFile(List<UserAccounts> users) throws IOException {
-        FileWriter writer = new FileWriter(localDir + "\\current_user_accounts_file.txt");
+        // Windows Paths
+//        FileWriter writer = new FileWriter(localDir + "\\current_user_accounts_file.txt");
+        FileWriter writer = new FileWriter(localDir + "\\FileIOTestFiles\\testcurrent_user_accounts_file.txt");
+
+        // Linux Paths
+//        FileWriter writer = new FileWriter(localDir + "/current_user_accounts_file.txt");
+//        FileWriter writer = new FileWriter(localDir + "/FileIOTestFiles/testcurrent_user_accounts_file.txt");
         for(UserAccounts user : users){
             writer.write(user.toString());
         }
@@ -135,11 +141,18 @@ public class FileIO{
      * @param items the available items list to write to file.
      */
     public void writeItemFile(List<AvailableItems> items) throws IOException {
-        FileWriter writer = new FileWriter(localDir + "\\items.if.txt");
+        // Windows Paths
+//        FileWriter writer = new FileWriter(localDir + "\\items.if.txt");
+        FileWriter writer = new FileWriter(localDir + "\\FileIOTestFiles\\testItems.if.txt");
+
+        // Linux Paths
+//        FileWriter writer = new FileWriter(localDir + "/items.if.txt");
+//        FileWriter writer = new FileWriter(localDir + "/FileIOTestFiles/testItems.if.txt");
         for(AvailableItems item : items){
             writer.write(item.toString());
         }
         writer.close();
     }
+
 
 }

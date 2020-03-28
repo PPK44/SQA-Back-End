@@ -1,0 +1,6 @@
+01 CreateTest      AA 000020.00
+02 DeleteTest      FS 000050.00
+06 AddTest         FS 000060.00
+05 RefundTest      FS 000070.00
+03 AdvertiseItem       AdvertiseSelle 004 010.00
+04 BidTest             SellerName      BuyerName       040.00
