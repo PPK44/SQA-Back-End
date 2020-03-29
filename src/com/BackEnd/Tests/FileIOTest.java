@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -19,15 +18,9 @@ public class FileIOTest {
 
     // Data for all three files accessed: the available items file, the user accounts file, and the daily transaction file.
     String localDir = System.getProperty("user.dir");
-    File availableItemsFile = new File(localDir + "\\FileIOTestFiles\\testitems.if.txt");
-    File userAccountsFile = new File(localDir + "\\FileIOTestFiles\\testcurrent_user_accounts_file.txt");
-    File transactionFile = new File(localDir + "\\FileIOTestFiles\\testDailyTransactionFile.txt");
-
-    // Linux Paths
-//    String localDir = System.getProperty("user.dir");
-//    File availableItemsFile = new File(localDir + "/items.if.txt");
-//    File userAccountsFile = new File(localDir + "/current_user_accounts_file.txt");
-//    File transactionFile = new File(localDir + "/daily_transaction_file.txt");
+    File availableItemsFile = new File(localDir + File.separator + "FileIOTestFiles" + File.separator + "testitems.if.txt");
+    File userAccountsFile = new File(localDir + File.separator+ "FileIOTestFiles" + File.separator+ "testcurrent_user_accounts_file.txt");
+    File transactionFile = new File(localDir + File.separator + "FileIOTestFiles" + File.separator + "testDailyTransactionFile.txt");
 
     FileIO fileIO = new FileIO();
 
@@ -191,11 +184,8 @@ public class FileIOTest {
     public void writeUserFile() throws IOException {
         fileIO.writeUserFile(users, userAccountsFile.toString());
         String expected = "MR.RUNESCAPEMAN buyinggf20k  FS 000000.44";
-        // Linux Path
-//        File userFileTest = new File(localDir+ "/FileIOTestFiles/testcurrent_user_accounts_file.txt");
 
-        //Windows Path
-        File userFileTest = new File(localDir+ "\\FileIOTestFiles\\testcurrent_user_accounts_file.txt");
+        File userFileTest = new File(localDir+ File.separator + "FileIOTestFiles" + File.separator + "testcurrent_user_accounts_file.txt");
         Scanner scanner = new Scanner(userFileTest);
         String actualString = scanner.nextLine();
         assertEquals(expected, actualString);
@@ -206,11 +196,8 @@ public class FileIOTest {
     public void writeItemFile() throws IOException {
         fileIO.writeItemFile(items, availableItemsFile.toString());
         String expected = "apple               test123         BUYINGMAN       020 009.00";
-        // Linux Path
-//        File itemFileTest = new File(localDir+ "/FileIOTestFiles/testItems.if.txt");
 
-        // Windows Path
-        File itemFileTest = new File(localDir+ "\\FileIOTestFiles\\testItems.if.txt");
+        File itemFileTest = new File(localDir+ File.separator + "FileIOTestFiles" + File.separator + "testItems.if.txt");
         Scanner scanner = new Scanner(itemFileTest);
         String actualString = scanner.nextLine();
         assertEquals(expected, actualString);

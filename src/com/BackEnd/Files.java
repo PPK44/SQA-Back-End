@@ -22,7 +22,7 @@ public class Files {
     final BigDecimal MAX_CREDIT = new BigDecimal("999999.99");
 
     /**
-     * Updates and stores the list of users, utilizing the FileIO class.
+     * Updates and stores the list of users.
      * @throws FileNotFoundException if the user file is missing
      */
     public void updateUserList(List<UserAccounts> users, List<Transactions> transactions) throws IOException {
@@ -54,7 +54,9 @@ public class Files {
 
 
     /**
-     * Updates and stores the available item list, utilizing the FileIO class.
+     * Updates and stores the available item list.
+     * @param transactions holds the list of transactions to go through
+     * @param items holds list of items
      * @throws FileNotFoundException if the items file is missing
      */
     public void updateAvailableItemsList(List<AvailableItems> items, List<Transactions> transactions) throws IOException {
@@ -74,6 +76,7 @@ public class Files {
     /**
      * Creates a new user with information from the transaction and adds it into the list
      * @param transaction holds the transaction that will be used to change/add to the list
+     * @param users holds the list of users
      */
     public void create(Transactions transaction, List<UserAccounts> users) {
         boolean check = false;
@@ -102,6 +105,7 @@ public class Files {
     /**
      * Deletes a user with information from the transaction object and adds it into the list
      * @param transaction holds the transaction that will be used to change/add to the list
+     * @param users holds the list of users
      */
     public void delete(Transactions transaction, List<UserAccounts> users) {
 
@@ -119,6 +123,7 @@ public class Files {
     /**
      * Adds the item to be advertised from the transactions object to the item list
      * @param transaction holds the transaction that will be used to change/add to the list
+     * @param items holds the list of items
      */
     public void advertise(Transactions transaction, List<AvailableItems> items) {
 
@@ -138,6 +143,7 @@ public class Files {
     /**
      * Adds the bid from the transaction object to the item list for current bid
      * @param transaction holds the transaction that will be used to change/add to the list
+     * @param items holds the list of items
      */
     public void bid(Transactions transaction, List<AvailableItems> items) {
 
@@ -164,7 +170,7 @@ public class Files {
     /**
      * Refund Credit with information from the transaction object and adds to the proper user
      * @param transaction holds the transaction that will be used to change/add to the list
-     * @param users
+     * @param users holds the list of users
      */
     public void refund(Transactions transaction, List<UserAccounts> users) {
         boolean maxCreditCheck = true;
@@ -200,7 +206,7 @@ public class Files {
     /**
      * Adds credit with information from the transaction object and adds it to the proper user
      * @param transaction holds the transaction that will be used to change/add to the list
-     * @param users
+     * @param users holds the list of users
      */
     public void addCredit(Transactions transaction, List<UserAccounts> users){
         UserAccounts user = new UserAccounts();
@@ -222,7 +228,7 @@ public class Files {
     /**
      * Enables the user passed in from transaction and updates the users list
      * @param transaction holds the transaction that will be used to change/add to the list
-     * @param users
+     * @param users holds the list of users
      */
     public void enable(Transactions transaction, List<UserAccounts> users){
 
@@ -266,8 +272,7 @@ public class Files {
 
     /**
      * Decrements the number of days left on the auction and if 0 days left the auction is completed
-     * STILL NEED TO TEST
-     * @param items
+     * @param items holds the items that we are decrementing number of days for
      */
     public void decrementAuctionDay(List<AvailableItems> items, List<UserAccounts> users) throws IOException{
 
@@ -293,9 +298,9 @@ public class Files {
 
     /**
      * Completes an auction for when the number of days left is zero
-     * @param items
-     * @param item
-     * @param users
+     * @param items holds all the items in the liat
+     * @param item the item we are completing the auction for
+     * @param users holds the list of users
      */
     public void completeAuction(List<AvailableItems> items, AvailableItems item, List<UserAccounts> users) {
         boolean maxCreditCheck = true;
@@ -364,9 +369,9 @@ public class Files {
     }
 
     /**
-     *
-     * @param users
-     * @param items
+     * Check if any deleted users have the highest bid on an item and remove them from item and put highest bid to 0
+     * @param users holds the users in a list
+     * @param items holds all the items in a list
      */
     public void checkForDeletedUsers(List<UserAccounts> users, List<AvailableItems> items){
 

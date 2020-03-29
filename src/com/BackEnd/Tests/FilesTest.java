@@ -5,7 +5,6 @@ import com.BackEnd.Files;
 import com.BackEnd.Transactions;
 
 import com.BackEnd.UserAccounts;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,12 +12,11 @@ import java.io.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import static org.junit.Assert.*;
 
 /**
- * Use junit4
+ * Using junit4
  */
 public class FilesTest {
 
@@ -33,6 +31,9 @@ public class FilesTest {
     Transactions disableTransaction = new Transactions();
     List<Transactions> transactions = new ArrayList<>();
 
+    /**
+     * Setup
+     */
     @Before
     public void init(){
 
