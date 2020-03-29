@@ -79,14 +79,14 @@ public class FilesTest {
         addCreditTransaction.setUserName("AddCreditUser");
         addCreditTransaction.setAvailableCredit(new BigDecimal("10.00"));
 
-        // Update Method Testing Data Prep
+
     }
 
     /**
      * Tests the updateUserList() method in Files by creating a test set of user-creating transactions to verify.
      */
     @Test
-    public void updateUserList() throws IOException {
+    public void updateUserList() {
         List<Transactions> testTransactionList = new ArrayList<>();
 
         Transactions createTransaction = new Transactions();
@@ -134,7 +134,7 @@ public class FilesTest {
      * Tests the updateAvailableItemsList() loop by never entering loop
      */
     @Test
-    public void neverEnterLoop() throws IOException {
+    public void neverEnterLoop() {
         List<Transactions> testTransactionList = new ArrayList<>();
         List<AvailableItems> items = new ArrayList<>();
 
@@ -145,23 +145,56 @@ public class FilesTest {
 
     /**
      * Tests the updateAvailableItemsList() loop by entering loop once
-     */
+     * Decision for Bid
+     * */
     @Test
-    public void enterLoopOnce() throws IOException {
+    public void enterLoopOnceForBid() {
+        List<Transactions> testTransactionList = new ArrayList<>();
+        AvailableItems item = new AvailableItems();
+        List<AvailableItems> items = new ArrayList<>();
+        item.setItemName("GreenApple");
+        testTransactionList.add(bidTransaction);
+
+
+        file.updateAvailableItemsList(items, testTransactionList);
+        assertEquals(1, testTransactionList.size());
+
+    }
+    /**
+     * Tests the updateAvailableItemsList() loop by entering loop once
+     * Decision for Bid
+     * */
+    @Test
+    public void enterLoopOnceForAdvertise() {
         List<Transactions> testTransactionList = new ArrayList<>();
         List<AvailableItems> items = new ArrayList<>();
-        testTransactionList.add(bidTransaction);
         testTransactionList.add(advertiseTransaction);
 
         file.updateAvailableItemsList(items, testTransactionList);
-        assertEquals(2, testTransactionList.size());
+        assertEquals(1, testTransactionList.size());
 
     }
     /**
      * Tests the updateAvailableItemsList() loop by entering loop twice
+     * Decision for None
      */
     @Test
-    public void enterLoopTwice() throws IOException {
+    public void enterLoopTwiceDecisionForNone() {
+        List<Transactions> testTransactionList = new ArrayList<>();
+        List<AvailableItems> items = new ArrayList<>();
+        testTransactionList.add(transaction);
+        testTransactionList.add(addCreditTransaction);
+
+        file.updateAvailableItemsList(items, testTransactionList);
+        assertEquals(0, items.size());
+
+    }
+    /**
+     * Tests the updateAvailableItemsList() loop by entering loop twice
+     * Decision coverage for both
+     */
+    @Test
+    public void enterLoopTwiceDecisionForBoth() {
         List<Transactions> testTransactionList = new ArrayList<>();
         List<AvailableItems> items = new ArrayList<>();
         testTransactionList.add(bidTransaction);
@@ -174,9 +207,10 @@ public class FilesTest {
 
     /**
      * Tests the updateAvailableItemsList() method in Files by creating a test set of item-creating transactions to verify.
+     * Loop coverage to enter loop multiple times
      */
     @Test
-    public void updateAvailableItemsList() throws IOException {
+    public void updateAvailableItemsList() {
         List<Transactions> testTransactionList = new ArrayList<>();
         List<AvailableItems> items = new ArrayList<>();
 
@@ -188,6 +222,14 @@ public class FilesTest {
         advertiseTransaction.setMinBid(new BigDecimal("149.99"));
         testTransactionList.add(advertiseTransaction);
 
+        Transactions advertiseTransaction2 = new Transactions();
+        advertiseTransaction2.setTransactionCode(3);
+        advertiseTransaction2.setItemName("Ice");
+        advertiseTransaction2.setSellerName("Johnny");
+        advertiseTransaction2.setDaysToAuction(15);
+        advertiseTransaction2.setMinBid(new BigDecimal("209.99"));
+        testTransactionList.add(advertiseTransaction2);
+
         Transactions bidTransaction = new Transactions();
         bidTransaction.setTransactionCode(4);
         bidTransaction.setItemName("Bread");
@@ -198,7 +240,7 @@ public class FilesTest {
 
 
         file.updateAvailableItemsList(items, testTransactionList);
-        assertEquals(1, items.size());
+        assertEquals(2, items.size());
     }
 
     /**
@@ -225,7 +267,7 @@ public class FilesTest {
     }
 
     /**
-     *
+     * Statement coverage for delete method
      */
     @Test
     public void delete() {
@@ -240,6 +282,9 @@ public class FilesTest {
         assertEquals(0, users.size());
     }
 
+    /**
+     * Statement coverage for advertise method
+     */
     @Test
     public void advertise(){
         List<AvailableItems> items = new ArrayList<>();
@@ -248,6 +293,9 @@ public class FilesTest {
 
     }
 
+    /**
+     * statement coverage for bid method
+     */
     @Test
     public void bid(){
         List<AvailableItems> items = new ArrayList<>();
@@ -263,6 +311,9 @@ public class FilesTest {
         assertEquals(new BigDecimal("55.00"), items.get(0).getHighestBid());
     }
 
+    /**
+     * statement coverage for refund method
+     */
     @Test
     public void refund(){
         List<UserAccounts> users = new ArrayList<>();
@@ -291,6 +342,9 @@ public class FilesTest {
 
     }
 
+    /**
+     * statement coverage for addcredit method
+     */
     @Test
     public void addCredit(){
         List<UserAccounts> users = new ArrayList<>();
@@ -311,6 +365,9 @@ public class FilesTest {
 
     }
 
+    /**
+     * statement coverage for enable method
+     */
     @Test
     public void enable(){
 
@@ -331,6 +388,9 @@ public class FilesTest {
 
     }
 
+    /**
+     * statement coverage for disable method
+     */
     @Test
     public void disable(){
 
@@ -351,6 +411,10 @@ public class FilesTest {
 
     }
 
+    /**
+     * statement coverage for decrementAuctionDay Method method
+     * @throws IOException
+     */
     @Test
     public void decrementAuctionDay() throws IOException {
         // Decrement Auction Day
@@ -394,7 +458,7 @@ public class FilesTest {
     }
 
     /**
-     * Decision Coverage in if statement to call complete auction in else statement
+     * Statement Coverage in if statement to call complete auction in else statement
      * @throws IOException
      */
     @Test
@@ -414,6 +478,110 @@ public class FilesTest {
         file.decrementAuctionDay(items, users);
     }
 
+    /**
+     *
+     */
+    @Test
+    public void completeAuctionLogStatement1()
+    {
+
+        // Complete Auction
+        List<AvailableItems> completeAuctionItems = new ArrayList<>();
+        AvailableItems completeAuctionitem = new AvailableItems();
+
+        // Create Items to complete
+        completeAuctionitem.setItemName("CompleteItem");
+        completeAuctionitem.setHighestBid(new BigDecimal("10.00"));
+        completeAuctionitem.setCurrentWinningBidder("DIBuyer");
+        completeAuctionitem.setSellerName("DISeller");
+        completeAuctionitem.setNumberOfDaysLeft(0);
+        completeAuctionItems.add(completeAuctionitem);
+
+        // Create Users to Handle the item
+        List<UserAccounts> completeUsers = new ArrayList<>();
+        UserAccounts completeBuyer = new UserAccounts();
+        UserAccounts completeSeller = new UserAccounts();
+
+        // Create Seller
+        completeSeller.setAvailableCredit(new BigDecimal("999999.99"));
+        completeSeller.setPassword("passwords");
+        completeSeller.setUserName("DISeller");
+        completeSeller.setUserType("FS");
+        completeUsers.add(completeSeller);
+
+        // Create Buyer
+        completeBuyer.setUserType("FS");
+        completeBuyer.setUserName("DIBuyer");
+        completeBuyer.setAvailableCredit(new BigDecimal("20.00"));
+        completeBuyer.setPassword("passwords");
+        completeUsers.add(completeBuyer);
+
+        // Run test
+        file.completeAuction(completeAuctionItems, completeAuctionitem, completeUsers);
+
+        //Test Results
+        // Test that seller gets money
+        //assertEquals(new BigDecimal("60.00"), completeUsers.get(0).getAvailableCredit());
+        // Test that buy loses money
+        //assertEquals(new BigDecimal("10.00"), completeUsers.get(1).getAvailableCredit());
+        // Test that Item is Deleted
+        assertEquals(0, completeAuctionItems.size());
+
+    }
+
+    /**
+     *
+     */
+    @Test
+    public void completeAuctionLogStatement2(){
+
+        // Complete Auction
+        List<AvailableItems> completeAuctionItems = new ArrayList<>();
+        AvailableItems completeAuctionitem = new AvailableItems();
+
+        // Create Items to complete
+        completeAuctionitem.setItemName("CompleteItem");
+        completeAuctionitem.setHighestBid(new BigDecimal("10.00"));
+        completeAuctionitem.setCurrentWinningBidder("DIBuyer");
+        completeAuctionitem.setSellerName("DISeller");
+        completeAuctionitem.setNumberOfDaysLeft(0);
+        completeAuctionItems.add(completeAuctionitem);
+
+        // Create Users to Handle the item
+        List<UserAccounts> completeUsers = new ArrayList<>();
+        UserAccounts completeBuyer = new UserAccounts();
+        UserAccounts completeSeller = new UserAccounts();
+
+        // Create Seller
+        completeSeller.setAvailableCredit(new BigDecimal("999999.98"));
+        completeSeller.setPassword("passwords");
+        completeSeller.setUserName("DISeller");
+        completeSeller.setUserType("FS");
+        completeUsers.add(completeSeller);
+
+        // Create Buyer
+        completeBuyer.setUserType("FS");
+        completeBuyer.setUserName("DIBuyer");
+        completeBuyer.setAvailableCredit(new BigDecimal("20.00"));
+        completeBuyer.setPassword("passwords");
+        completeUsers.add(completeBuyer);
+
+        // Run test
+        file.completeAuction(completeAuctionItems, completeAuctionitem, completeUsers);
+
+        //Test Results
+        // Test that seller gets money
+        //assertEquals(new BigDecimal("60.00"), completeUsers.get(0).getAvailableCredit());
+        // Test that buy loses money
+        //assertEquals(new BigDecimal("10.00"), completeUsers.get(1).getAvailableCredit());
+        // Test that Item is Deleted
+        assertEquals(0, completeAuctionItems.size());
+
+    }
+
+    /**
+     * Statement coverage for Complete Auction
+     */
     @Test
     public void completeAuctionWithNoBuyer()
     {
@@ -452,7 +620,7 @@ public class FilesTest {
     }
 
     /**
-     *
+     * Coverage for Complete Auction
      */
     @Test
     public void completeAuctionSuccess(){

@@ -31,12 +31,13 @@ public class Main extends FileIO {
         List<Transactions> transactions = parser.parseTransactions(transactionFile);
         List<AvailableItems> items = parser.parseItems(availableItemsFile);
         List<UserAccounts> users = parser.parseUsers(userAccountsFile);
+        run.decrementAuctionDay(items, users);
         run.updateUserList(users, transactions);
         run.updateAvailableItemsList(items, transactions);
-        run.checkForDeletedUsers(users, items);
-        run.decrementAuctionDay(items, users);
-        parser.writeItemFile(items, availableItemsFile.toString());
         parser.writeUserFile(users, userAccountsFile.toString());
+        run.checkForDeletedUsers(users, items);
+        parser.writeItemFile(items, availableItemsFile.toString());
+
 
 
     }

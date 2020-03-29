@@ -25,7 +25,7 @@ public class Files {
      * Updates and stores the list of users.
      * @throws FileNotFoundException if the user file is missing
      */
-    public void updateUserList(List<UserAccounts> users, List<Transactions> transactions) throws IOException {
+    public void updateUserList(List<UserAccounts> users, List<Transactions> transactions) {
 
         for (Transactions transaction: transactions) {
             switch (transaction.getTransactionCode()) {
@@ -59,7 +59,7 @@ public class Files {
      * @param items holds list of items
      * @throws FileNotFoundException if the items file is missing
      */
-    public void updateAvailableItemsList(List<AvailableItems> items, List<Transactions> transactions) throws IOException {
+    public void updateAvailableItemsList(List<AvailableItems> items, List<Transactions> transactions)  {
 
         for (Transactions transaction: transactions) {
             switch (transaction.getTransactionCode()) {
@@ -173,8 +173,7 @@ public class Files {
      * @param users holds the list of users
      */
     public void refund(Transactions transaction, List<UserAccounts> users) {
-        boolean maxCreditCheck = true;
-        boolean overCredit = true;
+
         UserAccounts buyer = new UserAccounts();
         UserAccounts seller = new UserAccounts();
 
@@ -384,12 +383,17 @@ public class Files {
                 if (user.getUserName().trim().equals(item.getCurrentWinningBidder().trim())) {
                     check = true;
                     break;
+                } else if(item.getCurrentWinningBidder().trim().equals("")){
+                    check = true;
+                    break;
                 }
             }
 
             if(!check){
                 availableItems.setHighestBid(new BigDecimal("0.00"));
+                System.out.println("A deleted user " + availableItems.getCurrentWinningBidder().trim() + " had a current bid and was removed");
                 availableItems.setCurrentWinningBidder("");
+
             }
 
         }
