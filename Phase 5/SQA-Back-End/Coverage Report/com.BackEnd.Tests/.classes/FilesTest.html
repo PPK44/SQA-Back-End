@@ -1,0 +1,792 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: FilesTest</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.BackEnd.Tests</a> ]
+</div>
+
+<h1>Coverage Summary for Class: FilesTest (com.BackEnd.Tests)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FilesTest</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (26/ 26)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (374/ 374)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.BackEnd.Tests;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.BackEnd.AvailableItems;
+<i>4</i>&nbsp;import com.BackEnd.Files;
+<i>5</i>&nbsp;import com.BackEnd.Transactions;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import com.BackEnd.UserAccounts;
+<i>8</i>&nbsp;import org.junit.Before;
+<i>9</i>&nbsp;import org.junit.Test;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;import java.io.*;
+<i>12</i>&nbsp;import java.math.BigDecimal;
+<i>13</i>&nbsp;import java.util.ArrayList;
+<i>14</i>&nbsp;import java.util.List;
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;import static org.junit.Assert.*;
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;/**
+<i>19</i>&nbsp; * Using junit4
+<i>20</i>&nbsp; */
+<b class="fc"><i>21</i>&nbsp;public class FilesTest {</b>
+<i>22</i>&nbsp;
+<b class="fc"><i>23</i>&nbsp;    Files file = new Files();</b>
+<i>24</i>&nbsp;
+<b class="fc"><i>25</i>&nbsp;    Transactions transaction = new Transactions();</b>
+<b class="fc"><i>26</i>&nbsp;    Transactions advertiseTransaction = new Transactions();</b>
+<b class="fc"><i>27</i>&nbsp;    Transactions bidTransaction = new Transactions();</b>
+<b class="fc"><i>28</i>&nbsp;    Transactions refundTransaction = new Transactions();</b>
+<b class="fc"><i>29</i>&nbsp;    Transactions addCreditTransaction = new Transactions();</b>
+<b class="fc"><i>30</i>&nbsp;    Transactions enableTransaction = new Transactions();</b>
+<b class="fc"><i>31</i>&nbsp;    Transactions disableTransaction = new Transactions();</b>
+<b class="fc"><i>32</i>&nbsp;    List&lt;Transactions&gt; transactions = new ArrayList&lt;&gt;();</b>
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;    /**
+<i>35</i>&nbsp;     * Setup
+<i>36</i>&nbsp;     */
+<i>37</i>&nbsp;    @Before
+<i>38</i>&nbsp;    public void init(){
+<i>39</i>&nbsp;
+<b class="fc"><i>40</i>&nbsp;        transaction.setTransactionCode(1);</b>
+<b class="fc"><i>41</i>&nbsp;        transaction.setUserName(&quot;paul&quot;);</b>
+<b class="fc"><i>42</i>&nbsp;        transaction.setUserType(&quot;FS&quot;);</b>
+<b class="fc"><i>43</i>&nbsp;        transaction.setAvailableCredit(new BigDecimal(&quot;100.00&quot;));</b>
+<b class="fc"><i>44</i>&nbsp;        transactions.add(transaction);</b>
+<i>45</i>&nbsp;
+<b class="fc"><i>46</i>&nbsp;        enableTransaction.setTransactionCode(7);</b>
+<b class="fc"><i>47</i>&nbsp;        enableTransaction.setUserName(&quot;jesus&quot;);</b>
+<b class="fc"><i>48</i>&nbsp;        enableTransaction.setUserType(&quot;FS&quot;);</b>
+<b class="fc"><i>49</i>&nbsp;        enableTransaction.setAvailableCredit(new BigDecimal(&quot;100.00&quot;));</b>
+<b class="fc"><i>50</i>&nbsp;        transactions.add(enableTransaction);</b>
+<b class="fc"><i>51</i>&nbsp;        disableTransaction.setTransactionCode(8);</b>
+<b class="fc"><i>52</i>&nbsp;        disableTransaction.setUserName(&quot;joe&quot;);</b>
+<b class="fc"><i>53</i>&nbsp;        disableTransaction.setUserType(&quot;FS&quot;);</b>
+<b class="fc"><i>54</i>&nbsp;        disableTransaction.setAvailableCredit(new BigDecimal(&quot;100.00&quot;));</b>
+<b class="fc"><i>55</i>&nbsp;        transactions.add(disableTransaction);</b>
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;        // Advertise Transaction Testing Data Prep
+<b class="fc"><i>58</i>&nbsp;        advertiseTransaction.setTransactionCode(3);</b>
+<b class="fc"><i>59</i>&nbsp;        advertiseTransaction.setItemName(&quot;GajanItemTest&quot;);</b>
+<b class="fc"><i>60</i>&nbsp;        advertiseTransaction.setSellerName(&quot;Gajan&quot;);</b>
+<b class="fc"><i>61</i>&nbsp;        advertiseTransaction.setCurrentWinningBidder(&quot;Gajan&quot;);</b>
+<b class="fc"><i>62</i>&nbsp;        advertiseTransaction.setHighestBid(new BigDecimal(&quot;999.99&quot;));</b>
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;        // Bid Transaction Testing Data Prep
+<b class="fc"><i>65</i>&nbsp;        bidTransaction.setTransactionCode(4);</b>
+<b class="fc"><i>66</i>&nbsp;        bidTransaction.setItemName(&quot;GreenApple&quot;);</b>
+<b class="fc"><i>67</i>&nbsp;        bidTransaction.setSellerName(&quot;GreenSeller&quot;);</b>
+<b class="fc"><i>68</i>&nbsp;        bidTransaction.setBuyerName(&quot;GreenBuyer&quot;);</b>
+<b class="fc"><i>69</i>&nbsp;        bidTransaction.setCurrentWinningBidder(&quot;GreenBuyer&quot;);</b>
+<b class="fc"><i>70</i>&nbsp;        bidTransaction.setHighestBid(new BigDecimal(&quot;90.00&quot;));</b>
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;        // Refund Transaction Testing Data Prep
+<b class="fc"><i>73</i>&nbsp;        refundTransaction.setTransactionCode(5);</b>
+<b class="fc"><i>74</i>&nbsp;        refundTransaction.setBuyerName(&quot;RefundBuyer&quot;);</b>
+<b class="fc"><i>75</i>&nbsp;        refundTransaction.setSellerName(&quot;RefundSeller&quot;);</b>
+<b class="fc"><i>76</i>&nbsp;        refundTransaction.setRefundCredit(new BigDecimal(&quot;1.00&quot;));</b>
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;        // Add Credit Transaction Testing Data Prep
+<b class="fc"><i>79</i>&nbsp;        addCreditTransaction.setUserName(&quot;AddCreditUser&quot;);</b>
+<b class="fc"><i>80</i>&nbsp;        addCreditTransaction.setAvailableCredit(new BigDecimal(&quot;10.00&quot;));</b>
+<i>81</i>&nbsp;
+<i>82</i>&nbsp;
+<b class="fc"><i>83</i>&nbsp;    }</b>
+<i>84</i>&nbsp;
+<i>85</i>&nbsp;    /**
+<i>86</i>&nbsp;     * Tests the updateUserList() method in Files by creating a test set of user-creating transactions to verify.
+<i>87</i>&nbsp;     */
+<i>88</i>&nbsp;    @Test
+<i>89</i>&nbsp;    public void updateUserList() {
+<b class="fc"><i>90</i>&nbsp;        List&lt;Transactions&gt; testTransactionList = new ArrayList&lt;&gt;();</b>
+<i>91</i>&nbsp;
+<b class="fc"><i>92</i>&nbsp;        Transactions createTransaction = new Transactions();</b>
+<b class="fc"><i>93</i>&nbsp;        createTransaction.setTransactionCode(1);</b>
+<b class="fc"><i>94</i>&nbsp;        createTransaction.setUserName(&quot;Joe&quot;);</b>
+<b class="fc"><i>95</i>&nbsp;        createTransaction.setUserType(&quot;FS&quot;);</b>
+<b class="fc"><i>96</i>&nbsp;        createTransaction.setAvailableCredit(new BigDecimal(&quot;500.00&quot;));</b>
+<b class="fc"><i>97</i>&nbsp;        testTransactionList.add(createTransaction);</b>
+<i>98</i>&nbsp;
+<b class="fc"><i>99</i>&nbsp;        Transactions createTransaction2 = new Transactions();</b>
+<b class="fc"><i>100</i>&nbsp;        createTransaction2.setTransactionCode(1);</b>
+<b class="fc"><i>101</i>&nbsp;        createTransaction2.setUserName(&quot;Barrett&quot;);</b>
+<b class="fc"><i>102</i>&nbsp;        createTransaction2.setUserType(&quot;AA&quot;);</b>
+<b class="fc"><i>103</i>&nbsp;        createTransaction2.setAvailableCredit(new BigDecimal(&quot;100.00&quot;));</b>
+<b class="fc"><i>104</i>&nbsp;        testTransactionList.add(createTransaction2);</b>
+<i>105</i>&nbsp;
+<b class="fc"><i>106</i>&nbsp;        Transactions addCreditTransaction = new Transactions();</b>
+<b class="fc"><i>107</i>&nbsp;        addCreditTransaction.setTransactionCode(6);</b>
+<b class="fc"><i>108</i>&nbsp;        addCreditTransaction.setUserName(&quot;Joe&quot;);</b>
+<b class="fc"><i>109</i>&nbsp;        addCreditTransaction.setUserType(&quot;FS&quot;);</b>
+<b class="fc"><i>110</i>&nbsp;        addCreditTransaction.setAvailableCredit(new BigDecimal(&quot;25.50&quot;));</b>
+<b class="fc"><i>111</i>&nbsp;        testTransactionList.add(addCreditTransaction);</b>
+<i>112</i>&nbsp;
+<b class="fc"><i>113</i>&nbsp;        Transactions refundTransaction = new Transactions();</b>
+<b class="fc"><i>114</i>&nbsp;        refundTransaction.setTransactionCode(5);</b>
+<b class="fc"><i>115</i>&nbsp;        refundTransaction.setBuyerName(&quot;Barrett&quot;);</b>
+<b class="fc"><i>116</i>&nbsp;        refundTransaction.setSellerName(&quot;Joe&quot;);</b>
+<b class="fc"><i>117</i>&nbsp;        refundTransaction.setRefundCredit(new BigDecimal(&quot;150&quot;));</b>
+<b class="fc"><i>118</i>&nbsp;        testTransactionList.add(refundTransaction);</b>
+<i>119</i>&nbsp;
+<b class="fc"><i>120</i>&nbsp;        Transactions deleteTransaction = new Transactions();</b>
+<b class="fc"><i>121</i>&nbsp;        deleteTransaction.setTransactionCode(2);</b>
+<b class="fc"><i>122</i>&nbsp;        deleteTransaction.setBuyerName(&quot;Barrett&quot;);</b>
+<b class="fc"><i>123</i>&nbsp;        deleteTransaction.setUserType(&quot;AA&quot;);</b>
+<b class="fc"><i>124</i>&nbsp;        testTransactionList.add(deleteTransaction);</b>
+<b class="fc"><i>125</i>&nbsp;        testTransactionList.add(enableTransaction); //transaction code 7</b>
+<b class="fc"><i>126</i>&nbsp;        testTransactionList.add(disableTransaction);//transaction code 8</b>
+<i>127</i>&nbsp;
+<b class="fc"><i>128</i>&nbsp;        List&lt;UserAccounts&gt; users = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>129</i>&nbsp;        file.updateUserList(users, testTransactionList);</b>
+<b class="fc"><i>130</i>&nbsp;        assertEquals(2, users.size());</b>
+<b class="fc"><i>131</i>&nbsp;    }</b>
+<i>132</i>&nbsp;
+<i>133</i>&nbsp;    /**
+<i>134</i>&nbsp;     * Tests the updateAvailableItemsList() loop by never entering loop
+<i>135</i>&nbsp;     */
+<i>136</i>&nbsp;    @Test
+<i>137</i>&nbsp;    public void neverEnterLoop() {
+<b class="fc"><i>138</i>&nbsp;        List&lt;Transactions&gt; testTransactionList = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>139</i>&nbsp;        List&lt;AvailableItems&gt; items = new ArrayList&lt;&gt;();</b>
+<i>140</i>&nbsp;
+<b class="fc"><i>141</i>&nbsp;        file.updateAvailableItemsList(items, testTransactionList);</b>
+<b class="fc"><i>142</i>&nbsp;        assertTrue(items.isEmpty());</b>
+<i>143</i>&nbsp;
+<b class="fc"><i>144</i>&nbsp;    }</b>
+<i>145</i>&nbsp;
+<i>146</i>&nbsp;    /**
+<i>147</i>&nbsp;     * Tests the updateAvailableItemsList() loop by entering loop once
+<i>148</i>&nbsp;     * Decision for Bid
+<i>149</i>&nbsp;     * */
+<i>150</i>&nbsp;    @Test
+<i>151</i>&nbsp;    public void enterLoopOnceForBid() {
+<b class="fc"><i>152</i>&nbsp;        List&lt;Transactions&gt; testTransactionList = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>153</i>&nbsp;        AvailableItems item = new AvailableItems();</b>
+<b class="fc"><i>154</i>&nbsp;        List&lt;AvailableItems&gt; items = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>155</i>&nbsp;        item.setItemName(&quot;GreenApple&quot;);</b>
+<b class="fc"><i>156</i>&nbsp;        testTransactionList.add(bidTransaction);</b>
+<i>157</i>&nbsp;
+<i>158</i>&nbsp;
+<b class="fc"><i>159</i>&nbsp;        file.updateAvailableItemsList(items, testTransactionList);</b>
+<b class="fc"><i>160</i>&nbsp;        assertEquals(1, testTransactionList.size());</b>
+<i>161</i>&nbsp;
+<b class="fc"><i>162</i>&nbsp;    }</b>
+<i>163</i>&nbsp;    /**
+<i>164</i>&nbsp;     * Tests the updateAvailableItemsList() loop by entering loop once
+<i>165</i>&nbsp;     * Decision for Bid
+<i>166</i>&nbsp;     * */
+<i>167</i>&nbsp;    @Test
+<i>168</i>&nbsp;    public void enterLoopOnceForAdvertise() {
+<b class="fc"><i>169</i>&nbsp;        List&lt;Transactions&gt; testTransactionList = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>170</i>&nbsp;        List&lt;AvailableItems&gt; items = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>171</i>&nbsp;        testTransactionList.add(advertiseTransaction);</b>
+<i>172</i>&nbsp;
+<b class="fc"><i>173</i>&nbsp;        file.updateAvailableItemsList(items, testTransactionList);</b>
+<b class="fc"><i>174</i>&nbsp;        assertEquals(1, testTransactionList.size());</b>
+<i>175</i>&nbsp;
+<b class="fc"><i>176</i>&nbsp;    }</b>
+<i>177</i>&nbsp;    /**
+<i>178</i>&nbsp;     * Tests the updateAvailableItemsList() loop by entering loop twice
+<i>179</i>&nbsp;     * Decision for None
+<i>180</i>&nbsp;     */
+<i>181</i>&nbsp;    @Test
+<i>182</i>&nbsp;    public void enterLoopTwiceDecisionForNone() {
+<b class="fc"><i>183</i>&nbsp;        List&lt;Transactions&gt; testTransactionList = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>184</i>&nbsp;        List&lt;AvailableItems&gt; items = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>185</i>&nbsp;        testTransactionList.add(transaction);</b>
+<b class="fc"><i>186</i>&nbsp;        testTransactionList.add(addCreditTransaction);</b>
+<i>187</i>&nbsp;
+<b class="fc"><i>188</i>&nbsp;        file.updateAvailableItemsList(items, testTransactionList);</b>
+<b class="fc"><i>189</i>&nbsp;        assertEquals(0, items.size());</b>
+<i>190</i>&nbsp;
+<b class="fc"><i>191</i>&nbsp;    }</b>
+<i>192</i>&nbsp;    /**
+<i>193</i>&nbsp;     * Tests the updateAvailableItemsList() loop by entering loop twice
+<i>194</i>&nbsp;     * Decision coverage for both
+<i>195</i>&nbsp;     */
+<i>196</i>&nbsp;    @Test
+<i>197</i>&nbsp;    public void enterLoopTwiceDecisionForBoth() {
+<b class="fc"><i>198</i>&nbsp;        List&lt;Transactions&gt; testTransactionList = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>199</i>&nbsp;        List&lt;AvailableItems&gt; items = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>200</i>&nbsp;        testTransactionList.add(bidTransaction);</b>
+<b class="fc"><i>201</i>&nbsp;        testTransactionList.add(advertiseTransaction);</b>
+<i>202</i>&nbsp;
+<b class="fc"><i>203</i>&nbsp;        file.updateAvailableItemsList(items, testTransactionList);</b>
+<b class="fc"><i>204</i>&nbsp;        assertEquals(2, testTransactionList.size());</b>
+<i>205</i>&nbsp;
+<b class="fc"><i>206</i>&nbsp;    }</b>
+<i>207</i>&nbsp;
+<i>208</i>&nbsp;    /**
+<i>209</i>&nbsp;     * Tests the updateAvailableItemsList() method in Files by creating a test set of item-creating transactions to verify.
+<i>210</i>&nbsp;     * Loop coverage to enter loop multiple times
+<i>211</i>&nbsp;     */
+<i>212</i>&nbsp;    @Test
+<i>213</i>&nbsp;    public void updateAvailableItemsList() {
+<b class="fc"><i>214</i>&nbsp;        List&lt;Transactions&gt; testTransactionList = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>215</i>&nbsp;        List&lt;AvailableItems&gt; items = new ArrayList&lt;&gt;();</b>
+<i>216</i>&nbsp;
+<b class="fc"><i>217</i>&nbsp;        Transactions advertiseTransaction = new Transactions();</b>
+<b class="fc"><i>218</i>&nbsp;        advertiseTransaction.setTransactionCode(3);</b>
+<b class="fc"><i>219</i>&nbsp;        advertiseTransaction.setItemName(&quot;Bread&quot;);</b>
+<b class="fc"><i>220</i>&nbsp;        advertiseTransaction.setSellerName(&quot;Joe&quot;);</b>
+<b class="fc"><i>221</i>&nbsp;        advertiseTransaction.setDaysToAuction(5);</b>
+<b class="fc"><i>222</i>&nbsp;        advertiseTransaction.setMinBid(new BigDecimal(&quot;149.99&quot;));</b>
+<b class="fc"><i>223</i>&nbsp;        testTransactionList.add(advertiseTransaction);</b>
+<i>224</i>&nbsp;
+<b class="fc"><i>225</i>&nbsp;        Transactions advertiseTransaction2 = new Transactions();</b>
+<b class="fc"><i>226</i>&nbsp;        advertiseTransaction2.setTransactionCode(3);</b>
+<b class="fc"><i>227</i>&nbsp;        advertiseTransaction2.setItemName(&quot;Ice&quot;);</b>
+<b class="fc"><i>228</i>&nbsp;        advertiseTransaction2.setSellerName(&quot;Johnny&quot;);</b>
+<b class="fc"><i>229</i>&nbsp;        advertiseTransaction2.setDaysToAuction(15);</b>
+<b class="fc"><i>230</i>&nbsp;        advertiseTransaction2.setMinBid(new BigDecimal(&quot;209.99&quot;));</b>
+<b class="fc"><i>231</i>&nbsp;        testTransactionList.add(advertiseTransaction2);</b>
+<i>232</i>&nbsp;
+<b class="fc"><i>233</i>&nbsp;        Transactions bidTransaction = new Transactions();</b>
+<b class="fc"><i>234</i>&nbsp;        bidTransaction.setTransactionCode(4);</b>
+<b class="fc"><i>235</i>&nbsp;        bidTransaction.setItemName(&quot;Bread&quot;);</b>
+<b class="fc"><i>236</i>&nbsp;        bidTransaction.setSellerName(&quot;Joe&quot;);</b>
+<b class="fc"><i>237</i>&nbsp;        bidTransaction.setBuyerName(&quot;Barrett&quot;);</b>
+<b class="fc"><i>238</i>&nbsp;        bidTransaction.setNewBid(new BigDecimal(&quot;150&quot;));</b>
+<b class="fc"><i>239</i>&nbsp;        testTransactionList.add(bidTransaction);</b>
+<i>240</i>&nbsp;
+<i>241</i>&nbsp;
+<b class="fc"><i>242</i>&nbsp;        file.updateAvailableItemsList(items, testTransactionList);</b>
+<b class="fc"><i>243</i>&nbsp;        assertEquals(2, items.size());</b>
+<b class="fc"><i>244</i>&nbsp;    }</b>
+<i>245</i>&nbsp;
+<i>246</i>&nbsp;    /**
+<i>247</i>&nbsp;     * Decision Coverage
+<i>248</i>&nbsp;     */
+<i>249</i>&nbsp;    @Test
+<i>250</i>&nbsp;    public void create()  {
+<b class="fc"><i>251</i>&nbsp;        List&lt;UserAccounts&gt; users = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>252</i>&nbsp;        file.create(transaction, users);</b>
+<b class="fc"><i>253</i>&nbsp;        assertEquals(1, users.size());</b>
+<b class="fc"><i>254</i>&nbsp;    }</b>
+<i>255</i>&nbsp;
+<i>256</i>&nbsp;    /**
+<i>257</i>&nbsp;     * Decision Coverage
+<i>258</i>&nbsp;     */
+<i>259</i>&nbsp;    @Test
+<i>260</i>&nbsp;    public void failCreate() {
+<b class="fc"><i>261</i>&nbsp;        List&lt;UserAccounts&gt; users = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>262</i>&nbsp;        UserAccounts user = new UserAccounts();</b>
+<b class="fc"><i>263</i>&nbsp;        user.setUserName(transaction.getUserName());</b>
+<b class="fc"><i>264</i>&nbsp;        users.add(user);</b>
+<b class="fc"><i>265</i>&nbsp;        file.create(transaction, users);</b>
+<b class="fc"><i>266</i>&nbsp;        assertEquals(1, users.size());</b>
+<b class="fc"><i>267</i>&nbsp;    }</b>
+<i>268</i>&nbsp;
+<i>269</i>&nbsp;    /**
+<i>270</i>&nbsp;     * Statement coverage for delete method
+<i>271</i>&nbsp;     */
+<i>272</i>&nbsp;    @Test
+<i>273</i>&nbsp;    public void delete() {
+<b class="fc"><i>274</i>&nbsp;        List&lt;UserAccounts&gt; users = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>275</i>&nbsp;        UserAccounts user = new UserAccounts();</b>
+<b class="fc"><i>276</i>&nbsp;        user.setUserName(&quot;paul&quot;);</b>
+<b class="fc"><i>277</i>&nbsp;        user.setUserType(&quot;FS&quot;);</b>
+<b class="fc"><i>278</i>&nbsp;        user.setAvailableCredit(new BigDecimal(&quot;100.00&quot;));</b>
+<b class="fc"><i>279</i>&nbsp;        user.setPassword(&quot;password&quot;);</b>
+<b class="fc"><i>280</i>&nbsp;        users.add(user);</b>
+<b class="fc"><i>281</i>&nbsp;        file.delete(transaction, users);</b>
+<b class="fc"><i>282</i>&nbsp;        assertEquals(0, users.size());</b>
+<b class="fc"><i>283</i>&nbsp;    }</b>
+<i>284</i>&nbsp;
+<i>285</i>&nbsp;    /**
+<i>286</i>&nbsp;     * Statement coverage for advertise method
+<i>287</i>&nbsp;     */
+<i>288</i>&nbsp;    @Test
+<i>289</i>&nbsp;    public void advertise(){
+<b class="fc"><i>290</i>&nbsp;        List&lt;AvailableItems&gt; items = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>291</i>&nbsp;        file.advertise(advertiseTransaction, items);</b>
+<b class="fc"><i>292</i>&nbsp;        assertEquals(1, items.size());</b>
+<i>293</i>&nbsp;
+<b class="fc"><i>294</i>&nbsp;    }</b>
+<i>295</i>&nbsp;
+<i>296</i>&nbsp;    /**
+<i>297</i>&nbsp;     * statement coverage for bid method
+<i>298</i>&nbsp;     */
+<i>299</i>&nbsp;    @Test
+<i>300</i>&nbsp;    public void bid(){
+<b class="fc"><i>301</i>&nbsp;        List&lt;AvailableItems&gt; items = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>302</i>&nbsp;        AvailableItems bidItem = new AvailableItems();</b>
+<b class="fc"><i>303</i>&nbsp;        bidItem.setItemName(&quot;GreenApple&quot;);</b>
+<b class="fc"><i>304</i>&nbsp;        bidItem.setSellerName(&quot;GreenSeller&quot;);</b>
+<b class="fc"><i>305</i>&nbsp;        bidItem.setCurrentWinningBidder(&quot;PoorBuyer&quot;);</b>
+<b class="fc"><i>306</i>&nbsp;        bidItem.setHighestBid(new BigDecimal(&quot;55.00&quot;));</b>
+<i>307</i>&nbsp;        //bidItem.setNumberOfDaysLeft(5);
+<b class="fc"><i>308</i>&nbsp;        items.add(bidItem);</b>
+<b class="fc"><i>309</i>&nbsp;        file.bid(bidTransaction, items);</b>
+<b class="fc"><i>310</i>&nbsp;        assertEquals(&quot;PoorBuyer&quot;, items.get(0).getCurrentWinningBidder());</b>
+<b class="fc"><i>311</i>&nbsp;        assertEquals(new BigDecimal(&quot;55.00&quot;), items.get(0).getHighestBid());</b>
+<b class="fc"><i>312</i>&nbsp;    }</b>
+<i>313</i>&nbsp;
+<i>314</i>&nbsp;    /**
+<i>315</i>&nbsp;     * statement coverage for refund method
+<i>316</i>&nbsp;     */
+<i>317</i>&nbsp;    @Test
+<i>318</i>&nbsp;    public void refund(){
+<b class="fc"><i>319</i>&nbsp;        List&lt;UserAccounts&gt; users = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>320</i>&nbsp;        UserAccounts refundBuyerUser = new UserAccounts();</b>
+<b class="fc"><i>321</i>&nbsp;        UserAccounts refundSellerUser = new UserAccounts();</b>
+<i>322</i>&nbsp;
+<i>323</i>&nbsp;        // Generate Refund Buyer Test Data
+<b class="fc"><i>324</i>&nbsp;        refundBuyerUser.setUserName(&quot;RefundBuyer&quot;);</b>
+<b class="fc"><i>325</i>&nbsp;        refundBuyerUser.setUserType(&quot;FS&quot;);</b>
+<b class="fc"><i>326</i>&nbsp;        refundBuyerUser.setAvailableCredit(new BigDecimal(&quot;20.00&quot;));</b>
+<b class="fc"><i>327</i>&nbsp;        refundBuyerUser.setPassword(&quot;password&quot;);</b>
+<b class="fc"><i>328</i>&nbsp;        users.add(refundBuyerUser);</b>
+<i>329</i>&nbsp;
+<i>330</i>&nbsp;        // Generate Refund Seller Test Data
+<b class="fc"><i>331</i>&nbsp;        refundSellerUser.setUserName(&quot;RefundSeller&quot;);</b>
+<b class="fc"><i>332</i>&nbsp;        refundSellerUser.setUserType(&quot;FS&quot;);</b>
+<b class="fc"><i>333</i>&nbsp;        refundSellerUser.setAvailableCredit(new BigDecimal(&quot;20.00&quot;));</b>
+<b class="fc"><i>334</i>&nbsp;        refundSellerUser.setPassword(&quot;password&quot;);</b>
+<b class="fc"><i>335</i>&nbsp;        users.add(refundSellerUser);</b>
+<i>336</i>&nbsp;
+<i>337</i>&nbsp;        // Start the Test
+<b class="fc"><i>338</i>&nbsp;        file.refund(refundTransaction, users);</b>
+<i>339</i>&nbsp;        // Test Results
+<b class="fc"><i>340</i>&nbsp;        assertEquals(new BigDecimal(&quot;21.00&quot;),users.get(0).getAvailableCredit());</b>
+<b class="fc"><i>341</i>&nbsp;        assertEquals(new BigDecimal(&quot;19.00&quot;), users.get(1).getAvailableCredit());</b>
+<i>342</i>&nbsp;
+<b class="fc"><i>343</i>&nbsp;    }</b>
+<i>344</i>&nbsp;
+<i>345</i>&nbsp;    /**
+<i>346</i>&nbsp;     * statement coverage for addcredit method
+<i>347</i>&nbsp;     */
+<i>348</i>&nbsp;    @Test
+<i>349</i>&nbsp;    public void addCredit(){
+<b class="fc"><i>350</i>&nbsp;        List&lt;UserAccounts&gt; users = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>351</i>&nbsp;        UserAccounts addCreditUser = new UserAccounts();</b>
+<i>352</i>&nbsp;
+<i>353</i>&nbsp;        // Generate AddCredit User
+<b class="fc"><i>354</i>&nbsp;        addCreditUser.setUserName(&quot;AddCreditUser&quot;);</b>
+<b class="fc"><i>355</i>&nbsp;        addCreditUser.setUserType(&quot;FS&quot;);</b>
+<b class="fc"><i>356</i>&nbsp;        addCreditUser.setAvailableCredit(new BigDecimal(&quot;10.00&quot;));</b>
+<b class="fc"><i>357</i>&nbsp;        addCreditUser.setPassword(&quot;password&quot;);</b>
+<b class="fc"><i>358</i>&nbsp;        users.add(addCreditUser);</b>
+<i>359</i>&nbsp;
+<i>360</i>&nbsp;        // Start the Test
+<b class="fc"><i>361</i>&nbsp;        file.addCredit(addCreditTransaction, users);</b>
+<i>362</i>&nbsp;        // Test Results
+<b class="fc"><i>363</i>&nbsp;        assertEquals(new BigDecimal(&quot;20.00&quot;), users.get(0).getAvailableCredit());</b>
+<i>364</i>&nbsp;
+<i>365</i>&nbsp;
+<b class="fc"><i>366</i>&nbsp;    }</b>
+<i>367</i>&nbsp;
+<i>368</i>&nbsp;    /**
+<i>369</i>&nbsp;     * statement coverage for enable method
+<i>370</i>&nbsp;     */
+<i>371</i>&nbsp;    @Test
+<i>372</i>&nbsp;    public void enable(){
+<i>373</i>&nbsp;
+<b class="fc"><i>374</i>&nbsp;        List&lt;UserAccounts&gt; users = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>375</i>&nbsp;        UserAccounts enableUser = new UserAccounts();</b>
+<i>376</i>&nbsp;
+<i>377</i>&nbsp;        // Generate Enable User
+<b class="fc"><i>378</i>&nbsp;        enableUser.setUserName(enableTransaction.getUserName());</b>
+<b class="fc"><i>379</i>&nbsp;        enableUser.setUserType(&quot;DS&quot;);</b>
+<b class="fc"><i>380</i>&nbsp;        enableUser.setAvailableCredit(enableTransaction.getAvailableCredit());</b>
+<b class="fc"><i>381</i>&nbsp;        enableUser.setPassword(&quot;password&quot;);</b>
+<b class="fc"><i>382</i>&nbsp;        users.add(enableUser);</b>
+<i>383</i>&nbsp;
+<i>384</i>&nbsp;        // Start the Test
+<b class="fc"><i>385</i>&nbsp;        file.enable(enableTransaction, users);</b>
+<i>386</i>&nbsp;        // Test Results
+<b class="fc"><i>387</i>&nbsp;        assertEquals(&quot;FS&quot;, users.get(0).getUserType());</b>
+<i>388</i>&nbsp;
+<b class="fc"><i>389</i>&nbsp;    }</b>
+<i>390</i>&nbsp;
+<i>391</i>&nbsp;    /**
+<i>392</i>&nbsp;     * statement coverage for disable method
+<i>393</i>&nbsp;     */
+<i>394</i>&nbsp;    @Test
+<i>395</i>&nbsp;    public void disable(){
+<i>396</i>&nbsp;
+<b class="fc"><i>397</i>&nbsp;        List&lt;UserAccounts&gt; users = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>398</i>&nbsp;        UserAccounts disableUser = new UserAccounts();</b>
+<i>399</i>&nbsp;
+<i>400</i>&nbsp;        // Generate Enable User
+<b class="fc"><i>401</i>&nbsp;        disableUser.setUserName(disableTransaction.getUserName());</b>
+<b class="fc"><i>402</i>&nbsp;        disableUser.setUserType(disableTransaction.getUserType());</b>
+<b class="fc"><i>403</i>&nbsp;        disableUser.setAvailableCredit(disableTransaction.getAvailableCredit());</b>
+<b class="fc"><i>404</i>&nbsp;        disableUser.setPassword(&quot;password&quot;);</b>
+<b class="fc"><i>405</i>&nbsp;        users.add(disableUser);</b>
+<i>406</i>&nbsp;
+<i>407</i>&nbsp;        // Start the Test
+<b class="fc"><i>408</i>&nbsp;        file.disable(disableTransaction, users);</b>
+<i>409</i>&nbsp;        // Test Results
+<b class="fc"><i>410</i>&nbsp;        assertEquals(&quot;DS&quot;, users.get(0).getUserType());</b>
+<i>411</i>&nbsp;
+<b class="fc"><i>412</i>&nbsp;    }</b>
+<i>413</i>&nbsp;
+<i>414</i>&nbsp;    /**
+<i>415</i>&nbsp;     * statement coverage for decrementAuctionDay Method method
+<i>416</i>&nbsp;     * @throws IOException
+<i>417</i>&nbsp;     */
+<i>418</i>&nbsp;    @Test
+<i>419</i>&nbsp;    public void decrementAuctionDay() throws IOException {
+<i>420</i>&nbsp;        // Decrement Auction Day
+<b class="fc"><i>421</i>&nbsp;        List&lt;AvailableItems&gt; decrementAuctionItems = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>422</i>&nbsp;        AvailableItems decrementAuctionitem = new AvailableItems();</b>
+<i>423</i>&nbsp;
+<i>424</i>&nbsp;        // Create Items to decrement
+<b class="fc"><i>425</i>&nbsp;        decrementAuctionitem.setItemName(&quot;DecrementItem&quot;);</b>
+<b class="fc"><i>426</i>&nbsp;        decrementAuctionitem.setHighestBid(new BigDecimal(&quot;10.00&quot;));</b>
+<b class="fc"><i>427</i>&nbsp;        decrementAuctionitem.setCurrentWinningBidder(&quot;DIBuyer&quot;);</b>
+<b class="fc"><i>428</i>&nbsp;        decrementAuctionitem.setSellerName(&quot;DISeller&quot;);</b>
+<b class="fc"><i>429</i>&nbsp;        decrementAuctionitem.setNumberOfDaysLeft(4);</b>
+<b class="fc"><i>430</i>&nbsp;        decrementAuctionItems.add(decrementAuctionitem);</b>
+<i>431</i>&nbsp;
+<i>432</i>&nbsp;        // Create Users to Handle the item
+<b class="fc"><i>433</i>&nbsp;        List&lt;UserAccounts&gt; decrementUsers = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>434</i>&nbsp;        UserAccounts decrementBuyer = new UserAccounts();</b>
+<b class="fc"><i>435</i>&nbsp;        UserAccounts decrementSeller = new UserAccounts();</b>
+<i>436</i>&nbsp;
+<i>437</i>&nbsp;        // Create Seller
+<b class="fc"><i>438</i>&nbsp;        decrementSeller.setAvailableCredit(new BigDecimal(&quot;50.00&quot;));</b>
+<b class="fc"><i>439</i>&nbsp;        decrementSeller.setPassword(&quot;passwords&quot;);</b>
+<b class="fc"><i>440</i>&nbsp;        decrementSeller.setUserName(&quot;DISeller&quot;);</b>
+<b class="fc"><i>441</i>&nbsp;        decrementSeller.setUserType(&quot;FS&quot;);</b>
+<b class="fc"><i>442</i>&nbsp;        decrementUsers.add(decrementSeller);</b>
+<i>443</i>&nbsp;
+<i>444</i>&nbsp;        // Create Buyer
+<b class="fc"><i>445</i>&nbsp;        decrementBuyer.setUserType(&quot;FS&quot;);</b>
+<b class="fc"><i>446</i>&nbsp;        decrementBuyer.setUserName(&quot;DIBuyer&quot;);</b>
+<b class="fc"><i>447</i>&nbsp;        decrementBuyer.setAvailableCredit(new BigDecimal(&quot;20.00&quot;));</b>
+<b class="fc"><i>448</i>&nbsp;        decrementBuyer.setPassword(&quot;passwords&quot;);</b>
+<b class="fc"><i>449</i>&nbsp;        decrementUsers.add(decrementBuyer);</b>
+<i>450</i>&nbsp;
+<i>451</i>&nbsp;        // Run test
+<b class="fc"><i>452</i>&nbsp;        file.decrementAuctionDay(decrementAuctionItems, decrementUsers);</b>
+<i>453</i>&nbsp;
+<i>454</i>&nbsp;        //Test Results
+<b class="fc"><i>455</i>&nbsp;        assertEquals(3, decrementAuctionItems.get(0).getNumberOfDaysLeft());</b>
+<i>456</i>&nbsp;
+<i>457</i>&nbsp;
+<b class="fc"><i>458</i>&nbsp;    }</b>
+<i>459</i>&nbsp;
+<i>460</i>&nbsp;    /**
+<i>461</i>&nbsp;     * Statement Coverage in if statement to call complete auction in else statement
+<i>462</i>&nbsp;     * @throws IOException
+<i>463</i>&nbsp;     */
+<i>464</i>&nbsp;    @Test
+<i>465</i>&nbsp;    public void decrementAuctionDayCallCompleteAuction() throws IOException {
+<b class="fc"><i>466</i>&nbsp;        List&lt;AvailableItems&gt; items = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>467</i>&nbsp;        AvailableItems item = new AvailableItems();</b>
+<b class="fc"><i>468</i>&nbsp;        List&lt;UserAccounts&gt; users = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>469</i>&nbsp;        UserAccounts user = new UserAccounts();</b>
+<b class="fc"><i>470</i>&nbsp;        item.setItemName(&quot;dragon&quot;);</b>
+<b class="fc"><i>471</i>&nbsp;        item.setNumberOfDaysLeft(0);</b>
+<b class="fc"><i>472</i>&nbsp;        item.setSellerName(&quot;john&quot;);</b>
+<b class="fc"><i>473</i>&nbsp;        item.setCurrentWinningBidder(&quot;brent&quot;);</b>
+<b class="fc"><i>474</i>&nbsp;        items.add(item);</b>
+<b class="fc"><i>475</i>&nbsp;        user.setUserName(&quot;johnny&quot;);</b>
+<b class="fc"><i>476</i>&nbsp;        users.add(user);</b>
+<i>477</i>&nbsp;
+<b class="fc"><i>478</i>&nbsp;        file.decrementAuctionDay(items, users);</b>
+<b class="fc"><i>479</i>&nbsp;    }</b>
+<i>480</i>&nbsp;
+<i>481</i>&nbsp;    /**
+<i>482</i>&nbsp;     *
+<i>483</i>&nbsp;     */
+<i>484</i>&nbsp;    @Test
+<i>485</i>&nbsp;    public void completeAuctionLogStatement1()
+<i>486</i>&nbsp;    {
+<i>487</i>&nbsp;
+<i>488</i>&nbsp;        // Complete Auction
+<b class="fc"><i>489</i>&nbsp;        List&lt;AvailableItems&gt; completeAuctionItems = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>490</i>&nbsp;        AvailableItems completeAuctionitem = new AvailableItems();</b>
+<i>491</i>&nbsp;
+<i>492</i>&nbsp;        // Create Items to complete
+<b class="fc"><i>493</i>&nbsp;        completeAuctionitem.setItemName(&quot;CompleteItem&quot;);</b>
+<b class="fc"><i>494</i>&nbsp;        completeAuctionitem.setHighestBid(new BigDecimal(&quot;10.00&quot;));</b>
+<b class="fc"><i>495</i>&nbsp;        completeAuctionitem.setCurrentWinningBidder(&quot;DIBuyer&quot;);</b>
+<b class="fc"><i>496</i>&nbsp;        completeAuctionitem.setSellerName(&quot;DISeller&quot;);</b>
+<b class="fc"><i>497</i>&nbsp;        completeAuctionitem.setNumberOfDaysLeft(0);</b>
+<b class="fc"><i>498</i>&nbsp;        completeAuctionItems.add(completeAuctionitem);</b>
+<i>499</i>&nbsp;
+<i>500</i>&nbsp;        // Create Users to Handle the item
+<b class="fc"><i>501</i>&nbsp;        List&lt;UserAccounts&gt; completeUsers = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>502</i>&nbsp;        UserAccounts completeBuyer = new UserAccounts();</b>
+<b class="fc"><i>503</i>&nbsp;        UserAccounts completeSeller = new UserAccounts();</b>
+<i>504</i>&nbsp;
+<i>505</i>&nbsp;        // Create Seller
+<b class="fc"><i>506</i>&nbsp;        completeSeller.setAvailableCredit(new BigDecimal(&quot;999999.99&quot;));</b>
+<b class="fc"><i>507</i>&nbsp;        completeSeller.setPassword(&quot;passwords&quot;);</b>
+<b class="fc"><i>508</i>&nbsp;        completeSeller.setUserName(&quot;DISeller&quot;);</b>
+<b class="fc"><i>509</i>&nbsp;        completeSeller.setUserType(&quot;FS&quot;);</b>
+<b class="fc"><i>510</i>&nbsp;        completeUsers.add(completeSeller);</b>
+<i>511</i>&nbsp;
+<i>512</i>&nbsp;        // Create Buyer
+<b class="fc"><i>513</i>&nbsp;        completeBuyer.setUserType(&quot;FS&quot;);</b>
+<b class="fc"><i>514</i>&nbsp;        completeBuyer.setUserName(&quot;DIBuyer&quot;);</b>
+<b class="fc"><i>515</i>&nbsp;        completeBuyer.setAvailableCredit(new BigDecimal(&quot;20.00&quot;));</b>
+<b class="fc"><i>516</i>&nbsp;        completeBuyer.setPassword(&quot;passwords&quot;);</b>
+<b class="fc"><i>517</i>&nbsp;        completeUsers.add(completeBuyer);</b>
+<i>518</i>&nbsp;
+<i>519</i>&nbsp;        // Run test
+<b class="fc"><i>520</i>&nbsp;        file.completeAuction(completeAuctionItems, completeAuctionitem, completeUsers);</b>
+<i>521</i>&nbsp;
+<i>522</i>&nbsp;        //Test Results
+<i>523</i>&nbsp;        // Test that seller gets money
+<i>524</i>&nbsp;        //assertEquals(new BigDecimal(&quot;60.00&quot;), completeUsers.get(0).getAvailableCredit());
+<i>525</i>&nbsp;        // Test that buy loses money
+<i>526</i>&nbsp;        //assertEquals(new BigDecimal(&quot;10.00&quot;), completeUsers.get(1).getAvailableCredit());
+<i>527</i>&nbsp;        // Test that Item is Deleted
+<b class="fc"><i>528</i>&nbsp;        assertEquals(0, completeAuctionItems.size());</b>
+<i>529</i>&nbsp;
+<b class="fc"><i>530</i>&nbsp;    }</b>
+<i>531</i>&nbsp;
+<i>532</i>&nbsp;    /**
+<i>533</i>&nbsp;     *
+<i>534</i>&nbsp;     */
+<i>535</i>&nbsp;    @Test
+<i>536</i>&nbsp;    public void completeAuctionLogStatement2(){
+<i>537</i>&nbsp;
+<i>538</i>&nbsp;        // Complete Auction
+<b class="fc"><i>539</i>&nbsp;        List&lt;AvailableItems&gt; completeAuctionItems = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>540</i>&nbsp;        AvailableItems completeAuctionitem = new AvailableItems();</b>
+<i>541</i>&nbsp;
+<i>542</i>&nbsp;        // Create Items to complete
+<b class="fc"><i>543</i>&nbsp;        completeAuctionitem.setItemName(&quot;CompleteItem&quot;);</b>
+<b class="fc"><i>544</i>&nbsp;        completeAuctionitem.setHighestBid(new BigDecimal(&quot;10.00&quot;));</b>
+<b class="fc"><i>545</i>&nbsp;        completeAuctionitem.setCurrentWinningBidder(&quot;DIBuyer&quot;);</b>
+<b class="fc"><i>546</i>&nbsp;        completeAuctionitem.setSellerName(&quot;DISeller&quot;);</b>
+<b class="fc"><i>547</i>&nbsp;        completeAuctionitem.setNumberOfDaysLeft(0);</b>
+<b class="fc"><i>548</i>&nbsp;        completeAuctionItems.add(completeAuctionitem);</b>
+<i>549</i>&nbsp;
+<i>550</i>&nbsp;        // Create Users to Handle the item
+<b class="fc"><i>551</i>&nbsp;        List&lt;UserAccounts&gt; completeUsers = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>552</i>&nbsp;        UserAccounts completeBuyer = new UserAccounts();</b>
+<b class="fc"><i>553</i>&nbsp;        UserAccounts completeSeller = new UserAccounts();</b>
+<i>554</i>&nbsp;
+<i>555</i>&nbsp;        // Create Seller
+<b class="fc"><i>556</i>&nbsp;        completeSeller.setAvailableCredit(new BigDecimal(&quot;999999.98&quot;));</b>
+<b class="fc"><i>557</i>&nbsp;        completeSeller.setPassword(&quot;passwords&quot;);</b>
+<b class="fc"><i>558</i>&nbsp;        completeSeller.setUserName(&quot;DISeller&quot;);</b>
+<b class="fc"><i>559</i>&nbsp;        completeSeller.setUserType(&quot;FS&quot;);</b>
+<b class="fc"><i>560</i>&nbsp;        completeUsers.add(completeSeller);</b>
+<i>561</i>&nbsp;
+<i>562</i>&nbsp;        // Create Buyer
+<b class="fc"><i>563</i>&nbsp;        completeBuyer.setUserType(&quot;FS&quot;);</b>
+<b class="fc"><i>564</i>&nbsp;        completeBuyer.setUserName(&quot;DIBuyer&quot;);</b>
+<b class="fc"><i>565</i>&nbsp;        completeBuyer.setAvailableCredit(new BigDecimal(&quot;20.00&quot;));</b>
+<b class="fc"><i>566</i>&nbsp;        completeBuyer.setPassword(&quot;passwords&quot;);</b>
+<b class="fc"><i>567</i>&nbsp;        completeUsers.add(completeBuyer);</b>
+<i>568</i>&nbsp;
+<i>569</i>&nbsp;        // Run test
+<b class="fc"><i>570</i>&nbsp;        file.completeAuction(completeAuctionItems, completeAuctionitem, completeUsers);</b>
+<i>571</i>&nbsp;
+<i>572</i>&nbsp;        //Test Results
+<i>573</i>&nbsp;        // Test that seller gets money
+<i>574</i>&nbsp;        //assertEquals(new BigDecimal(&quot;60.00&quot;), completeUsers.get(0).getAvailableCredit());
+<i>575</i>&nbsp;        // Test that buy loses money
+<i>576</i>&nbsp;        //assertEquals(new BigDecimal(&quot;10.00&quot;), completeUsers.get(1).getAvailableCredit());
+<i>577</i>&nbsp;        // Test that Item is Deleted
+<b class="fc"><i>578</i>&nbsp;        assertEquals(0, completeAuctionItems.size());</b>
+<i>579</i>&nbsp;
+<b class="fc"><i>580</i>&nbsp;    }</b>
+<i>581</i>&nbsp;
+<i>582</i>&nbsp;    /**
+<i>583</i>&nbsp;     * Statement coverage for Complete Auction
+<i>584</i>&nbsp;     */
+<i>585</i>&nbsp;    @Test
+<i>586</i>&nbsp;    public void completeAuctionWithNoBuyer()
+<i>587</i>&nbsp;    {
+<i>588</i>&nbsp;        // Complete Auction
+<b class="fc"><i>589</i>&nbsp;        List&lt;AvailableItems&gt; completeAuctionItems = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>590</i>&nbsp;        AvailableItems completeAuctionitem = new AvailableItems();</b>
+<i>591</i>&nbsp;
+<i>592</i>&nbsp;        // Create Items to complete
+<b class="fc"><i>593</i>&nbsp;        completeAuctionitem.setItemName(&quot;CompleteItem&quot;);</b>
+<b class="fc"><i>594</i>&nbsp;        completeAuctionitem.setHighestBid(new BigDecimal(&quot;10.00&quot;));</b>
+<b class="fc"><i>595</i>&nbsp;        completeAuctionitem.setCurrentWinningBidder(&quot;&quot;);</b>
+<b class="fc"><i>596</i>&nbsp;        completeAuctionitem.setSellerName(&quot;DISeller&quot;);</b>
+<b class="fc"><i>597</i>&nbsp;        completeAuctionitem.setNumberOfDaysLeft(0);</b>
+<b class="fc"><i>598</i>&nbsp;        completeAuctionItems.add(completeAuctionitem);</b>
+<i>599</i>&nbsp;
+<i>600</i>&nbsp;        // Create Users to Handle the item
+<b class="fc"><i>601</i>&nbsp;        List&lt;UserAccounts&gt; completeUsers = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>602</i>&nbsp;        UserAccounts completeBuyer = new UserAccounts();</b>
+<b class="fc"><i>603</i>&nbsp;        UserAccounts completeSeller = new UserAccounts();</b>
+<i>604</i>&nbsp;
+<i>605</i>&nbsp;        // Create Seller
+<b class="fc"><i>606</i>&nbsp;        completeSeller.setUserName(&quot;DISeller&quot;);</b>
+<b class="fc"><i>607</i>&nbsp;        completeSeller.setAvailableCredit(new BigDecimal(&quot;60.00&quot;));</b>
+<b class="fc"><i>608</i>&nbsp;        completeUsers.add(completeSeller);</b>
+<i>609</i>&nbsp;
+<i>610</i>&nbsp;        // Create Buyer
+<b class="fc"><i>611</i>&nbsp;        completeBuyer.setUserName(&quot;DIBuyer&quot;);</b>
+<b class="fc"><i>612</i>&nbsp;        completeUsers.add(completeBuyer);</b>
+<i>613</i>&nbsp;
+<i>614</i>&nbsp;
+<i>615</i>&nbsp;
+<b class="fc"><i>616</i>&nbsp;        file.completeAuction(completeAuctionItems, completeAuctionitem, completeUsers);</b>
+<b class="fc"><i>617</i>&nbsp;        assertEquals(new BigDecimal(&quot;60.00&quot;), completeUsers.get(0).getAvailableCredit());</b>
+<b class="fc"><i>618</i>&nbsp;        assertEquals(0, completeAuctionItems.size());</b>
+<i>619</i>&nbsp;
+<b class="fc"><i>620</i>&nbsp;    }</b>
+<i>621</i>&nbsp;
+<i>622</i>&nbsp;    /**
+<i>623</i>&nbsp;     * Coverage for Complete Auction
+<i>624</i>&nbsp;     */
+<i>625</i>&nbsp;    @Test
+<i>626</i>&nbsp;    public void completeAuctionSuccess(){
+<i>627</i>&nbsp;
+<i>628</i>&nbsp;        // Complete Auction
+<b class="fc"><i>629</i>&nbsp;        List&lt;AvailableItems&gt; completeAuctionItems = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>630</i>&nbsp;        AvailableItems completeAuctionitem = new AvailableItems();</b>
+<i>631</i>&nbsp;
+<i>632</i>&nbsp;        // Create Items to complete
+<b class="fc"><i>633</i>&nbsp;        completeAuctionitem.setItemName(&quot;CompleteItem&quot;);</b>
+<b class="fc"><i>634</i>&nbsp;        completeAuctionitem.setHighestBid(new BigDecimal(&quot;10.00&quot;));</b>
+<b class="fc"><i>635</i>&nbsp;        completeAuctionitem.setCurrentWinningBidder(&quot;DIBuyer&quot;);</b>
+<b class="fc"><i>636</i>&nbsp;        completeAuctionitem.setSellerName(&quot;DISeller&quot;);</b>
+<b class="fc"><i>637</i>&nbsp;        completeAuctionitem.setNumberOfDaysLeft(0);</b>
+<b class="fc"><i>638</i>&nbsp;        completeAuctionItems.add(completeAuctionitem);</b>
+<i>639</i>&nbsp;
+<i>640</i>&nbsp;        // Create Users to Handle the item
+<b class="fc"><i>641</i>&nbsp;        List&lt;UserAccounts&gt; completeUsers = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>642</i>&nbsp;        UserAccounts completeBuyer = new UserAccounts();</b>
+<b class="fc"><i>643</i>&nbsp;        UserAccounts completeSeller = new UserAccounts();</b>
+<i>644</i>&nbsp;
+<i>645</i>&nbsp;        // Create Seller
+<b class="fc"><i>646</i>&nbsp;        completeSeller.setAvailableCredit(new BigDecimal(&quot;50.00&quot;));</b>
+<b class="fc"><i>647</i>&nbsp;        completeSeller.setPassword(&quot;passwords&quot;);</b>
+<b class="fc"><i>648</i>&nbsp;        completeSeller.setUserName(&quot;DISeller&quot;);</b>
+<b class="fc"><i>649</i>&nbsp;        completeSeller.setUserType(&quot;FS&quot;);</b>
+<b class="fc"><i>650</i>&nbsp;        completeUsers.add(completeSeller);</b>
+<i>651</i>&nbsp;
+<i>652</i>&nbsp;        // Create Buyer
+<b class="fc"><i>653</i>&nbsp;        completeBuyer.setUserType(&quot;FS&quot;);</b>
+<b class="fc"><i>654</i>&nbsp;        completeBuyer.setUserName(&quot;DIBuyer&quot;);</b>
+<b class="fc"><i>655</i>&nbsp;        completeBuyer.setAvailableCredit(new BigDecimal(&quot;20.00&quot;));</b>
+<b class="fc"><i>656</i>&nbsp;        completeBuyer.setPassword(&quot;passwords&quot;);</b>
+<b class="fc"><i>657</i>&nbsp;        completeUsers.add(completeBuyer);</b>
+<i>658</i>&nbsp;
+<i>659</i>&nbsp;        // Run test
+<b class="fc"><i>660</i>&nbsp;        file.completeAuction(completeAuctionItems, completeAuctionitem, completeUsers);</b>
+<i>661</i>&nbsp;
+<i>662</i>&nbsp;        //Test Results
+<i>663</i>&nbsp;        // Test that seller gets money
+<b class="fc"><i>664</i>&nbsp;        assertEquals(new BigDecimal(&quot;60.00&quot;), completeUsers.get(0).getAvailableCredit());</b>
+<i>665</i>&nbsp;        // Test that buy loses money
+<b class="fc"><i>666</i>&nbsp;        assertEquals(new BigDecimal(&quot;10.00&quot;), completeUsers.get(1).getAvailableCredit());</b>
+<i>667</i>&nbsp;        // Test that Item is Deleted
+<b class="fc"><i>668</i>&nbsp;        assertEquals(0, completeAuctionItems.size());</b>
+<i>669</i>&nbsp;
+<b class="fc"><i>670</i>&nbsp;    }</b>
+<i>671</i>&nbsp;
+<i>672</i>&nbsp;    /**
+<i>673</i>&nbsp;     * The user is not found in the current list of users
+<i>674</i>&nbsp;     */
+<i>675</i>&nbsp;    @Test
+<i>676</i>&nbsp;    public void checkForDeletedUsersFalse(){
+<b class="fc"><i>677</i>&nbsp;        List&lt;AvailableItems&gt; items = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>678</i>&nbsp;        List&lt;UserAccounts&gt; users = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>679</i>&nbsp;        UserAccounts user = new UserAccounts();</b>
+<b class="fc"><i>680</i>&nbsp;        AvailableItems item = new AvailableItems();</b>
+<b class="fc"><i>681</i>&nbsp;        user.setUserName(&quot;john&quot;);</b>
+<b class="fc"><i>682</i>&nbsp;        users.add(user);</b>
+<b class="fc"><i>683</i>&nbsp;        item.setCurrentWinningBidder(&quot;joe&quot;);</b>
+<b class="fc"><i>684</i>&nbsp;        items.add(item);</b>
+<i>685</i>&nbsp;
+<b class="fc"><i>686</i>&nbsp;        file.checkForDeletedUsers(users, items);</b>
+<b class="fc"><i>687</i>&nbsp;        assertEquals(&quot;&quot;, items.get(0).getCurrentWinningBidder());</b>
+<i>688</i>&nbsp;
+<b class="fc"><i>689</i>&nbsp;    }</b>
+<i>690</i>&nbsp;
+<i>691</i>&nbsp;    /**
+<i>692</i>&nbsp;     * The user is found in the list of current users
+<i>693</i>&nbsp;     */
+<i>694</i>&nbsp;    @Test
+<i>695</i>&nbsp;    public void checkForDeletedUsersTrue(){
+<b class="fc"><i>696</i>&nbsp;        List&lt;AvailableItems&gt; items = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>697</i>&nbsp;        List&lt;UserAccounts&gt; users = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>698</i>&nbsp;        UserAccounts user = new UserAccounts();</b>
+<b class="fc"><i>699</i>&nbsp;        AvailableItems item = new AvailableItems();</b>
+<b class="fc"><i>700</i>&nbsp;        user.setUserName(&quot;john&quot;);</b>
+<b class="fc"><i>701</i>&nbsp;        users.add(user);</b>
+<b class="fc"><i>702</i>&nbsp;        item.setCurrentWinningBidder(&quot;john&quot;);</b>
+<b class="fc"><i>703</i>&nbsp;        items.add(item);</b>
+<i>704</i>&nbsp;
+<b class="fc"><i>705</i>&nbsp;        file.checkForDeletedUsers(users, items);</b>
+<b class="fc"><i>706</i>&nbsp;        assertEquals(user.getUserName(), items.get(0).getCurrentWinningBidder());</b>
+<i>707</i>&nbsp;
+<b class="fc"><i>708</i>&nbsp;    }</b>
+<i>709</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-03-29 14:45</div>
+</div>
+</body>
+</html>
