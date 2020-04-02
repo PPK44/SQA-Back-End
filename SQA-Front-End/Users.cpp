@@ -80,7 +80,7 @@ void Users::ChangePassword(Users user, string file){
 
 }
 
-void Users::Create(string** users, int userCount){
+void Users::Create(string** users, int userCount, string transactionFile){
 
 	Writer writer;
 	Users user;
@@ -147,14 +147,14 @@ void Users::Create(string** users, int userCount){
 		user.setPassword(password);
 		user.setUserType(userType);
 		user.setCredits(0.0);
-		writer.GenericWriteToDailyTransactionFile(user, code);
+		writer.GenericWriteToDailyTransactionFile(user, code, transactionFile);
 		//validation = true;
 	}
 }
 
 }
 
-void Users::AddCredits(Users user){
+void Users::AddCredits(Users user, string transactionFile){
 
 	string credit;
 	float sum;
@@ -191,7 +191,7 @@ void Users::AddCredits(Users user){
 		LightHighlight();
 		cout << "You have added: " << sum ;
 		Highlight();
-		writer.GenericWriteToDailyTransactionFile(user, code);
+		writer.GenericWriteToDailyTransactionFile(user, code, transactionFile);
 	}
 	}
 	
@@ -199,10 +199,10 @@ void Users::AddCredits(Users user){
 	
 }
 
-void Users::EndSession(Users user){
+void Users::EndSession(Users user, string transactionFile){
 	const string code = "00";
 	Writer writer;
-	writer.GenericWriteToDailyTransactionFile(user, code);
+	writer.GenericWriteToDailyTransactionFile(user, code, transactionFile);
 
 }
 
