@@ -35,6 +35,11 @@ public class Main extends FileIO {
         run.updateAvailableItemsList(items, transactions);
         parser.writeUserFile(users, userAccountsFile.toString());
         run.checkForDeletedUsers(users, items);
+        int count = 1;
+        for (AvailableItems item : items) {
+            item.setTransactionCode(count);
+            count++;
+        }
         parser.writeItemFile(items, availableItemsFile.toString());
 
 

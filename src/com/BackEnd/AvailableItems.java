@@ -14,12 +14,28 @@ public class AvailableItems {
      * Data about the item in question, its seller, and about the item's active auction.
      * Auction data includes the highest bidder, the highest bid, and the amount of days left.
      */
+    private int transactionCode;
     private String itemName;
     private String sellerName;
     private String currentWinningBidder;
     private int numberOfDaysLeft;
     private BigDecimal highestBid = new BigDecimal("0.0");
 
+    /**
+     * Gets the item's name.
+     * @return the name of the item
+     */
+    public int getTransactionCode() {
+        return transactionCode;
+    }
+
+    /**
+     * Sets the item's name.
+     * @param code the new name of the item
+     */
+    public void setTransactionCode(int code) {
+        this.transactionCode = code;
+    }
     /**
      * Gets the item's name.
      * @return the name of the item
@@ -115,7 +131,8 @@ public class AvailableItems {
      * @param days how many days are left in the item's auction
      * @param bid the current highest bid price
      */
-    public AvailableItems(String item, String seller, String currentBidder, int days, BigDecimal bid){
+    public AvailableItems(int transactionCode,String item, String seller, String currentBidder, int days, BigDecimal bid){
+        this.transactionCode = transactionCode;
         this.itemName = item;
         this.sellerName = seller;
         this.currentWinningBidder = currentBidder;
@@ -133,7 +150,8 @@ public class AvailableItems {
         StringBuilder sb = new StringBuilder(String.valueOf(highestBid));
         StringBuilder sb2 = new StringBuilder(String.valueOf(numberOfDaysLeft));
         StringBuilder sb3 = new StringBuilder(String.valueOf(currentWinningBidder));
-        return itemName + " " + sellerName + " " + sb3.insert(0, "               ", 0, 15 - sb3.length()) + " " + sb2.insert(0, "00", 0, 3 - sb2.length()) + " " + sb.insert(0, "00", 0, 6 - sb.length()) + "\n";
+        StringBuilder sb4 = new StringBuilder(String.valueOf(transactionCode));
+        return sb4.insert(sb4.length(), "   ", 0, 4 - sb4.length()) + " " + itemName + " " + sellerName + " " + sb3.insert(0, "               ", 0, 15 - sb3.length()) + " " + sb2.insert(0, "00", 0, 3 - sb2.length()) + " " + sb.insert(0, "00", 0, 6 - sb.length()) + "\n";
     }
 
 }

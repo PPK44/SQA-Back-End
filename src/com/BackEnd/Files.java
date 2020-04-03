@@ -128,7 +128,6 @@ public class Files {
     public void advertise(Transactions transaction, List<AvailableItems> items) {
 
         AvailableItems item = new AvailableItems();
-
         item.setItemName(transaction.getItemName());
         item.setSellerName(transaction.getSellerName());
         item.setCurrentWinningBidder(transaction.getBuyerName());

@@ -74,11 +74,12 @@ public class FileIO{
         while(scanner.hasNextLine()){
             AvailableItems item = new AvailableItems();
             String line = scanner.nextLine();
-            item.setItemName(line.substring(0, 19));
-            item.setSellerName(line.substring(20, 35));
-            item.setCurrentWinningBidder(line.substring(36, 51));
-            item.setNumberOfDaysLeft(Integer.parseInt(line.substring(52, 55)));
-            item.setHighestBid(new BigDecimal(line.substring(56, 62)));
+            item.setTransactionCode(Integer.parseInt(line.substring(0, 4).trim()));
+            item.setItemName(line.substring(5, 24));
+            item.setSellerName(line.substring(25, 40));
+            item.setCurrentWinningBidder(line.substring(41, 56));
+            item.setNumberOfDaysLeft(Integer.parseInt(line.substring(57, 60)));
+            item.setHighestBid(new BigDecimal(line.substring(61, 67)));
             items.add(item);
         }
         return items;
