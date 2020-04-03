@@ -29,7 +29,7 @@ void Writer::BidWriteToDailyTransactionFile(string itemName, string sellerName, 
     string name = buyerName;
     name.append(15 - buyerName.length(), ' ');
     outFile.open(transactionFile, ios::app);
-    outFile << "\n04 " + itemName + " " + sellerName + " " + name + " " + currentBid; 
+    outFile << "04 " << itemName << " " << sellerName << " " << name << " " << currentBid << endl; 
 
     outFile.close();
 
@@ -106,7 +106,7 @@ void Writer::GenericWriteToDailyTransactionFile(Users user, string transactionCo
         cerr << "Unable to open file";
     }
 
-    File << "\n" << code << " " << username << " " << userType << " " << cred;
+    File << code << " " << username << " " << userType << " " << cred << endl;
     File.close(); //closing the file
 }
 
@@ -129,12 +129,11 @@ void Writer::WriteAdvertiseToDailyTransactionFile(Users user, string item, int n
     itemName.append(MAX_ITEM_NAME_LENGTH - itemName.length(), ' ');
     aucBid.insert(aucBid.begin(), MAX_CREDIT_LENGTH - aucBid.length(), '0');
 
-    file << endl 
-         << ADVERTISE_CODE << " " 
+    file << ADVERTISE_CODE << " " 
          << itemName << " " 
          << username << " " 
          << setfill('0') << setw(3) << numDays << " "
-         << setprecision(2) << fixed << aucBid;
+         << setprecision(2) << fixed << aucBid << endl;
     file.close();
 }
 
@@ -150,7 +149,7 @@ void Writer::RefundWriteToDailyTransactionFile(string buyerName, string sellerNa
     string seller = sellerName;
     seller.append(15 - sellerName.length(), ' ');
     outFile.open(transactionFile, ios::app);
-    outFile << "\n05 " + buyer + " " +  seller + " " + refund; 
+    outFile << "05 " + buyer + " " +  seller + " " + refund << endl; 
 
     outFile.close();
 }
