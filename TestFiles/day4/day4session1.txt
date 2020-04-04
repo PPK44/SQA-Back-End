@@ -1,0 +1,15 @@
+LOGIN
+geerthan
+password
+Bid
+nintendo switch
+0
+yes
+500
+bid
+security analysis
+0
+yes
+18
+logout
+exit

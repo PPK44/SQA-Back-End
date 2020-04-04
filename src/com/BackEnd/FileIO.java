@@ -25,6 +25,13 @@ public class FileIO{
 
            switch (line.substring(0, 2)) {
                case "01": //Create
+                   transaction.setTransactionCode(Integer.parseInt(line.substring(0, 2)));
+                   transaction.setUserName(line.substring(3, 18));
+                   transaction.setPassword(line.substring(19, 31));
+                   transaction.setUserType(line.substring(32, 34));
+                   transaction.setAvailableCredit(new BigDecimal(line.substring(35, 44)));
+                   transactions.add(transaction);
+                   break;
                case "02":  //Delete
                case "06":  //Add credit
                case "07": //Enable

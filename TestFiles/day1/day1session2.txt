@@ -1,0 +1,13 @@
+LOGIN
+sellingboy
+isellthings
+advertise
+calculator
+19.99
+27
+advertise
+nintendo switch
+450
+19
+logout
+exit

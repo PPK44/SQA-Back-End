@@ -1,0 +1,9 @@
+LOGIN
+gajan
+secret
+ADVERTISE
+DND
+15.99
+10
+logout
+exit

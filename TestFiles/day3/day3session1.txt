@@ -1,0 +1,17 @@
+LOGIN
+adminboy
+AdPass123
+REFUND
+test123
+test
+100
+UPDATE
+ENABLE
+yo
+Yes
+UPDATE
+disable
+Paul
+Yes
+logout
+exit

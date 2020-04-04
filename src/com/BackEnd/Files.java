@@ -93,7 +93,7 @@ public class Files {
             UserAccounts user = new UserAccounts();
             user.setUserType(transaction.getUserType());
             user.setAvailableCredit(transaction.getAvailableCredit());
-            user.setPassword("Test");
+            user.setPassword(transaction.getPassword());
             user.setUserName(transaction.getUserName());
             users.add(user);
             System.out.println("Created User " + user.getUserName().trim() + " with user type " + user.getUserType());

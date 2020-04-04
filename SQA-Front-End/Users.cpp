@@ -28,7 +28,7 @@ bool Users::Login(string** users, int userCount){
      	cin >> username;
     	cout << "\nPassword: ";
      	cin >> password;
-		setUserName(username);
+		setUserName(ToLower(username));
 		setPassword(password);
 		for(int i = 0; i < userCount; i++){
 			if (getUserName().compare(users[i][0]) == 0 && getPassword().compare(users[i][1]) == 0){
@@ -143,11 +143,11 @@ void Users::Create(string** users, int userCount, string transactionFile){
 		LightHighlight();
 		cout << "User Successfully Created";
 		Highlight();
-		user.setUserName(username);
+		user.setUserName(ToLower(username));
 		user.setPassword(password);
 		user.setUserType(userType);
 		user.setCredits(0.0);
-		writer.GenericWriteToDailyTransactionFile(user, code, transactionFile);
+		writer.CreateWriteToDailyTransactionFile(user, code, transactionFile);
 		//validation = true;
 	}
 }

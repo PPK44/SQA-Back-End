@@ -28,4 +28,4 @@ AuctionLib.cpp: AuctionLib.cpp
 	 g++ -c AuctionLib.cpp	  
      
 clean:
-	 rm auction-system.o auction-system.exe Users.o Admin.o Advertise.o Bid.o Items.o Writer.o	AuctionLib.o
+	 del auction-system.o auction-system.exe Users.o Admin.o Advertise.o Bid.o Items.o Writer.o	AuctionLib.o

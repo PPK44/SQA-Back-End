@@ -1,0 +1,13 @@
+login
+test123
+secret
+bid
+test item
+0
+yes
+90.99
+advertise
+nintendo switch
+60
+logout
+exit

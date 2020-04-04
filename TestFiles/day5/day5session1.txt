@@ -1,0 +1,9 @@
+login
+geerthan
+password
+nintendo switch
+1
+yes
+95
+logout
+exit

@@ -1,0 +1,10 @@
+login
+buyingman
+ibuythings
+bid
+apple
+0
+yes
+7.99
+logout
+exit

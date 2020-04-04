@@ -16,6 +16,7 @@ public class Transactions {
     private int transactionCode;
     private String userName;
     private String userType;
+    private String password;
     private BigDecimal availableCredit = new BigDecimal("0.00");
     private String buyerName;
     private String sellerName;
@@ -74,6 +75,24 @@ public class Transactions {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
+
+    /**
+     * gets the password for create
+     * @return the password for that user
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * sets the password for create
+     * @param password the password for the corresponding user
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 
     /**
      * Gets the type of the user who started the transaction.

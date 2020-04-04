@@ -40,7 +40,7 @@ void Advertise::AdvertiseItem(Users self, string transactionFile){
             Highlight();
             
         }else {
-            itemName = buffer;
+            itemName = ToLower(buffer);
             buffer = "";
             std::cout << "\nMinimum bid: $";
             getline(cin, buffer);
