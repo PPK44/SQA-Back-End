@@ -24,30 +24,24 @@ reset="\e[0m"
 
 # Remove old transaction files
 rm $transDir/*
-rm daily_transaction_file.txt
-
-# Create blank files if they don't exist
-# For backend
-touch current_user_accounts_file.txt
-touch daily_transaction_file.txt
-touch items.if.txt
+rm $dir/out/daily_transaction_file.txt
 
 # For frontend
-touch $dir/current_user_accounts_file.txt
-touch $dir/available_items_file.txt
+touch $dir/in/current_user_accounts_file.txt
+touch $dir/in/available_items_file.txt
 # Temp buffer
 touch $BUFOUT
 
-# Copy root files into day test files
-cat current_user_accounts_file.txt >$dir/current_user_accounts_file.txt
-cat items.if.txt >$dir/available_items_file.txt
+# Copy in files into out files
+cat "${dir}/in/current_user_accounts_file.txt" >"${dir}/out/current_user_accounts_file.txt"
+cat "${dir}/in/available_items_file.txt" >"${dir}/out/available_items_file.txt"
 
 
 for f in $TESTS
 do
 	touch $transDir/daily_transaction_file_$testCnt.txt
 	echo "Run ${testCnt}: ${f}"
-	../SQA-Front-End/auction-system.exe "${dir}/current_user_accounts_file.txt" "${dir}/available_items_file.txt" "${transDir}/daily_transaction_file_${testCnt}.txt" <$f >$BUFOUT
+	../SQA-Front-End/auction-system.exe "${dir}/in/current_user_accounts_file.txt" "${dir}/in/available_items_file.txt" "${transDir}/daily_transaction_file_${testCnt}.txt" <$f #>$BUFOUT
 
 	((testCnt++))
 done
@@ -55,10 +49,10 @@ done
 rm $BUFOUT
 
 # Merge transaction files
-cat $transDir/* >$dir/merged_transaction_file.txt
-cat $dir/merged_transaction_file.txt >daily_transaction_file.txt
+cat $transDir/* >"${dir}/out/daily_transaction_file.txt"
 
 echo -e "\n${green}Created merged transaction file.${reset}\n"
 
 # Run backend
-java -jar ../out/artifacts/SQA_Back_End_jar/SQA-Back-End.jar
+cd $dir/out
+java -jar ../../../out/artifacts/SQA_Back_End_jar/SQA-Back-End.jar
