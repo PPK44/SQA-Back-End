@@ -1,6 +1,5 @@
 mr.runescapeman buyinggf20k  FS 000000.44
 heckingcoolman  chimmychonga BS 001000.55
-donothurtme     nomore       FS 000000.00
 adminboy        AdPass123    AA 999999.00
 test123         secret       FS 222591.22
 buyingman       ibuythings   BS 999999.00
@@ -13,3 +12,4 @@ test            fail         FS 000000.00
 johndoe         password     FS 000000.00
 bigboidaddydude password     FS 000000.00
 gajan           secret       SS 000000.00
+geerthan        password     BS 000000.00

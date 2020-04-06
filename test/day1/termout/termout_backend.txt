@@ -1,0 +1,9 @@
+Decremented number of days by 1 on test item
+Decremented number of days by 1 on apple
+Decremented number of days by 1 on nintendo switch
+Decremented number of days by 1 on nintendo switch
+Created User johndoe with user type FS
+Advertised calculator with seller name sellingboy     
+Advertised nintendo switch with seller name sellingboy     
+User buyingman bid 7.99 on apple
+A deleted user PAULKERRIGAN44 had a current bid and was removed

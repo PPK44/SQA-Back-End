@@ -10,3 +10,4 @@ paul            new          FS 000000.00
 temp            temp         -- 000000.00
 yo              hello        DS 000000.00
 test            fail         FS 000000.00
+johndoe         password     FS 000000.00

@@ -9,6 +9,6 @@ bid
 test item
 0
 yes
-90.99
+102.99
 logout
 exit

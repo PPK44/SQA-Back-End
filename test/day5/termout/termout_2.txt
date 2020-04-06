@@ -1,0 +1,52 @@
+day5/trans/daily_transaction_file_2.txt
+==========================================
+      SQA Baller Squad Auction House
+==========================================
+
+Please Type login, create or exit!
+Enter Command: 
+=========================================================
+                        LOGIN
+=========================================================
+
+Username: 
+Password: 
+Welcome gajan! Glad to see you are back :)
+Your user Type is SS.
+
+Enter Command: 
+=========================================================
+                        ADVERTISE
+=========================================================
+
+Item name: 
+Minimum bid: $
+Number of days to auction: 
+---------------------------------------------------------
+            You have put up usb.
+        This item will be auctioned for 5 days
+            with a minimum bid of $19.99!
+=========================================================
+
+Enter Command: 
+=========================================================
+                        ADVERTISE
+=========================================================
+
+Item name: 
+Minimum bid: $
+Number of days to auction: 
+---------------------------------------------------------
+            You have put up linux.
+        This item will be auctioned for 100 days
+            with a minimum bid of $799.99!
+=========================================================
+
+Enter Command: 
+==========================================
+      SQA Baller Squad Auction House
+==========================================
+
+Please Type login, create or exit!
+Enter Command: 
+

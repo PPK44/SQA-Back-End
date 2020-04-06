@@ -1,4 +1,7 @@
-1    test item           AnotherUser                     086 000.00
+1    test item           AnotherUser     test123         086 090.99
 2    apple               sellingboy      buyingman       078 007.99
-3    calculator          sellingboy                      026 019.99
-4    nintendo switch     sellingboy                      018 450.00
+3    nintendo switch     test123                         017 069.00
+4    nintendo switch     sellingboy                      043 089.00
+5    calculator          sellingboy                      026 019.99
+6    nintendo switch     sellingboy                      018 450.00
+7    nintendo switch     test123                         019 060.00

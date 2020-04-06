@@ -1,6 +1,7 @@
 login
 geerthan
 password
+bid
 nintendo switch
 1
 yes

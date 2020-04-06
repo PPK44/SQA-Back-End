@@ -1,0 +1,50 @@
+day3/trans/daily_transaction_file_3.txt
+==========================================
+      SQA Baller Squad Auction House
+==========================================
+
+Please Type login, create or exit!
+Enter Command: 
+=========================================================
+                        LOGIN
+=========================================================
+
+Username: 
+Password: 
+Welcome test123! Glad to see you are back :)
+Your user Type is FS.
+
+Enter Command: 0
+222591
+
+=========================================================
+                        ADD CREDIT
+=========================================================
+
+How much Credit do you want to add to your account: 
+---------------------------------------------------------
+You have added: 678
+=========================================================
+
+Enter Command: 
+=========================================================
+                        ADVERTISE
+=========================================================
+
+Item name: 
+Minimum bid: $
+Number of days to auction: 
+---------------------------------------------------------
+            You have put up security analysis.
+        This item will be auctioned for 14 days
+            with a minimum bid of $15.99!
+=========================================================
+
+Enter Command: 
+==========================================
+      SQA Baller Squad Auction House
+==========================================
+
+Please Type login, create or exit!
+Enter Command: 
+

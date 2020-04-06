@@ -1,0 +1,38 @@
+day4/trans/daily_transaction_file_2.txt
+==========================================
+      SQA Baller Squad Auction House
+==========================================
+
+Please Type login, create or exit!
+Enter Command: 
+=========================================================
+                        LOGIN
+=========================================================
+
+Username: 
+Password: 
+Welcome gajan! Glad to see you are back :)
+Your user Type is SS.
+
+Enter Command: 
+=========================================================
+                        ADVERTISE
+=========================================================
+
+Item name: 
+Minimum bid: $
+Number of days to auction: 
+---------------------------------------------------------
+            You have put up dnd.
+        This item will be auctioned for 10 days
+            with a minimum bid of $15.99!
+=========================================================
+
+Enter Command: 
+==========================================
+      SQA Baller Squad Auction House
+==========================================
+
+Please Type login, create or exit!
+Enter Command: 
+

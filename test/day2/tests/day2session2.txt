@@ -6,7 +6,7 @@ ENABLE
 yo
 Yes
 DELETE
-DONOTHURTME
+donothurtme
 YES
 logout
 exit

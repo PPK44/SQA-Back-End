@@ -1,0 +1,13 @@
+Decremented number of days by 1 on test item
+Decremented number of days by 1 on apple
+Decremented number of days by 1 on nintendo switch
+Decremented number of days by 1 on nintendo switch
+Decremented number of days by 1 on calculator
+Decremented number of days by 1 on nintendo switch
+Decremented number of days by 1 on nintendo switch
+Removed 100.00 from seller test123 for refund
+Refunded 100.00 to buyer test
+Added 678.00 to user test123
+Advertised dragon scimitar with seller name mr.runescapeman
+User mr.runescapeman bid 102.99 on test item
+Advertised security analysis with seller name test123        

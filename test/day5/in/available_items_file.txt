@@ -1,4 +1,10 @@
-1    test item           AnotherUser                     084 000.00
+1    test item           AnotherUser     mr.runescapeman 084 102.99
 2    apple               sellingboy      buyingman       076 007.99
-3    calculator          sellingboy                      024 019.99
-4    nintendo switch     sellingboy                      016 450.00
+7    nintendo switch     test123         geerthan        017 500.00
+4    nintendo switch     sellingboy                      041 089.00
+5    calculator          sellingboy                      024 019.99
+6    nintendo switch     sellingboy                      016 450.00
+7    nintendo switch     test123         geerthan        017 500.00
+8    dragon scimitar     mr.runescapeman                 006 015.99
+9    security analysis   test123         geerthan        013 018.00
+10   dnd                 gajan                           010 015.99
