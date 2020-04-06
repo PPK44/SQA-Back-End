@@ -1,6 +1,7 @@
 login
 geerthan
 password
+advertise
 nintendo switch
 1
 yes
