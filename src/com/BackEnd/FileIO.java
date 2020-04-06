@@ -131,8 +131,10 @@ public class FileIO{
      */
     public void writeItemFile(List<AvailableItems> items, String file) throws IOException {
         FileWriter writer = new FileWriter(file);
+
         for(AvailableItems item : items){
             writer.write(item.toString());
+
         }
         writer.close();
     }
