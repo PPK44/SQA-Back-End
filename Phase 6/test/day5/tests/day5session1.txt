@@ -1,0 +1,10 @@
+login
+geerthan
+password
+bid
+nintendo switch
+1
+yes
+95
+logout
+exit

@@ -1,0 +1,11 @@
+LOGIN
+test123
+secret
+addcredit
+678
+advertise
+Security Analysis
+15.99
+14
+logout
+exit

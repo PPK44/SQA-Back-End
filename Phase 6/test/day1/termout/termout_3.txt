@@ -1,0 +1,44 @@
+day1/trans/daily_transaction_file_3.txt
+==========================================
+      SQA Baller Squad Auction House
+==========================================
+
+Please Type login, create or exit!
+Enter Command: 
+=========================================================
+                        LOGIN
+=========================================================
+
+Username: 
+Password: 
+Welcome buyingman! Glad to see you are back :)
+Your user Type is BS.
+
+Enter Command: 
+=========================================================
+                        BID
+=========================================================
+Type "exit" to return to main menu
+---------------------------------------------------------
+
+Enter an Item name: 
+0. apple               sellingboy      080 0.00
+Enter a number from the list: 
+You have selected from List number: 0
+---------------------------------------------------------
+Current Price: 000.00
+Minimum Bid Price: 0
+Would you like to bid on this? (Yes/No): 
+How much would you like to bid (Min Bid: 0): 
+---------------------------------------------------------
+            A bid of $7.99 has been placed!
+=========================================================
+
+Enter Command: 
+==========================================
+      SQA Baller Squad Auction House
+==========================================
+
+Please Type login, create or exit!
+Enter Command: 
+

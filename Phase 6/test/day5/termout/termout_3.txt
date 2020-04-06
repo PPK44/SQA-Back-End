@@ -1,0 +1,57 @@
+day5/trans/daily_transaction_file_3.txt
+==========================================
+      SQA Baller Squad Auction House
+==========================================
+
+Please Type login, create or exit!
+Enter Command: 
+=========================================================
+                        LOGIN
+=========================================================
+
+Username: 
+Password: 
+Welcome test123! Glad to see you are back :)
+Your user Type is FS.
+
+Enter Command: 0
+223169
+
+=========================================================
+                        ADD CREDIT
+=========================================================
+
+How much Credit do you want to add to your account: 
+---------------------------------------------------------
+You have added: 500
+=========================================================
+
+Enter Command: 
+=========================================================
+                        BID
+=========================================================
+Type "exit" to return to main menu
+---------------------------------------------------------
+
+Enter an Item name: 
+0. nintendo switch     sellingboy      041 89.00
+1. nintendo switch     sellingboy      016 450.00
+Enter a number from the list: 
+You have selected from List number: 0
+---------------------------------------------------------
+Current Price: 089.00
+Minimum Bid Price: 93.45
+Would you like to bid on this? (Yes/No): 
+How much would you like to bid (Min Bid: 93.45): 
+---------------------------------------------------------
+            A bid of $600 has been placed!
+=========================================================
+
+Enter Command: 
+==========================================
+      SQA Baller Squad Auction House
+==========================================
+
+Please Type login, create or exit!
+Enter Command: 
+

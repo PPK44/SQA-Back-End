@@ -1,0 +1,8 @@
+04 test item           AnotherUser     test123         090.99
+03 nintendo switch     test123         019 060.00
+00 test123         FS 222591.22
+02 donothurtme     FS 000000.00
+00 adminboy        AA 999999.00
+01 bigboidaddydude password     FS 000000.00
+01 gajan           secret       SS 000000.00
+01 geerthan        password     BS 000000.00

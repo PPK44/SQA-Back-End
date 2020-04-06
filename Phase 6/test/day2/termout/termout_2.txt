@@ -1,0 +1,46 @@
+day2/trans/daily_transaction_file_2.txt
+==========================================
+      SQA Baller Squad Auction House
+==========================================
+
+Please Type login, create or exit!
+Enter Command: 
+=========================================================
+                        LOGIN
+=========================================================
+
+Username: 
+Password: 
+Welcome adminboy! Glad to see you are back :)
+Your user Type is AA.
+
+Enter Command: 
+=========================================================
+                        UPDATE
+=========================================================
+Would you like to enable or disable a user?: 
+Which user would you like to enable?: 
+What user type will this user be: FS BS SS?
+User Type: Yes
+Invalid Option, Please try enabling this user again!
+
+Enter Command: 
+=========================================================
+                        DELETE
+=========================================================
+
+Enter username: 
+Are you sure you want to delete user donothurtme?
+(Yes/No): 
+---------------------------------------------------------
+            donothurtme has been successfully deleted!
+=========================================================
+
+Enter Command: 
+==========================================
+      SQA Baller Squad Auction House
+==========================================
+
+Please Type login, create or exit!
+Enter Command: 
+

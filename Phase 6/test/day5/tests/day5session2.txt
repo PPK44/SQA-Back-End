@@ -1,0 +1,13 @@
+login
+gajan
+secret
+advertise
+usb
+19.99
+5
+advertise
+linux
+799.99
+100
+logout
+exit

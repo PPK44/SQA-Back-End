@@ -1,0 +1,13 @@
+login
+test123
+secret
+addcredit
+500
+bid
+nintendo switch
+0
+yes
+600
+logout
+exit
+

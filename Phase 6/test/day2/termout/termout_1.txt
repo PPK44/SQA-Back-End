@@ -1,0 +1,58 @@
+day2/trans/daily_transaction_file_1.txt
+==========================================
+      SQA Baller Squad Auction House
+==========================================
+
+Please Type login, create or exit!
+Enter Command: 
+=========================================================
+                        LOGIN
+=========================================================
+
+Username: 
+Password: 
+Welcome test123! Glad to see you are back :)
+Your user Type is FS.
+
+Enter Command: 
+=========================================================
+                        BID
+=========================================================
+Type "exit" to return to main menu
+---------------------------------------------------------
+
+Enter an Item name: 
+0. test item           AnotherUser     087 0.00
+Enter a number from the list: 
+You have selected from List number: 0
+---------------------------------------------------------
+Current Price: 000.00
+Minimum Bid Price: 0
+Would you like to bid on this? (Yes/No): 
+How much would you like to bid (Min Bid: 0): 
+---------------------------------------------------------
+            A bid of $90.99 has been placed!
+=========================================================
+
+Enter Command: 
+=========================================================
+                        ADVERTISE
+=========================================================
+
+Item name: 
+Minimum bid: $
+Number of days to auction: 
+---------------------------------------------------------
+            You have put up nintendo switch.
+        This item will be auctioned for 19 days
+            with a minimum bid of $60.00!
+=========================================================
+
+Enter Command: 
+==========================================
+      SQA Baller Squad Auction House
+==========================================
+
+Please Type login, create or exit!
+Enter Command: 
+

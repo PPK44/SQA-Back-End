@@ -1,0 +1,13 @@
+CREATE
+BIGBOIDADDYDUDE
+password
+FS
+create
+gajan
+secret
+SS
+create
+geerthan
+password
+BS
+exit

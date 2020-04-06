@@ -1,0 +1,54 @@
+day3/trans/daily_transaction_file_1.txt
+==========================================
+      SQA Baller Squad Auction House
+==========================================
+
+Please Type login, create or exit!
+Enter Command: 
+=========================================================
+                        LOGIN
+=========================================================
+
+Username: 
+Password: 
+Welcome adminboy! Glad to see you are back :)
+Your user Type is AA.
+
+Enter Command: 
+=========================================================
+                        REFUND
+=========================================================
+
+Please enter seller's name: 
+Please enter buyer's name: 
+Please enter credit amount to refund: 
+Money has been refunded, moving you back to Main Menu!
+Enter Command: 
+=========================================================
+                        UPDATE
+=========================================================
+Would you like to enable or disable a user?: 
+Which user would you like to enable?: 
+What user type will this user be: FS BS SS?
+User Type: Yes
+Invalid Option, Please try enabling this user again!
+
+Enter Command: 
+=========================================================
+                        UPDATE
+=========================================================
+Would you like to enable or disable a user?: 
+Which user would you like to disable?: 
+---------------------------------------------------------
+            User Paul does not exist.
+=========================================================
+
+Enter Command: 
+Enter Command: 
+==========================================
+      SQA Baller Squad Auction House
+==========================================
+
+Please Type login, create or exit!
+Enter Command: 
+

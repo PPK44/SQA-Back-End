@@ -1,0 +1,1 @@
+TEST tests/admin_delete_invalid_confirmation: FAIL

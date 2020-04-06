@@ -1,0 +1,12 @@
+LOGIN
+adminboy
+AdPass123
+UPDATE
+ENABLE
+yo
+Yes
+DELETE
+donothurtme
+YES
+logout
+exit

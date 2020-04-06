@@ -1,0 +1,14 @@
+LOGIN
+mr.runescapeman
+buyinggf20k
+ADVERTISE
+DRAGON SCIMITAR
+15.99
+7
+bid
+test item
+0
+yes
+102.99
+logout
+exit
