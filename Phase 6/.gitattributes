@@ -1,2 +1,2 @@
-/test/**/tests/*.txt eol=lf
-/test/*.sh
+test/**/tests/*.txt eol=lf
+test/*.sh
